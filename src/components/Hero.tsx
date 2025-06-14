@@ -1,131 +1,163 @@
 
 import React from 'react';
 import { Button } from '@/components/ui/button';
-import { ArrowRight, Users, Award, BookOpen, TrendingUp, Play } from 'lucide-react';
+import { ArrowRight, Users, Award, BookOpen, TrendingUp, FileText, ExternalLink } from 'lucide-react';
 
 const Hero = () => {
   const stats = [
-    { icon: Users, label: 'Students', value: '2000+', color: 'text-blue-600' },
-    { icon: BookOpen, label: 'Programs', value: '15+', color: 'text-green-600' },
-    { icon: Award, label: 'Faculty', value: '100+', color: 'text-purple-600' },
-    { icon: TrendingUp, label: 'Placement Rate', value: '95%', color: 'text-orange-600' }
+    { icon: Users, label: 'Students Enrolled', value: '2000+', color: 'text-green-700' },
+    { icon: BookOpen, label: 'Academic Programs', value: '15+', color: 'text-blue-700' },
+    { icon: Award, label: 'Faculty Members', value: '100+', color: 'text-purple-700' },
+    { icon: TrendingUp, label: 'Placement Rate', value: '95%', color: 'text-amber-700' }
+  ];
+
+  const announcements = [
+    { text: 'Admission 2024-25 Open - Apply Now', urgent: true },
+    { text: 'NIRF Ranking 2024 Released', urgent: false },
+    { text: 'Convocation 2024 Schedule Announced', urgent: false }
   ];
 
   return (
-    <section id="home" className="relative min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-slate-800 overflow-hidden">
-      {/* Background Elements */}
-      <div className="absolute inset-0">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(59,130,246,0.1),transparent_50%)]" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,rgba(147,51,234,0.1),transparent_50%)]" />
-      </div>
-      
-      <div className="relative max-w-7xl mx-auto px-4 pt-20 pb-16 min-h-screen flex items-center">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center w-full">
-          {/* Left Content */}
-          <div className="text-center lg:text-left space-y-8">
-            {/* Badge */}
-            <div className="inline-flex items-center px-4 py-2 bg-blue-600/20 border border-blue-400/30 rounded-full text-blue-200 text-sm font-medium backdrop-blur-sm">
-              <Award className="w-4 h-4 mr-2" />
-              NAAC A+ Accredited • Est. 2002
-            </div>
-
-            {/* Main Heading */}
-            <div className="space-y-4">
-              <h1 className="text-4xl lg:text-6xl font-bold text-white leading-tight">
-                University Institute of
-                <span className="block bg-gradient-to-r from-blue-400 to-cyan-300 bg-clip-text text-transparent">
-                  Engineering & Technology
-                </span>
-              </h1>
-              <p className="text-xl text-blue-200 font-medium">
-                Panjab University, Chandigarh
-              </p>
-            </div>
-
-            {/* Description */}
-            <p className="text-lg text-slate-300 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
-              Empowering minds through excellence in engineering education, research, and innovation. 
-              Join our legacy of creating tomorrow's technology leaders.
-            </p>
-
-            {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-              <Button 
-                size="lg" 
-                className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-8 py-4 h-auto group"
-              >
-                Apply Now
-                <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
-              </Button>
-              <Button 
-                size="lg" 
-                variant="outline" 
-                className="border-2 border-slate-300 text-white hover:bg-white hover:text-slate-900 px-8 py-4 h-auto group backdrop-blur-sm"
-              >
-                <Play className="mr-2 h-5 w-5" />
-                Watch Video
-              </Button>
-            </div>
-
-            {/* Stats */}
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 pt-8">
-              {stats.map((stat, index) => (
-                <div key={index} className="text-center lg:text-left">
-                  <div className="flex items-center justify-center lg:justify-start mb-2">
-                    <stat.icon className={`h-6 w-6 ${stat.color} mr-2`} />
-                  </div>
-                  <div className="text-2xl font-bold text-white mb-1">{stat.value}</div>
-                  <div className="text-sm text-slate-400">{stat.label}</div>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Right Content - Visual */}
-          <div className="relative">
-            <div className="relative">
-              {/* Main Image */}
-              <div className="relative rounded-2xl overflow-hidden shadow-2xl">
-                <img
-                  src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=600&h=600&fit=crop&crop=center"
-                  alt="UIET Campus"
-                  className="w-full h-80 lg:h-96 object-cover"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+    <section id="home" className="relative bg-gradient-to-br from-blue-50 to-amber-50">
+      {/* Announcements Bar */}
+      <div className="bg-red-600 text-white py-2">
+        <div className="container-width">
+          <div className="flex items-center justify-center">
+            <div className="flex items-center space-x-2 text-sm font-medium">
+              <span className="animate-pulse">🔴</span>
+              <span>ANNOUNCEMENTS:</span>
+              <div className="hidden md:flex space-x-4">
+                {announcements.map((announcement, index) => (
+                  <span key={index} className={announcement.urgent ? 'animate-pulse font-bold' : ''}>
+                    {announcement.text}
+                  </span>
+                ))}
               </div>
-
-              {/* Floating Achievement Card */}
-              <div className="absolute -bottom-6 -left-6 right-6 bg-white/95 backdrop-blur-sm rounded-xl p-6 shadow-xl">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <h3 className="font-bold text-lg text-slate-900">Top Engineering Institute</h3>
-                    <p className="text-slate-600">Ranked among best in North India</p>
-                    <div className="flex items-center mt-2">
-                      <div className="flex text-yellow-400">
-                        {[...Array(5)].map((_, i) => (
-                          <Award key={i} className="w-4 h-4 fill-current" />
-                        ))}
-                      </div>
-                      <span className="ml-2 text-sm text-slate-600">Excellence Rating</span>
-                    </div>
-                  </div>
-                  <div className="text-4xl">🏆</div>
-                </div>
-              </div>
-
-              {/* Decorative Elements */}
-              <div className="absolute -top-4 -right-4 w-24 h-24 bg-blue-400/20 rounded-full blur-xl" />
-              <div className="absolute -bottom-8 -right-8 w-32 h-32 bg-purple-400/20 rounded-full blur-xl" />
             </div>
           </div>
         </div>
       </div>
 
-      {/* Bottom Wave */}
-      <div className="absolute bottom-0 left-0 right-0">
-        <svg viewBox="0 0 1200 120" preserveAspectRatio="none" className="w-full h-16 fill-white">
-          <path d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z" />
-        </svg>
+      <div className="container-width py-12 lg:py-20">
+        <div className="grid lg:grid-cols-2 gap-12 items-center">
+          {/* Left Content */}
+          <div className="text-center lg:text-left space-y-8">
+            {/* Government Badge */}
+            <div className="inline-flex items-center px-4 py-2 bg-green-100 border border-green-300 rounded text-green-800 text-sm font-semibold">
+              <Award className="w-4 h-4 mr-2" />
+              Government Institute • NAAC A+ • Established 2002
+            </div>
+
+            {/* Main Heading */}
+            <div className="space-y-4">
+              <h1 className="text-3xl lg:text-5xl font-bold text-gray-900 leading-tight">
+                University Institute of
+                <span className="block text-amber-600">
+                  Engineering & Technology
+                </span>
+              </h1>
+              <p className="text-xl text-gray-700 font-medium">
+                Panjab University, Chandigarh
+              </p>
+            </div>
+
+            {/* Description */}
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
+              A premier technical institution committed to excellence in engineering education, 
+              research, and innovation. Nurturing skilled engineers for the nation's development.
+            </p>
+
+            {/* CTA Buttons */}
+            <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+              <Button className="gov-button-primary group">
+                Apply for Admission
+                <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+              </Button>
+              <Button className="gov-button-secondary group">
+                <FileText className="mr-2 h-5 w-5" />
+                Download Prospectus
+              </Button>
+              <Button variant="outline" className="border-2 border-gray-300 hover:bg-gray-50 group">
+                <ExternalLink className="mr-2 h-5 w-5" />
+                Virtual Tour
+              </Button>
+            </div>
+
+            {/* Quick Links */}
+            <div className="flex flex-wrap gap-3 justify-center lg:justify-start pt-4">
+              <span className="text-sm text-gray-600 font-medium">Quick Access:</span>
+              {['Student Portal', 'Faculty Login', 'Library', 'Results', 'Timetable'].map((link) => (
+                <a key={link} href="#" className="text-sm text-blue-600 hover:text-blue-800 underline">
+                  {link}
+                </a>
+              ))}
+            </div>
+          </div>
+
+          {/* Right Content - Campus Image */}
+          <div className="relative">
+            <div className="relative rounded-lg overflow-hidden shadow-xl border-4 border-white">
+              <img
+                src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=600&h=400&fit=crop&crop=center"
+                alt="UIET Campus"
+                className="w-full h-80 lg:h-96 object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
+              
+              {/* Campus Info Overlay */}
+              <div className="absolute bottom-4 left-4 right-4 bg-white/95 backdrop-blur-sm rounded-lg p-4 shadow-lg">
+                <h3 className="font-bold text-lg text-gray-900 mb-1">UIET Campus</h3>
+                <p className="text-gray-600 text-sm">State-of-the-art facilities spread across 25 acres</p>
+              </div>
+            </div>
+
+            {/* Accreditation Badge */}
+            <div className="absolute -top-4 -right-4 bg-green-600 text-white p-4 rounded-full shadow-lg">
+              <div className="text-center">
+                <div className="text-xl font-bold">A+</div>
+                <div className="text-xs">NAAC</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Statistics */}
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 mt-16">
+          {stats.map((stat, index) => (
+            <div key={index} className="gov-card text-center p-6 rounded-lg">
+              <stat.icon className={`h-8 w-8 ${stat.color} mx-auto mb-3`} />
+              <div className="text-2xl font-bold text-gray-900 mb-1">{stat.value}</div>
+              <div className="text-sm text-gray-600">{stat.label}</div>
+            </div>
+          ))}
+        </div>
+
+        {/* Important Links Section */}
+        <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="gov-card p-6 rounded-lg">
+            <h3 className="font-bold text-lg text-gray-900 mb-3">Admissions 2024</h3>
+            <p className="text-gray-600 text-sm mb-4">Apply for B.Tech, M.Tech, and Ph.D programs</p>
+            <Button className="gov-button-primary w-full">
+              Apply Now
+            </Button>
+          </div>
+          
+          <div className="gov-card p-6 rounded-lg">
+            <h3 className="font-bold text-lg text-gray-900 mb-3">Academic Resources</h3>
+            <p className="text-gray-600 text-sm mb-4">Access syllabus, timetables, and academic calendar</p>
+            <Button variant="outline" className="w-full border-amber-600 text-amber-600 hover:bg-amber-50">
+              View Resources
+            </Button>
+          </div>
+          
+          <div className="gov-card p-6 rounded-lg">
+            <h3 className="font-bold text-lg text-gray-900 mb-3">Placement Cell</h3>
+            <p className="text-gray-600 text-sm mb-4">Career opportunities and recruitment information</p>
+            <Button variant="outline" className="w-full border-green-600 text-green-600 hover:bg-green-50">
+              Explore Careers
+            </Button>
+          </div>
+        </div>
       </div>
     </section>
   );
