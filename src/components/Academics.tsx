@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
@@ -103,37 +103,37 @@ const Academics = () => {
   ];
 
   return (
-    <section id="academics" className="py-20 bg-white">
+    <section id="academics" className="py-12 sm:py-20 bg-white">
       <div className="max-w-7xl mx-auto px-4">
         {/* Header */}
-        <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-gray-900 mb-4">Academic Programs</h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+        <div className="text-center mb-12 sm:mb-16 animate-fadeInUp">
+          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">Academic Programs</h2>
+          <p className="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto">
             Comprehensive engineering education programs designed to prepare students for successful careers in technology and innovation.
           </p>
         </div>
 
         {/* Programs Tabs */}
-        <Tabs defaultValue="undergraduate" className="mb-16">
-          <TabsList className="grid w-full lg:w-fit mx-auto grid-cols-3 mb-8">
-            <TabsTrigger value="undergraduate" className="px-6">Undergraduate</TabsTrigger>
-            <TabsTrigger value="postgraduate" className="px-6">Postgraduate</TabsTrigger>
-            <TabsTrigger value="doctoral" className="px-6">Doctoral</TabsTrigger>
+        <Tabs defaultValue="undergraduate" className="mb-12 sm:mb-16 animate-fadeInUp stagger-2">
+          <TabsList className="grid w-full lg:w-fit mx-auto grid-cols-3 mb-6 sm:mb-8">
+            <TabsTrigger value="undergraduate" className="px-4 sm:px-6 text-sm sm:text-base">Undergraduate</TabsTrigger>
+            <TabsTrigger value="postgraduate" className="px-4 sm:px-6 text-sm sm:text-base">Postgraduate</TabsTrigger>
+            <TabsTrigger value="doctoral" className="px-4 sm:px-6 text-sm sm:text-base">Doctoral</TabsTrigger>
           </TabsList>
 
           {Object.entries(programs).map(([level, programList]) => (
             <TabsContent key={level} value={level}>
-              <div className="grid md:grid-cols-2 gap-6">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
                 {programList.map((program, index) => (
-                  <Card key={index} className="hover:shadow-lg transition-shadow duration-300">
+                  <Card key={index} className={`hover-lift transition-all duration-300 animate-scaleIn stagger-${index + 1}`}>
                     <CardHeader>
-                      <div className="flex justify-between items-start mb-2">
-                        <CardTitle className="text-xl text-gray-900">{program.name}</CardTitle>
-                        <span className="bg-blue-100 text-blue-800 text-xs font-semibold px-2 py-1 rounded">
+                      <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start mb-2 gap-2">
+                        <CardTitle className="text-lg sm:text-xl text-gray-900 leading-tight">{program.name}</CardTitle>
+                        <span className="bg-blue-100 text-blue-800 text-xs font-semibold px-2 py-1 rounded self-start">
                           {program.code}
                         </span>
                       </div>
-                      <div className="flex items-center space-x-4 text-sm text-gray-600">
+                      <div className="flex flex-col sm:flex-row sm:items-center space-y-2 sm:space-y-0 sm:space-x-4 text-sm text-gray-600">
                         <span className="flex items-center">
                           <Clock className="h-4 w-4 mr-1" />
                           {program.duration}
@@ -145,21 +145,21 @@ const Academics = () => {
                       </div>
                     </CardHeader>
                     <CardContent>
-                      <p className="text-gray-600 mb-4">{program.description}</p>
+                      <p className="text-gray-600 mb-4 text-sm sm:text-base">{program.description}</p>
                       <div className="mb-4">
-                        <h4 className="font-semibold text-gray-900 mb-2">Key Highlights:</h4>
+                        <h4 className="font-semibold text-gray-900 mb-2 text-sm sm:text-base">Key Highlights:</h4>
                         <div className="flex flex-wrap gap-2">
                           {program.highlights.map((highlight, idx) => (
                             <span
                               key={idx}
-                              className="bg-gray-100 text-gray-700 text-xs px-2 py-1 rounded"
+                              className="bg-gray-100 text-gray-700 text-xs px-2 py-1 rounded hover-scale"
                             >
                               {highlight}
                             </span>
                           ))}
                         </div>
                       </div>
-                      <Button variant="outline" size="sm" className="w-full">
+                      <Button variant="outline" size="sm" className="w-full hover-glow">
                         Learn More
                       </Button>
                     </CardContent>
@@ -171,13 +171,13 @@ const Academics = () => {
         </Tabs>
 
         {/* Facilities */}
-        <div>
-          <h3 className="text-3xl font-bold text-gray-900 text-center mb-12">Academic Facilities</h3>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="animate-fadeInUp stagger-3">
+          <h3 className="text-2xl sm:text-3xl font-bold text-gray-900 text-center mb-8 sm:mb-12">Academic Facilities</h3>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
             {facilities.map((facility, index) => (
-              <Card key={index} className="text-center hover:shadow-lg transition-shadow duration-300">
-                <CardContent className="p-6">
-                  <facility.icon className="h-12 w-12 text-blue-600 mx-auto mb-4" />
+              <Card key={index} className={`text-center hover-lift transition-all duration-300 animate-scaleIn stagger-${index + 1}`}>
+                <CardContent className="p-4 sm:p-6">
+                  <facility.icon className="h-10 w-10 sm:h-12 sm:w-12 text-blue-600 mx-auto mb-3 sm:mb-4 animate-bounce-soft" />
                   <h4 className="text-lg font-semibold text-gray-900 mb-2">{facility.title}</h4>
                   <p className="text-gray-600 text-sm">{facility.description}</p>
                 </CardContent>
