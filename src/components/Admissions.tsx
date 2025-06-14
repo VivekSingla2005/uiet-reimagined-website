@@ -1,148 +1,207 @@
+
 import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Calendar, FileText, CreditCard, CheckCircle, AlertCircle, Download, Upload } from 'lucide-react';
+import { Calendar, FileText, Users, GraduationCap, CheckCircle, AlertCircle, Clock, CreditCard } from 'lucide-react';
 
 const Admissions = () => {
-  const admissionProcess = [
+  const admissionSchedule = [
     {
-      step: 1,
-      title: 'Online Application',
-      description: 'Fill out the online application form with required details',
-      icon: FileText
+      program: 'B.Tech',
+      applicationStart: 'March 1, 2024',
+      applicationEnd: 'May 15, 2024',
+      examDate: 'June 10, 2024',
+      resultsDate: 'July 5, 2024',
+      seats: 240
     },
     {
-      step: 2,
-      title: 'Document Upload',
-      description: 'Upload all required documents and certificates',
-      icon: Upload
+      program: 'M.Tech',
+      applicationStart: 'March 15, 2024',
+      applicationEnd: 'May 30, 2024',
+      examDate: 'June 20, 2024',
+      resultsDate: 'July 15, 2024',
+      seats: 75
     },
     {
-      step: 3,
-      title: 'Fee Payment',
-      description: 'Pay the application fee through online portal',
-      icon: CreditCard
-    },
-    {
-      step: 4,
-      title: 'Merit List',
-      description: 'Check merit list and counseling schedule',
-      icon: CheckCircle
+      program: 'Ph.D',
+      applicationStart: 'January 1, 2024',
+      applicationEnd: 'March 31, 2024',
+      examDate: 'April 25, 2024',
+      resultsDate: 'May 20, 2024',
+      seats: 25
     }
-  ];
-
-  const importantDates = [
-    { event: 'Application Start Date', date: 'April 15, 2024' },
-    { event: 'Application Last Date', date: 'June 30, 2024' },
-    { event: 'Merit List Release', date: 'July 15, 2024' },
-    { event: 'Counseling Starts', date: 'July 20, 2024' },
-    { event: 'Classes Begin', date: 'August 15, 2024' }
   ];
 
   const eligibilityCriteria = {
-    undergraduate: [
+    btech: [
       'Passed 10+2 with Physics, Chemistry, and Mathematics',
-      'Minimum 75% marks in 10+2 (70% for SC/ST)',
+      'Minimum 60% marks in qualifying examination',
       'Valid JEE Main score',
-      'Age limit: 25 years (30 for SC/ST)'
+      'Age limit: 25 years (relaxation for reserved categories)'
     ],
-    postgraduate: [
-      'Bachelor\'s degree in relevant engineering field',
-      'Minimum 60% marks in graduation (55% for SC/ST)',
-      'Valid GATE score (for M.Tech programs)',
-      'Valid CAT/MAT score (for MBA program)'
+    mtech: [
+      'B.Tech/B.E. in relevant discipline',
+      'Minimum 60% marks or 6.5 CGPA',
+      'Valid GATE score',
+      'No age limit'
     ],
-    doctoral: [
-      'Master\'s degree in relevant field',
-      'Minimum 60% marks in post-graduation',
-      'Valid NET/GATE score or equivalent',
-      'Research proposal and interview'
+    phd: [
+      'M.Tech/M.E./M.Sc. in relevant discipline',
+      'Minimum 60% marks or 6.5 CGPA',
+      'Valid GATE/NET/JRF score',
+      'Research proposal required'
     ]
   };
 
-  const feeStructure = {
-    undergraduate: {
-      tuition: '₹1,50,000',
-      hostel: '₹60,000',
-      mess: '₹40,000',
-      other: '₹20,000',
-      total: '₹2,70,000'
+  const applicationProcess = [
+    {
+      step: 1,
+      title: 'Online Registration',
+      description: 'Create account on admission portal',
+      icon: Users
     },
-    postgraduate: {
-      tuition: '₹2,00,000',
-      hostel: '₹60,000',
-      mess: '₹40,000',
-      other: '₹25,000',
-      total: '₹3,25,000'
+    {
+      step: 2,
+      title: 'Fill Application',
+      description: 'Complete application form with details',
+      icon: FileText
+    },
+    {
+      step: 3,
+      title: 'Upload Documents',
+      description: 'Upload required certificates',
+      icon: CheckCircle
+    },
+    {
+      step: 4,
+      title: 'Pay Fees',
+      description: 'Pay application fee online',
+      icon: CreditCard
+    },
+    {
+      step: 5,
+      title: 'Submit Application',
+      description: 'Review and submit application',
+      icon: Clock
+    },
+    {
+      step: 6,
+      title: 'Admit Card',
+      description: 'Download admit card',
+      icon: GraduationCap
     }
-  };
+  ];
+
+  const feeStructure = [
+    { program: 'B.Tech (per year)', tuition: '₹1,20,000', hostel: '₹45,000', other: '₹15,000', total: '₹1,80,000' },
+    { program: 'M.Tech (per year)', tuition: '₹80,000', hostel: '₹45,000', other: '₹12,000', total: '₹1,37,000' },
+    { program: 'Ph.D (per year)', tuition: '₹30,000', hostel: '₹45,000', other: '₹8,000', total: '₹83,000' }
+  ];
 
   return (
-    <section id="admissions" className="py-20 bg-white">
+    <section id="admissions" className="py-16 bg-gradient-to-br from-slate-50 to-white">
       <div className="max-w-7xl mx-auto px-4">
         {/* Header */}
-        <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-gray-900 mb-4">Admissions</h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Join UIET and embark on your journey towards engineering excellence. 
-            Find all information about admission process, eligibility, and important dates.
+        <div className="text-center mb-12">
+          <div className="inline-flex items-center px-4 py-2 bg-blue-100 text-blue-700 rounded-full text-sm font-medium mb-4">
+            <GraduationCap className="w-4 h-4 mr-2" />
+            Admissions 2024
+          </div>
+          <h2 className="text-4xl font-bold text-slate-900 mb-4">Join UIET Family</h2>
+          <p className="text-lg text-slate-600 max-w-2xl mx-auto">
+            Begin your journey towards excellence in engineering education. Apply now for our world-class programs.
           </p>
         </div>
 
-        {/* Important Dates Alert */}
-        <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4 mb-12">
-          <div className="flex items-start">
-            <AlertCircle className="h-5 w-5 text-yellow-600 mt-0.5 mr-3 flex-shrink-0" />
-            <div>
-              <h3 className="font-semibold text-yellow-800">Admission Open for 2024-25</h3>
-              <p className="text-yellow-700">Application deadline: June 30, 2024. Apply now to secure your seat!</p>
-            </div>
-          </div>
+        {/* Quick Stats */}
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+          <Card className="text-center border-0 shadow-md bg-white">
+            <CardContent className="p-6">
+              <div className="text-2xl font-bold text-blue-600 mb-1">340</div>
+              <div className="text-slate-600 text-sm">Total Seats</div>
+            </CardContent>
+          </Card>
+          <Card className="text-center border-0 shadow-md bg-white">
+            <CardContent className="p-6">
+              <div className="text-2xl font-bold text-green-600 mb-1">95%</div>
+              <div className="text-slate-600 text-sm">Placement Rate</div>
+            </CardContent>
+          </Card>
+          <Card className="text-center border-0 shadow-md bg-white">
+            <CardContent className="p-6">
+              <div className="text-2xl font-bold text-purple-600 mb-1">₹45 LPA</div>
+              <div className="text-slate-600 text-sm">Highest Package</div>
+            </CardContent>
+          </Card>
+          <Card className="text-center border-0 shadow-md bg-white">
+            <CardContent className="p-6">
+              <div className="text-2xl font-bold text-orange-600 mb-1">22+</div>
+              <div className="text-slate-600 text-sm">Years Legacy</div>
+            </CardContent>
+          </Card>
         </div>
 
-        {/* Admission Process */}
-        <div className="mb-16">
-          <h3 className="text-3xl font-bold text-gray-900 text-center mb-12">Admission Process</h3>
-          <div className="grid md:grid-cols-4 gap-6">
-            {admissionProcess.map((step) => (
-              <Card key={step.step} className="text-center relative">
-                <CardContent className="p-6">
-                  <div className="w-12 h-12 bg-blue-600 text-white rounded-full flex items-center justify-center mx-auto mb-4 text-lg font-bold">
-                    {step.step}
-                  </div>
-                  <step.icon className="h-8 w-8 text-blue-600 mx-auto mb-3" />
-                  <h4 className="text-lg font-semibold text-gray-900 mb-2">{step.title}</h4>
-                  <p className="text-gray-600 text-sm">{step.description}</p>
-                </CardContent>
-                {step.step < 4 && (
-                  <div className="hidden md:block absolute top-1/2 -right-3 w-6 h-0.5 bg-gray-300" />
-                )}
-              </Card>
-            ))}
-          </div>
-        </div>
-
-        {/* Eligibility & Fee Structure */}
-        <Tabs defaultValue="eligibility" className="mb-16">
-          <TabsList className="grid w-full lg:w-fit mx-auto grid-cols-2 mb-8">
-            <TabsTrigger value="eligibility" className="px-8">Eligibility Criteria</TabsTrigger>
-            <TabsTrigger value="fees" className="px-8">Fee Structure</TabsTrigger>
+        {/* Main Content */}
+        <Tabs defaultValue="schedule" className="mb-12">
+          <TabsList className="grid grid-cols-2 md:grid-cols-4 w-full lg:w-fit mx-auto mb-8 bg-white shadow-sm">
+            <TabsTrigger value="schedule" className="px-6 py-3">Schedule</TabsTrigger>
+            <TabsTrigger value="eligibility" className="px-6 py-3">Eligibility</TabsTrigger>
+            <TabsTrigger value="process" className="px-6 py-3">Process</TabsTrigger>
+            <TabsTrigger value="fees" className="px-6 py-3">Fee Structure</TabsTrigger>
           </TabsList>
 
+          <TabsContent value="schedule">
+            <div className="space-y-6">
+              {admissionSchedule.map((schedule, index) => (
+                <Card key={index} className="border-0 shadow-md bg-white">
+                  <CardContent className="p-6">
+                    <div className="grid grid-cols-1 md:grid-cols-6 gap-4 items-center">
+                      <div className="md:col-span-1">
+                        <h3 className="text-xl font-bold text-slate-900">{schedule.program}</h3>
+                        <p className="text-slate-600 text-sm">{schedule.seats} seats</p>
+                      </div>
+                      <div className="md:col-span-1 text-center">
+                        <div className="text-sm font-medium text-slate-900">Application Start</div>
+                        <div className="text-blue-600 text-sm">{schedule.applicationStart}</div>
+                      </div>
+                      <div className="md:col-span-1 text-center">
+                        <div className="text-sm font-medium text-slate-900">Application End</div>
+                        <div className="text-red-600 text-sm">{schedule.applicationEnd}</div>
+                      </div>
+                      <div className="md:col-span-1 text-center">
+                        <div className="text-sm font-medium text-slate-900">Exam Date</div>
+                        <div className="text-purple-600 text-sm">{schedule.examDate}</div>
+                      </div>
+                      <div className="md:col-span-1 text-center">
+                        <div className="text-sm font-medium text-slate-900">Results</div>
+                        <div className="text-green-600 text-sm">{schedule.resultsDate}</div>
+                      </div>
+                      <div className="md:col-span-1">
+                        <Button className="w-full bg-blue-600 hover:bg-blue-700">Apply Now</Button>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </TabsContent>
+
           <TabsContent value="eligibility">
-            <div className="grid lg:grid-cols-3 gap-6">
-              {Object.entries(eligibilityCriteria).map(([level, criteria]) => (
-                <Card key={level}>
-                  <CardHeader>
-                    <CardTitle className="capitalize">{level} Programs</CardTitle>
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+              {Object.entries(eligibilityCriteria).map(([program, criteria]) => (
+                <Card key={program} className="border-0 shadow-md bg-white">
+                  <CardHeader className="pb-4">
+                    <CardTitle className="text-xl text-slate-900 capitalize">
+                      {program === 'btech' ? 'B.Tech' : program === 'mtech' ? 'M.Tech' : 'Ph.D'}
+                    </CardTitle>
                   </CardHeader>
                   <CardContent>
-                    <ul className="space-y-2">
-                      {criteria.map((criterion, index) => (
-                        <li key={index} className="flex items-start text-sm">
-                          <CheckCircle className="h-4 w-4 text-green-600 mr-2 mt-0.5 flex-shrink-0" />
-                          {criterion}
+                    <ul className="space-y-3">
+                      {criteria.map((criterion, idx) => (
+                        <li key={idx} className="flex items-start">
+                          <CheckCircle className="w-5 h-5 text-green-500 mr-3 mt-0.5 flex-shrink-0" />
+                          <span className="text-slate-600 text-sm">{criterion}</span>
                         </li>
                       ))}
                     </ul>
@@ -152,97 +211,74 @@ const Admissions = () => {
             </div>
           </TabsContent>
 
-          <TabsContent value="fees">
-            <div className="grid lg:grid-cols-2 gap-6 max-w-4xl mx-auto">
-              {Object.entries(feeStructure).map(([level, fees]) => (
-                <Card key={level}>
-                  <CardHeader>
-                    <CardTitle className="capitalize">{level} Programs</CardTitle>
-                    <p className="text-sm text-gray-600">Annual Fee Structure</p>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="space-y-3">
-                      <div className="flex justify-between">
-                        <span>Tuition Fee</span>
-                        <span className="font-semibold">{fees.tuition}</span>
-                      </div>
-                      <div className="flex justify-between">
-                        <span>Hostel Fee</span>
-                        <span className="font-semibold">{fees.hostel}</span>
-                      </div>
-                      <div className="flex justify-between">
-                        <span>Mess Fee</span>
-                        <span className="font-semibold">{fees.mess}</span>
-                      </div>
-                      <div className="flex justify-between">
-                        <span>Other Charges</span>
-                        <span className="font-semibold">{fees.other}</span>
-                      </div>
-                      <hr />
-                      <div className="flex justify-between text-lg font-bold">
-                        <span>Total</span>
-                        <span>{fees.total}</span>
-                      </div>
+          <TabsContent value="process">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {applicationProcess.map((step) => (
+                <Card key={step.step} className="text-center border-0 shadow-md bg-white">
+                  <CardContent className="p-6">
+                    <div className="w-12 h-12 bg-blue-600 text-white rounded-full flex items-center justify-center mx-auto mb-4 text-lg font-bold">
+                      {step.step}
                     </div>
+                    <step.icon className="w-8 h-8 text-blue-600 mx-auto mb-3" />
+                    <h4 className="text-lg font-semibold text-slate-900 mb-2">{step.title}</h4>
+                    <p className="text-slate-600 text-sm">{step.description}</p>
                   </CardContent>
                 </Card>
               ))}
             </div>
           </TabsContent>
+
+          <TabsContent value="fees">
+            <Card className="border-0 shadow-md bg-white">
+              <CardContent className="p-6">
+                <div className="overflow-x-auto">
+                  <table className="w-full text-left">
+                    <thead>
+                      <tr className="border-b border-slate-200">
+                        <th className="pb-3 text-slate-900 font-semibold">Program</th>
+                        <th className="pb-3 text-slate-900 font-semibold">Tuition Fee</th>
+                        <th className="pb-3 text-slate-900 font-semibold">Hostel Fee</th>
+                        <th className="pb-3 text-slate-900 font-semibold">Other Charges</th>
+                        <th className="pb-3 text-slate-900 font-semibold">Total</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {feeStructure.map((fee, index) => (
+                        <tr key={index} className="border-b border-slate-100">
+                          <td className="py-3 font-medium text-slate-900">{fee.program}</td>
+                          <td className="py-3 text-slate-600">{fee.tuition}</td>
+                          <td className="py-3 text-slate-600">{fee.hostel}</td>
+                          <td className="py-3 text-slate-600">{fee.other}</td>
+                          <td className="py-3 font-semibold text-green-600">{fee.total}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </CardContent>
+            </Card>
+          </TabsContent>
         </Tabs>
 
-        {/* Important Dates */}
-        <div className="grid lg:grid-cols-2 gap-12 items-start mb-16">
-          <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center">
-                <Calendar className="h-5 w-5 mr-2" />
-                Important Dates
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-3">
-                {importantDates.map((item, index) => (
-                  <div key={index} className="flex justify-between items-center py-2 border-b border-gray-100 last:border-0">
-                    <span className="text-gray-700">{item.event}</span>
-                    <span className="font-semibold text-blue-600">{item.date}</span>
-                  </div>
-                ))}
+        {/* CTA Section */}
+        <div className="text-center">
+          <Card className="border-0 shadow-lg bg-gradient-to-r from-blue-600 to-purple-600 text-white">
+            <CardContent className="p-8">
+              <h3 className="text-2xl font-bold mb-4">Ready to Apply?</h3>
+              <p className="text-blue-100 mb-6 max-w-2xl mx-auto">
+                Don't miss this opportunity to be part of India's leading engineering institute. 
+                Start your application today and secure your future.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <Button className="bg-white text-blue-600 hover:bg-slate-100 font-semibold px-8 py-3">
+                  Start Application
+                </Button>
+                <Button variant="outline" className="border-white text-white hover:bg-white hover:text-blue-600 px-8 py-3">
+                  Download Brochure
+                </Button>
               </div>
             </CardContent>
           </Card>
-
-          {/* Quick Actions */}
-          <div className="space-y-6">
-            <Card className="bg-blue-50 border-blue-200">
-              <CardContent className="p-6">
-                <h3 className="text-xl font-semibold text-gray-900 mb-4">Ready to Apply?</h3>
-                <div className="space-y-3">
-                  <Button className="w-full bg-blue-600 hover:bg-blue-700">
-                    Apply Online Now
-                  </Button>
-                  <Button variant="outline" className="w-full">
-                    <Download className="h-4 w-4 mr-2" />
-                    Download Prospectus
-                  </Button>
-                  <Button variant="outline" className="w-full">
-                    Check Merit List
-                  </Button>
-                </div>
-              </CardContent>
-            </Card>
-
-            <Card>
-              <CardContent className="p-6">
-                <h3 className="text-lg font-semibold text-gray-900 mb-3">Need Help?</h3>
-                <div className="space-y-2 text-sm">
-                  <p><strong>Admission Office:</strong> +91-172-2534816</p>
-                  <p><strong>Email:</strong> admissions@uiet.puchd.ac.in</p>
-                  <p><strong>Timing:</strong> 9:00 AM - 5:00 PM (Mon-Fri)</p>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
         </div>
       </div>
     </section>
