@@ -1,9 +1,8 @@
-
 import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Calendar, FileText, CreditCard, CheckCircle, AlertCircle, Download } from 'lucide-react';
+import { Calendar, FileText, CreditCard, CheckCircle, AlertCircle, Download, Upload } from 'lucide-react';
 
 const Admissions = () => {
   const admissionProcess = [
