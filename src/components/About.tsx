@@ -37,24 +37,27 @@ const About = () => {
   ];
 
   return (
-    <section id="about" className="py-12 sm:py-20 bg-gray-50">
+    <section id="about" className="py-20 bg-slate-50">
       <div className="max-w-7xl mx-auto px-4">
         {/* Header */}
-        <div className="text-center mb-12 sm:mb-16 animate-fadeInUp">
-          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">About UIET</h2>
-          <p className="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto">
+        <div className="text-center mb-16">
+          <div className="inline-block px-4 py-2 bg-blue-100 text-blue-700 rounded-full text-sm font-medium mb-4">
+            About UIET
+          </div>
+          <h2 className="text-4xl font-bold text-slate-900 mb-6">Excellence in Engineering Education</h2>
+          <p className="text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed">
             Established in 2002, University Institute of Engineering & Technology is a premier 
             technical institute under Panjab University, Chandigarh.
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center mb-12 sm:mb-16">
+        <div className="grid lg:grid-cols-2 gap-16 items-center mb-20">
           {/* Left Content */}
-          <div className="space-y-6 animate-fadeInLeft">
-            <h3 className="text-2xl sm:text-3xl font-bold text-gray-900">
+          <div className="space-y-8">
+            <h3 className="text-3xl font-bold text-slate-900">
               Pioneering Engineering Education Since 2002
             </h3>
-            <div className="space-y-4 text-gray-600 text-sm sm:text-base">
+            <div className="space-y-6 text-slate-600 leading-relaxed">
               <p>
                 UIET stands as a beacon of excellence in engineering education, research, and innovation. 
                 Located in the beautiful city of Chandigarh, we have been nurturing young minds and 
@@ -72,11 +75,11 @@ const About = () => {
             </div>
 
             {/* Achievements */}
-            <div>
-              <h4 className="text-lg sm:text-xl font-semibold text-gray-900 mb-4">Key Achievements</h4>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+            <div className="bg-white p-6 rounded-xl border border-slate-200">
+              <h4 className="text-xl font-semibold text-slate-900 mb-4">Key Achievements</h4>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 {achievements.map((achievement, index) => (
-                  <div key={index} className={`flex items-center text-xs sm:text-sm text-gray-600 animate-fadeInUp stagger-${index + 1}`}>
+                  <div key={index} className="flex items-center text-sm text-slate-600">
                     <div className="w-2 h-2 bg-blue-600 rounded-full mr-3 flex-shrink-0" />
                     {achievement}
                   </div>
@@ -86,29 +89,29 @@ const About = () => {
           </div>
 
           {/* Right Content - Image */}
-          <div className="relative animate-fadeInRight">
-            <div className="rounded-2xl overflow-hidden shadow-xl hover-lift">
+          <div className="relative">
+            <div className="rounded-2xl overflow-hidden shadow-xl">
               <img
                 src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=600&h=400&fit=crop&crop=center"
                 alt="UIET Campus Building"
-                className="w-full h-64 sm:h-80 lg:h-96 object-cover"
+                className="w-full h-96 object-cover"
               />
             </div>
-            <div className="absolute -bottom-4 sm:-bottom-6 -right-4 sm:-right-6 bg-blue-600 text-white p-3 sm:p-4 rounded-lg shadow-lg animate-scaleIn hover-glow">
-              <div className="text-xl sm:text-2xl font-bold">20+</div>
-              <div className="text-xs sm:text-sm">Years of Excellence</div>
+            <div className="absolute -bottom-6 -right-6 bg-blue-600 text-white p-6 rounded-xl shadow-lg">
+              <div className="text-3xl font-bold">20+</div>
+              <div className="text-sm">Years of Excellence</div>
             </div>
           </div>
         </div>
 
         {/* Features Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {features.map((feature, index) => (
-            <Card key={index} className={`text-center hover-lift transition-all duration-300 animate-scaleIn stagger-${index + 1}`}>
-              <CardContent className="p-4 sm:p-6">
-                <feature.icon className="h-10 w-10 sm:h-12 sm:w-12 text-blue-600 mx-auto mb-3 sm:mb-4 animate-bounce-soft" />
-                <h3 className="text-lg sm:text-xl font-semibold text-gray-900 mb-2">{feature.title}</h3>
-                <p className="text-gray-600 text-sm sm:text-base">{feature.description}</p>
+            <Card key={index} className="text-center hover-card border-0 shadow-lg bg-white">
+              <CardContent className="p-8">
+                <feature.icon className="h-12 w-12 text-blue-600 mx-auto mb-4" />
+                <h3 className="text-xl font-semibold text-slate-900 mb-3">{feature.title}</h3>
+                <p className="text-slate-600 leading-relaxed">{feature.description}</p>
               </CardContent>
             </Card>
           ))}
