@@ -1,172 +1,167 @@
-
 import React from 'react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Computer, Users, BookOpen, Award, Flask, Calendar, Trophy, FileText } from 'lucide-react';
+import { Users, BookOpen, Target, Award, Beaker, Calendar, GraduationCap, Code } from 'lucide-react';
 
 const DepartmentCSE = () => {
+  const faculty = [
+    { name: 'Dr. Rajesh Kumar', designation: 'Professor & HOD', specialization: 'Machine Learning, AI', experience: '20 years' },
+    { name: 'Dr. Priya Sharma', designation: 'Associate Professor', specialization: 'Data Structures, Algorithms', experience: '15 years' },
+    { name: 'Dr. Amit Singh', designation: 'Assistant Professor', specialization: 'Computer Networks, IoT', experience: '10 years' },
+    { name: 'Dr. Neha Gupta', designation: 'Assistant Professor', specialization: 'Software Engineering, Web Tech', experience: '8 years' }
+  ];
+
+  const labs = [
+    { name: 'Programming Lab', systems: 60, software: 'Dev-C++, Eclipse, Visual Studio' },
+    { name: 'Database Lab', systems: 40, software: 'Oracle, MySQL, MongoDB' },
+    { name: 'Network Lab', systems: 30, software: 'Cisco Packet Tracer, Wireshark' },
+    { name: 'AI/ML Lab', systems: 25, software: 'Python, R, TensorFlow, Jupyter' }
+  ];
+
+  const programs = [
+    { degree: 'B.Tech CSE', duration: '4 years', intake: 120, eligibility: '10+2 with PCM' },
+    { degree: 'M.Tech CSE', duration: '2 years', intake: 30, eligibility: 'B.Tech in CSE/IT' },
+    { degree: 'Ph.D CSE', duration: '3-5 years', intake: 10, eligibility: 'M.Tech with valid GATE/NET' }
+  ];
+
   return (
     <div className="min-h-screen">
       <Header />
       
       {/* Department Hero */}
-      <section className="bg-gradient-to-r from-blue-600 to-purple-600 text-white py-16">
+      <section className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white py-16">
         <div className="container-modern">
           <div className="text-center">
-            <Computer className="h-16 w-16 mx-auto mb-4" />
+            <Code className="h-16 w-16 mx-auto mb-4" />
             <h1 className="text-4xl font-bold mb-4">Computer Science & Engineering</h1>
-            <p className="text-xl text-blue-100">Leading innovation in software development, AI, and emerging technologies</p>
+            <p className="text-xl text-blue-100">
+              Pioneering innovation in computing technologies and software development
+            </p>
           </div>
         </div>
       </section>
 
       <div className="container-modern py-12">
-        <Tabs defaultValue="overview" className="w-full">
-          <TabsList className="grid grid-cols-4 md:grid-cols-8 w-full mb-8">
-            <TabsTrigger value="overview">Overview</TabsTrigger>
-            <TabsTrigger value="academics">Academics</TabsTrigger>
-            <TabsTrigger value="faculty">Faculty</TabsTrigger>
-            <TabsTrigger value="research">Research</TabsTrigger>
-            <TabsTrigger value="labs">Labs</TabsTrigger>
-            <TabsTrigger value="events">Events</TabsTrigger>
-            <TabsTrigger value="alumni">Alumni</TabsTrigger>
-            <TabsTrigger value="achievements">Achievements</TabsTrigger>
+        <Tabs defaultValue="overview" className="space-y-8">
+          <TabsList className="grid w-full grid-cols-4 lg:grid-cols-8 h-auto p-1">
+            <TabsTrigger value="overview" className="px-3 py-2 text-xs">Overview</TabsTrigger>
+            <TabsTrigger value="programs" className="px-3 py-2 text-xs">Programs</TabsTrigger>
+            <TabsTrigger value="faculty" className="px-3 py-2 text-xs">Faculty</TabsTrigger>
+            <TabsTrigger value="research" className="px-3 py-2 text-xs">Research</TabsTrigger>
+            <TabsTrigger value="labs" className="px-3 py-2 text-xs">Labs</TabsTrigger>
+            <TabsTrigger value="events" className="px-3 py-2 text-xs">Events</TabsTrigger>
+            <TabsTrigger value="alumni" className="px-3 py-2 text-xs">Alumni</TabsTrigger>
+            <TabsTrigger value="achievements" className="px-3 py-2 text-xs">Achievements</TabsTrigger>
           </TabsList>
 
-          <TabsContent value="overview">
+          <TabsContent value="overview" className="space-y-8">
             <div className="grid md:grid-cols-2 gap-8">
               <Card>
                 <CardHeader>
-                  <CardTitle>Vision</CardTitle>
+                  <CardTitle className="flex items-center">
+                    <Target className="h-5 w-5 mr-2 text-blue-600" />
+                    Vision
+                  </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p>To be a globally recognized department that produces world-class computer science engineers and researchers who contribute to technological advancement and societal development.</p>
+                  <p className="text-gray-600">
+                    To be a globally recognized department of excellence in computer science and engineering education, 
+                    research, and innovation that contributes to societal development.
+                  </p>
                 </CardContent>
               </Card>
-              
+
               <Card>
                 <CardHeader>
-                  <CardTitle>Mission</CardTitle>
+                  <CardTitle className="flex items-center">
+                    <BookOpen className="h-5 w-5 mr-2 text-green-600" />
+                    Mission
+                  </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <ul className="list-disc list-inside space-y-2">
-                    <li>Provide quality education in computer science and engineering</li>
-                    <li>Foster innovation and research culture</li>
-                    <li>Develop ethical and socially responsible engineers</li>
-                    <li>Maintain strong industry-academia collaboration</li>
-                  </ul>
+                  <p className="text-gray-600">
+                    To provide quality education in computer science and engineering through innovative curriculum, 
+                    cutting-edge research, and industry collaboration while fostering ethical and professional values.
+                  </p>
                 </CardContent>
               </Card>
             </div>
 
-            <Card className="mt-8">
+            <Card>
               <CardHeader>
                 <CardTitle>Program Educational Objectives (PEOs)</CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="grid md:grid-cols-2 gap-6">
-                  <div>
-                    <h4 className="font-semibold mb-2">PEO 1: Technical Excellence</h4>
-                    <p>Graduates will demonstrate technical competence in computer science and engineering</p>
+                <div className="space-y-3">
+                  <div className="flex items-start space-x-3">
+                    <div className="w-6 h-6 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 text-sm font-semibold mt-0.5">1</div>
+                    <p className="text-gray-600">Graduates will demonstrate technical competence in computer science and engineering fundamentals.</p>
                   </div>
-                  <div>
-                    <h4 className="font-semibold mb-2">PEO 2: Professional Skills</h4>
-                    <p>Graduates will exhibit leadership, teamwork, and communication skills</p>
+                  <div className="flex items-start space-x-3">
+                    <div className="w-6 h-6 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 text-sm font-semibold mt-0.5">2</div>
+                    <p className="text-gray-600">Graduates will exhibit problem-solving skills and innovative thinking in their professional careers.</p>
                   </div>
-                  <div>
-                    <h4 className="font-semibold mb-2">PEO 3: Lifelong Learning</h4>
-                    <p>Graduates will engage in continuous learning and professional development</p>
+                  <div className="flex items-start space-x-3">
+                    <div className="w-6 h-6 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 text-sm font-semibold mt-0.5">3</div>
+                    <p className="text-gray-600">Graduates will demonstrate effective communication, teamwork, and leadership skills.</p>
                   </div>
-                  <div>
-                    <h4 className="font-semibold mb-2">PEO 4: Social Responsibility</h4>
-                    <p>Graduates will demonstrate ethical behavior and social responsibility</p>
+                  <div className="flex items-start space-x-3">
+                    <div className="w-6 h-6 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 text-sm font-semibold mt-0.5">4</div>
+                    <p className="text-gray-600">Graduates will engage in lifelong learning and professional development.</p>
                   </div>
                 </div>
               </CardContent>
             </Card>
           </TabsContent>
 
-          <TabsContent value="academics">
-            <div className="space-y-8">
-              <Card>
-                <CardHeader>
-                  <CardTitle>Programs Offered</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="grid md:grid-cols-3 gap-6">
-                    <div className="text-center p-4 border rounded-lg">
-                      <h4 className="font-semibold mb-2">B.E. Computer Science</h4>
-                      <p className="text-sm text-gray-600">4-year undergraduate program</p>
-                      <p className="text-sm font-medium">Intake: 60 students</p>
+          <TabsContent value="programs">
+            <div className="space-y-6">
+              {programs.map((program, index) => (
+                <Card key={index}>
+                  <CardContent className="p-6">
+                    <div className="grid md:grid-cols-4 gap-4 items-center">
+                      <div>
+                        <h3 className="text-lg font-semibold text-gray-900">{program.degree}</h3>
+                        <p className="text-sm text-gray-600">Duration: {program.duration}</p>
+                      </div>
+                      <div className="text-center">
+                        <div className="text-2xl font-bold text-blue-600">{program.intake}</div>
+                        <div className="text-sm text-gray-600">Intake</div>
+                      </div>
+                      <div>
+                        <div className="text-sm text-gray-600">Eligibility</div>
+                        <div className="font-medium">{program.eligibility}</div>
+                      </div>
+                      <div className="text-right">
+                        <button className="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm hover:bg-blue-700 transition-colors">
+                          View Syllabus
+                        </button>
+                      </div>
                     </div>
-                    <div className="text-center p-4 border rounded-lg">
-                      <h4 className="font-semibold mb-2">M.E. Computer Science</h4>
-                      <p className="text-sm text-gray-600">2-year postgraduate program</p>
-                      <p className="text-sm font-medium">Intake: 18 students</p>
-                    </div>
-                    <div className="text-center p-4 border rounded-lg">
-                      <h4 className="font-semibold mb-2">Ph.D Computer Science</h4>
-                      <p className="text-sm text-gray-600">Research program</p>
-                      <p className="text-sm font-medium">Variable intake</p>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-
-              <Card>
-                <CardHeader>
-                  <CardTitle>Course Structure</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="grid md:grid-cols-2 gap-6">
-                    <div>
-                      <h4 className="font-semibold mb-3">Core Subjects</h4>
-                      <ul className="space-y-1 text-sm">
-                        <li>• Data Structures and Algorithms</li>
-                        <li>• Computer Organization</li>
-                        <li>• Operating Systems</li>
-                        <li>• Database Management Systems</li>
-                        <li>• Computer Networks</li>
-                        <li>• Software Engineering</li>
-                      </ul>
-                    </div>
-                    <div>
-                      <h4 className="font-semibold mb-3">Specialization Areas</h4>
-                      <ul className="space-y-1 text-sm">
-                        <li>• Artificial Intelligence</li>
-                        <li>• Machine Learning</li>
-                        <li>• Cybersecurity</li>
-                        <li>• Web Development</li>
-                        <li>• Mobile Computing</li>
-                        <li>• Cloud Computing</li>
-                      </ul>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
+                  </CardContent>
+                </Card>
+              ))}
             </div>
           </TabsContent>
 
           <TabsContent value="faculty">
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {[
-                { name: 'Dr. Rajesh Kumar', designation: 'Professor & Head', specialization: 'AI & Machine Learning' },
-                { name: 'Dr. Priya Sharma', designation: 'Associate Professor', specialization: 'Database Systems' },
-                { name: 'Dr. Amit Singh', designation: 'Assistant Professor', specialization: 'Computer Networks' },
-                { name: 'Dr. Neha Gupta', designation: 'Assistant Professor', specialization: 'Software Engineering' },
-                { name: 'Dr. Suresh Patel', designation: 'Associate Professor', specialization: 'Cybersecurity' },
-                { name: 'Dr. Kavita Rani', designation: 'Assistant Professor', specialization: 'Data Mining' }
-              ].map((faculty, index) => (
+            <div className="grid md:grid-cols-2 gap-6">
+              {faculty.map((member, index) => (
                 <Card key={index}>
-                  <CardContent className="p-6 text-center">
-                    <div className="w-20 h-20 bg-blue-100 rounded-full mx-auto mb-4 flex items-center justify-center">
-                      <Users className="h-10 w-10 text-blue-600" />
+                  <CardContent className="p-6">
+                    <div className="flex items-start space-x-4">
+                      <div className="w-16 h-16 bg-gray-200 rounded-full flex items-center justify-center">
+                        <Users className="h-8 w-8 text-gray-500" />
+                      </div>
+                      <div className="flex-1">
+                        <h3 className="text-lg font-semibold text-gray-900">{member.name}</h3>
+                        <p className="text-blue-600 font-medium">{member.designation}</p>
+                        <p className="text-sm text-gray-600 mt-1">{member.specialization}</p>
+                        <p className="text-sm text-gray-500">{member.experience}</p>
+                      </div>
                     </div>
-                    <h4 className="font-semibold">{faculty.name}</h4>
-                    <p className="text-sm text-gray-600 mb-1">{faculty.designation}</p>
-                    <p className="text-xs text-blue-600">{faculty.specialization}</p>
                   </CardContent>
                 </Card>
               ))}
@@ -174,44 +169,53 @@ const DepartmentCSE = () => {
           </TabsContent>
 
           <TabsContent value="research">
-            <div className="space-y-8">
+            <div className="grid md:grid-cols-2 gap-8">
               <Card>
                 <CardHeader>
-                  <CardTitle>Ongoing Research Projects</CardTitle>
+                  <CardTitle className="flex items-center">
+                    <Beaker className="h-5 w-5 mr-2 text-green-600" />
+                    Ongoing Research
+                  </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <div className="space-y-4">
-                    {[
-                      'AI-based Healthcare Diagnosis System',
-                      'Blockchain for Secure Data Management',
-                      'IoT Security Framework',
-                      'Natural Language Processing for Regional Languages'
-                    ].map((project, index) => (
-                      <div key={index} className="p-4 border-l-4 border-blue-500 bg-blue-50">
-                        <h4 className="font-semibold">{project}</h4>
-                        <p className="text-sm text-gray-600 mt-1">Funded by DST/CSIR • Duration: 2023-2026</p>
-                      </div>
-                    ))}
+                  <div className="space-y-3">
+                    <div className="border-l-4 border-green-500 pl-4">
+                      <h4 className="font-semibold">AI-based Healthcare Solutions</h4>
+                      <p className="text-sm text-gray-600">Dr. Rajesh Kumar - Funded by DST</p>
+                    </div>
+                    <div className="border-l-4 border-green-500 pl-4">
+                      <h4 className="font-semibold">IoT Security Framework</h4>
+                      <p className="text-sm text-gray-600">Dr. Amit Singh - Industry Collaboration</p>
+                    </div>
+                    <div className="border-l-4 border-green-500 pl-4">
+                      <h4 className="font-semibold">Blockchain for Supply Chain</h4>
+                      <p className="text-sm text-gray-600">Dr. Neha Gupta - UGC Funded</p>
+                    </div>
                   </div>
                 </CardContent>
               </Card>
 
               <Card>
                 <CardHeader>
-                  <CardTitle>Completed Research Projects</CardTitle>
+                  <CardTitle className="flex items-center">
+                    <Award className="h-5 w-5 mr-2 text-blue-600" />
+                    Completed Research
+                  </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <div className="space-y-4">
-                    {[
-                      'Smart City Traffic Management System',
-                      'Educational Data Mining Platform',
-                      'Cloud-based E-governance Solution'
-                    ].map((project, index) => (
-                      <div key={index} className="p-4 border-l-4 border-green-500 bg-green-50">
-                        <h4 className="font-semibold">{project}</h4>
-                        <p className="text-sm text-gray-600 mt-1">Completed in 2023 • Impact: 500+ users</p>
-                      </div>
-                    ))}
+                  <div className="space-y-3">
+                    <div className="border-l-4 border-blue-500 pl-4">
+                      <h4 className="font-semibold">Machine Learning in Agriculture</h4>
+                      <p className="text-sm text-gray-600">2023 - Published in IEEE Journal</p>
+                    </div>
+                    <div className="border-l-4 border-blue-500 pl-4">
+                      <h4 className="font-semibold">Cloud Computing Security</h4>
+                      <p className="text-sm text-gray-600">2022 - Patent Filed</p>
+                    </div>
+                    <div className="border-l-4 border-blue-500 pl-4">
+                      <h4 className="font-semibold">Data Mining Techniques</h4>
+                      <p className="text-sm text-gray-600">2021 - Best Paper Award</p>
+                    </div>
                   </div>
                 </CardContent>
               </Card>
@@ -220,43 +224,20 @@ const DepartmentCSE = () => {
 
           <TabsContent value="labs">
             <div className="grid md:grid-cols-2 gap-6">
-              {[
-                { name: 'Programming Lab', capacity: '60 systems', software: 'Visual Studio, Eclipse, PyCharm' },
-                { name: 'Network Lab', capacity: '30 systems', software: 'Cisco Packet Tracer, Wireshark' },
-                { name: 'AI/ML Lab', capacity: '40 systems', software: 'TensorFlow, PyTorch, R' },
-                { name: 'Database Lab', capacity: '50 systems', software: 'Oracle, MySQL, MongoDB' }
-              ].map((lab, index) => (
+              {labs.map((lab, index) => (
                 <Card key={index}>
                   <CardHeader>
-                    <CardTitle className="flex items-center">
-                      <Flask className="h-5 w-5 mr-2" />
-                      {lab.name}
-                    </CardTitle>
+                    <CardTitle>{lab.name}</CardTitle>
                   </CardHeader>
                   <CardContent>
-                    <p className="text-sm text-gray-600 mb-2">Capacity: {lab.capacity}</p>
-                    <p className="text-sm">Software: {lab.software}</p>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-          </TabsContent>
-
-          <TabsContent value="events">
-            <div className="space-y-6">
-              {[
-                { name: 'TechFest 2024', date: 'March 15-17, 2024', description: 'Annual technical festival with coding competitions' },
-                { name: 'AI Workshop', date: 'February 20, 2024', description: 'Hands-on workshop on machine learning' },
-                { name: 'Industry Talk Series', date: 'Monthly', description: 'Guest lectures by industry experts' }
-              ].map((event, index) => (
-                <Card key={index}>
-                  <CardContent className="p-6">
-                    <div className="flex items-start">
-                      <Calendar className="h-6 w-6 text-blue-600 mr-4 mt-1" />
+                    <div className="space-y-2">
+                      <div className="flex justify-between">
+                        <span className="text-gray-600">Systems:</span>
+                        <span className="font-semibold">{lab.systems}</span>
+                      </div>
                       <div>
-                        <h4 className="font-semibold">{event.name}</h4>
-                        <p className="text-sm text-gray-600 mb-2">{event.date}</p>
-                        <p className="text-sm">{event.description}</p>
+                        <span className="text-gray-600">Software: </span>
+                        <span className="text-sm">{lab.software}</span>
                       </div>
                     </div>
                   </CardContent>
@@ -265,22 +246,59 @@ const DepartmentCSE = () => {
             </div>
           </TabsContent>
 
+          <TabsContent value="events">
+            <div className="space-y-6">
+              <Card>
+                <CardHeader>
+                  <CardTitle className="flex items-center">
+                    <Calendar className="h-5 w-5 mr-2 text-purple-600" />
+                    Upcoming Events
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-4">
+                    <div className="flex items-center space-x-4 p-4 bg-gray-50 rounded-lg">
+                      <div className="text-center">
+                        <div className="text-lg font-bold text-blue-600">15</div>
+                        <div className="text-sm text-gray-600">JAN</div>
+                      </div>
+                      <div>
+                        <h4 className="font-semibold">AI Workshop</h4>
+                        <p className="text-sm text-gray-600">Introduction to Machine Learning</p>
+                      </div>
+                    </div>
+                    <div className="flex items-center space-x-4 p-4 bg-gray-50 rounded-lg">
+                      <div className="text-center">
+                        <div className="text-lg font-bold text-blue-600">22</div>
+                        <div className="text-sm text-gray-600">JAN</div>
+                      </div>
+                      <div>
+                        <h4 className="font-semibold">Tech Symposium</h4>
+                        <p className="text-sm text-gray-600">Latest trends in Computer Science</p>
+                      </div>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+          </TabsContent>
+
           <TabsContent value="alumni">
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid md:grid-cols-3 gap-6">
               {[
-                { name: 'Rahul Verma', batch: '2020', company: 'Google', position: 'Software Engineer' },
-                { name: 'Priya Patel', batch: '2019', company: 'Microsoft', position: 'Product Manager' },
-                { name: 'Amit Sharma', batch: '2018', company: 'Amazon', position: 'SDE-II' }
+                { name: 'Rahul Sharma', batch: '2020', company: 'Google', position: 'Software Engineer' },
+                { name: 'Priya Gupta', batch: '2019', company: 'Microsoft', position: 'Senior Developer' },
+                { name: 'Amit Kumar', batch: '2018', company: 'Amazon', position: 'Tech Lead' }
               ].map((alumni, index) => (
                 <Card key={index}>
                   <CardContent className="p-6 text-center">
-                    <div className="w-16 h-16 bg-green-100 rounded-full mx-auto mb-4 flex items-center justify-center">
-                      <Trophy className="h-8 w-8 text-green-600" />
+                    <div className="w-16 h-16 bg-gray-200 rounded-full mx-auto mb-4 flex items-center justify-center">
+                      <GraduationCap className="h-8 w-8 text-gray-500" />
                     </div>
-                    <h4 className="font-semibold">{alumni.name}</h4>
-                    <p className="text-sm text-gray-600">Batch: {alumni.batch}</p>
-                    <p className="text-sm text-blue-600">{alumni.position}</p>
-                    <p className="text-sm font-medium">{alumni.company}</p>
+                    <h3 className="font-semibold text-gray-900">{alumni.name}</h3>
+                    <p className="text-blue-600">{alumni.position}</p>
+                    <p className="text-sm text-gray-600">{alumni.company}</p>
+                    <p className="text-xs text-gray-500">Batch of {alumni.batch}</p>
                   </CardContent>
                 </Card>
               ))}
@@ -291,27 +309,33 @@ const DepartmentCSE = () => {
             <div className="space-y-6">
               <Card>
                 <CardHeader>
-                  <CardTitle>Department Achievements</CardTitle>
+                  <CardTitle className="flex items-center">
+                    <Award className="h-5 w-5 mr-2 text-yellow-600" />
+                    Department Achievements
+                  </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <div className="grid md:grid-cols-2 gap-6">
-                    <div>
-                      <h4 className="font-semibold mb-3">Academic Excellence</h4>
-                      <ul className="space-y-2 text-sm">
-                        <li>• NBA Accreditation (2023)</li>
-                        <li>• Best Department Award (2022)</li>
-                        <li>• 100% Placement Record (2023)</li>
-                        <li>• 50+ Research Publications</li>
-                      </ul>
+                  <div className="space-y-4">
+                    <div className="flex items-start space-x-3">
+                      <div className="w-2 h-2 bg-yellow-500 rounded-full mt-2"></div>
+                      <div>
+                        <h4 className="font-semibold">Best Department Award 2023</h4>
+                        <p className="text-sm text-gray-600">Recognized by Panjab University for excellence in academics and research</p>
+                      </div>
                     </div>
-                    <div>
-                      <h4 className="font-semibold mb-3">Student Achievements</h4>
-                      <ul className="space-y-2 text-sm">
-                        <li>• ACM ICPC Finalists (2023)</li>
-                        <li>• Google Summer of Code (5 students)</li>
-                        <li>• National Level Hackathon Winners</li>
-                        <li>• Patent Applications Filed (8)</li>
-                      </ul>
+                    <div className="flex items-start space-x-3">
+                      <div className="w-2 h-2 bg-yellow-500 rounded-full mt-2"></div>
+                      <div>
+                        <h4 className="font-semibold">5 Patents Filed in 2023</h4>
+                        <p className="text-sm text-gray-600">Faculty and students filed patents in AI, IoT, and Blockchain domains</p>
+                      </div>
+                    </div>
+                    <div className="flex items-start space-x-3">
+                      <div className="w-2 h-2 bg-yellow-500 rounded-full mt-2"></div>
+                      <div>
+                        <h4 className="font-semibold">100% Placement Record</h4>
+                        <p className="text-sm text-gray-600">All eligible students placed in top companies with excellent packages</p>
+                      </div>
                     </div>
                   </div>
                 </CardContent>

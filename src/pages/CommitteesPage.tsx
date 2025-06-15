@@ -1,9 +1,8 @@
-
 import React from 'react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Users, Shield, Heart, Scale, UserCheck, AlertTriangle, Flask, Laptop } from 'lucide-react';
+import { Users, Shield, Heart, Scale, UserCheck, AlertTriangle, Beaker, Laptop } from 'lucide-react';
 
 const CommitteesPage = () => {
   const committees = [
@@ -81,7 +80,7 @@ const CommitteesPage = () => {
     },
     {
       name: 'Research & Development Cell',
-      icon: Flask,
+      icon: Beaker,
       description: 'Promotes research culture and facilitates R&D activities',
       members: ['Dr. V. Kumar (Coordinator)', 'Research Faculty', 'Industry Representatives'],
       responsibilities: [
