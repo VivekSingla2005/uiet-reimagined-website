@@ -24,41 +24,83 @@ const Header = () => {
       name: 'Institute',
       href: '/about',
       dropdown: [
-        { name: 'About Institute', href: '/about' },
+        { name: 'About UIET', href: '/about' },
+        { name: 'About Panjab University', href: '/about#pu' },
+        { name: 'About Chandigarh', href: '/about#chandigarh' },
+        { name: 'Location & Campus', href: '/about#location' },
+        { name: "Director's Message", href: '/about#director' },
         { name: 'Vision & Mission', href: '/about#mission' },
-        { name: 'Administration', href: '/about#admin' },
-        { name: 'History', href: '/about#history' },
-        { name: 'Infrastructure', href: '/about#infrastructure' },
-        { name: 'NAAC', href: '/about#naac' }
+        { name: 'Infrastructure', href: '/about#infrastructure' }
       ]
     },
     {
       name: 'Academics',
       href: '/academics',
       dropdown: [
-        { name: 'Undergraduate Programs', href: '/academics#undergraduate' },
-        { name: 'Postgraduate Programs', href: '/academics#postgraduate' },
-        { name: 'Ph.D Programs', href: '/academics#doctoral' },
+        { name: 'Academic Programs', href: '/academics' },
         { name: 'Academic Calendar', href: '/academics#calendar' },
-        { name: 'Syllabus', href: '/academics#syllabus' }
+        { name: 'Syllabus', href: '/academics#syllabus' },
+        { name: 'Timetable', href: '/academics#timetable' },
+        { name: 'Examination', href: '/academics#examination' }
       ]
     },
     {
       name: 'Departments',
       href: '/departments',
       dropdown: [
-        { name: 'Computer Science & Engineering', href: '/departments#cse' },
-        { name: 'Electronics & Communication', href: '/departments#ece' },
-        { name: 'Mechanical Engineering', href: '/departments#me' },
-        { name: 'Civil Engineering', href: '/departments#ce' },
-        { name: 'Biotechnology', href: '/departments#bt' }
+        { name: 'All Departments', href: '/departments' },
+        { name: 'Computer Science & Engineering', href: '/departments/cse' },
+        { name: 'Electronics & Communication', href: '/departments/ece' },
+        { name: 'Electrical & Electronics', href: '/departments/eee' },
+        { name: 'Information Technology', href: '/departments/it' },
+        { name: 'Mechanical Engineering', href: '/departments/me' },
+        { name: 'Biotechnology', href: '/departments/bt' },
+        { name: 'Applied Sciences', href: '/departments/as' }
       ]
     },
     { name: 'Faculty', href: '/faculty' },
     { name: 'Research', href: '/research' },
-    { name: 'Students', href: '/students' },
+    {
+      name: 'Admissions',
+      href: '/admissions',
+      dropdown: [
+        { name: 'B.E. Admissions 2024', href: '/admissions' },
+        { name: 'M.E./M.Tech Admissions 2024', href: '/admissions#mtech' },
+        { name: 'Ph.D Admissions', href: '/admissions#phd' },
+        { name: 'NRI/Foreign Admissions', href: '/admissions#nri' },
+        { name: 'Sports Quota', href: '/admissions#sports' },
+        { name: 'PUMEET', href: '/admissions#pumeet' },
+        { name: 'PULEET', href: '/admissions#puleet' }
+      ]
+    },
+    {
+      name: 'Students',
+      href: '/students',
+      dropdown: [
+        { name: 'Student Life', href: '/students' },
+        { name: 'Clubs & Societies', href: '/students#clubs' },
+        { name: 'Events & Activities', href: '/students#events' },
+        { name: 'Alumni Network', href: '/students#alumni' },
+        { name: 'Newsletter', href: '/students#newsletter' },
+        { name: 'Achievements', href: '/students#achievements' }
+      ]
+    },
+    {
+      name: 'Committees',
+      href: '/committees',
+      dropdown: [
+        { name: 'All Committees', href: '/committees' },
+        { name: 'Departmental Committee', href: '/committees#departmental' },
+        { name: 'Grievance Redressal Cell', href: '/committees#grievance' },
+        { name: 'Anti-Sexual Harassment', href: '/committees#harassment' },
+        { name: 'Board of Control', href: '/committees#board' },
+        { name: 'SC/ST Cell', href: '/committees#scst' },
+        { name: 'Anti-Ragging Committee', href: '/committees#ragging' },
+        { name: 'R&D Cell', href: '/committees#rnd' },
+        { name: 'UTechnos Committee', href: '/committees#utechnos' }
+      ]
+    },
     { name: 'Placements', href: '/placements' },
-    { name: 'Admissions', href: '/admissions' },
     { name: 'Contact', href: '/contact' }
   ];
 

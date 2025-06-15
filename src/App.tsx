@@ -8,12 +8,14 @@ import Index from "./pages/Index";
 import AboutPage from "./pages/AboutPage";
 import AcademicsPage from "./pages/AcademicsPage";
 import DepartmentsPage from "./pages/DepartmentsPage";
+import DepartmentCSE from "./pages/DepartmentCSE";
 import FacultyPage from "./pages/FacultyPage";
 import ResearchPage from "./pages/ResearchPage";
 import StudentsPage from "./pages/StudentsPage";
 import PlacementsPage from "./pages/PlacementsPage";
 import AdmissionsPage from "./pages/AdmissionsPage";
 import ContactPage from "./pages/ContactPage";
+import CommitteesPage from "./pages/CommitteesPage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -29,12 +31,14 @@ const App = () => (
           <Route path="/about" element={<AboutPage />} />
           <Route path="/academics" element={<AcademicsPage />} />
           <Route path="/departments" element={<DepartmentsPage />} />
+          <Route path="/departments/cse" element={<DepartmentCSE />} />
           <Route path="/faculty" element={<FacultyPage />} />
           <Route path="/research" element={<ResearchPage />} />
           <Route path="/students" element={<StudentsPage />} />
           <Route path="/placements" element={<PlacementsPage />} />
           <Route path="/admissions" element={<AdmissionsPage />} />
           <Route path="/contact" element={<ContactPage />} />
+          <Route path="/committees" element={<CommitteesPage />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

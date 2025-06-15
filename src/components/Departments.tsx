@@ -2,7 +2,8 @@
 import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Computer, Zap, Cog, Building, Dna, Users, BookOpen, Award } from 'lucide-react';
+import { Computer, Zap, Cog, Building, Dna, Users, BookOpen, Award, Smartphone, Lightbulb, Calculator } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const Departments = () => {
   const departments = [
@@ -14,7 +15,8 @@ const Departments = () => {
       students: 240,
       description: 'Leading department in software development, AI, and emerging technologies.',
       specializations: ['Artificial Intelligence', 'Data Science', 'Cybersecurity', 'Software Engineering'],
-      image: 'photo-1461749280684-dccba630e2f6'
+      image: 'photo-1461749280684-dccba630e2f6',
+      link: '/departments/cse'
     },
     {
       name: 'Electronics & Communication Engineering',
@@ -24,7 +26,30 @@ const Departments = () => {
       students: 200,
       description: 'Excellence in electronics, communication systems, and signal processing.',
       specializations: ['VLSI Design', 'Embedded Systems', 'Communication Networks', 'IoT'],
-      image: 'photo-1518877593221-1f28583780b4'
+      image: 'photo-1518877593221-1f28583780b4',
+      link: '/departments/ece'
+    },
+    {
+      name: 'Electrical & Electronics Engineering',
+      icon: Lightbulb,
+      head: 'Dr. Santosh Gupta',
+      faculty: 12,
+      students: 160,
+      description: 'Power systems, control engineering, and renewable energy solutions.',
+      specializations: ['Power Systems', 'Control Engineering', 'Renewable Energy', 'Electric Drives'],
+      image: 'photo-1581092160562-40aa08e78837',
+      link: '/departments/eee'
+    },
+    {
+      name: 'Information Technology',
+      icon: Smartphone,
+      head: 'Dr. Neha Verma',
+      faculty: 14,
+      students: 180,
+      description: 'Modern IT solutions, web technologies, and digital transformation.',
+      specializations: ['Web Development', 'Mobile Computing', 'Cloud Technology', 'Digital Marketing'],
+      image: 'photo-1551288049-bebda4e38f71',
+      link: '/departments/it'
     },
     {
       name: 'Mechanical Engineering',
@@ -34,17 +59,8 @@ const Departments = () => {
       students: 180,
       description: 'Traditional engineering with modern applications in automation and design.',
       specializations: ['CAD/CAM', 'Robotics', 'Thermal Engineering', 'Manufacturing'],
-      image: 'photo-1485833077593-4278bba3f11f'
-    },
-    {
-      name: 'Civil Engineering',
-      icon: Building,
-      head: 'Dr. Neha Gupta',
-      faculty: 10,
-      students: 120,
-      description: 'Infrastructure development and sustainable construction practices.',
-      specializations: ['Structural Engineering', 'Environmental Engineering', 'Transportation', 'Geotechnical'],
-      image: 'photo-1487252665478-49b61b47f302'
+      image: 'photo-1485833077593-4278bba3f11f',
+      link: '/departments/me'
     },
     {
       name: 'Biotechnology',
@@ -54,7 +70,19 @@ const Departments = () => {
       students: 90,
       description: 'Interdisciplinary approach to biological systems and technology.',
       specializations: ['Genetic Engineering', 'Bioinformatics', 'Bioprocessing', 'Medical Biotechnology'],
-      image: 'photo-1501286353178-1ec881214838'
+      image: 'photo-1501286353178-1ec881214838',
+      link: '/departments/bt'
+    },
+    {
+      name: 'Applied Sciences',
+      icon: Calculator,
+      head: 'Dr. Kavita Rani',
+      faculty: 20,
+      students: 300,
+      description: 'Foundation courses in mathematics, physics, and chemistry for all engineering disciplines.',
+      specializations: ['Mathematics', 'Physics', 'Chemistry', 'Environmental Science'],
+      image: 'photo-1532094349884-543bc11b234d',
+      link: '/departments/as'
     }
   ];
 
@@ -131,9 +159,11 @@ const Departments = () => {
                         </div>
                       </div>
 
-                      <Button variant="outline" className="w-full hover-button">
-                        Explore Department
-                      </Button>
+                      <Link to={dept.link}>
+                        <Button variant="outline" className="w-full hover-button">
+                          Explore Department
+                        </Button>
+                      </Link>
                     </div>
                   </CardContent>
                 </div>
@@ -151,22 +181,22 @@ const Departments = () => {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
             <div>
               <Users className="h-8 w-8 mx-auto mb-2 text-blue-300" />
-              <div className="text-2xl font-bold">63</div>
+              <div className="text-2xl font-bold">99</div>
               <div className="text-slate-300">Total Faculty</div>
             </div>
             <div>
               <BookOpen className="h-8 w-8 mx-auto mb-2 text-blue-300" />
-              <div className="text-2xl font-bold">830</div>
+              <div className="text-2xl font-bold">1350</div>
               <div className="text-slate-300">Total Students</div>
             </div>
             <div>
               <Award className="h-8 w-8 mx-auto mb-2 text-blue-300" />
-              <div className="text-2xl font-bold">15+</div>
+              <div className="text-2xl font-bold">21+</div>
               <div className="text-slate-300">Programs</div>
             </div>
             <div>
               <Computer className="h-8 w-8 mx-auto mb-2 text-blue-300" />
-              <div className="text-2xl font-bold">25+</div>
+              <div className="text-2xl font-bold">35+</div>
               <div className="text-slate-300">Research Labs</div>
             </div>
           </div>
