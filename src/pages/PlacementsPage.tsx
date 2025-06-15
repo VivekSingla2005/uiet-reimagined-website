@@ -1,17 +1,17 @@
 
 import React from 'react';
 import Header from '@/components/Header';
-import Hero from '@/components/Hero';
+import Placements from '@/components/Placements';
 import Footer from '@/components/Footer';
 
-const Index = () => {
+const PlacementsPage = () => {
   return (
     <div className="min-h-screen">
       <Header />
-      <Hero />
+      <Placements />
       <Footer />
     </div>
   );
 };
 
-export default Index;
+export default PlacementsPage;

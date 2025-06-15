@@ -3,151 +3,107 @@ import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Users, Award, BookOpen, TrendingUp, Trophy, Star, Calendar, MapPin } from 'lucide-react';
+import { Users, Trophy, BookOpen, Calendar, Star, Award, Activity, GraduationCap } from 'lucide-react';
 
 const Students = () => {
   const studentStats = [
-    { icon: Users, label: 'Total Students', value: '2,500+' },
-    { icon: BookOpen, label: 'Student Clubs', value: '25+' },
-    { icon: Award, label: 'Achievements', value: '150+' },
-    { icon: Trophy, label: 'National Awards', value: '45+' }
+    { icon: Users, label: 'Total Students', value: '2000+' },
+    { icon: GraduationCap, label: 'Graduates (2023)', value: '450' },
+    { icon: Trophy, label: 'Awards Won', value: '150+' },
+    { icon: Star, label: 'Average CGPA', value: '8.2' }
   ];
 
-  const studentClubs = [
+  const studentLife = [
     {
-      name: 'ACM UIET Chapter',
-      category: 'Technical',
-      members: 120,
-      description: 'Programming competitions, hackathons, and technical workshops',
-      image: 'photo-1522202176988-66273c2fd55f'
+      category: 'Technical Clubs',
+      clubs: [
+        { name: 'Coding Club', members: 200, description: 'Programming competitions and hackathons' },
+        { name: 'Robotics Society', members: 150, description: 'Robotics projects and competitions' },
+        { name: 'AI/ML Club', members: 180, description: 'Machine learning workshops and projects' },
+        { name: 'Electronics Club', members: 120, description: 'Circuit design and embedded systems' }
+      ]
     },
     {
-      name: 'IEEE Student Branch',
-      category: 'Technical',
-      members: 95,
-      description: 'Research presentations, industry talks, and technical seminars',
-      image: 'photo-1515187029135-18ee286d815b'
+      category: 'Cultural Activities',
+      clubs: [
+        { name: 'Music Society', members: 100, description: 'Musical events and talent shows' },
+        { name: 'Drama Club', members: 80, description: 'Theater productions and performances' },
+        { name: 'Photography Club', members: 90, description: 'Photography workshops and exhibitions' },
+        { name: 'Literary Society', members: 70, description: 'Writing competitions and publications' }
+      ]
     },
     {
-      name: 'Robotics Club',
-      category: 'Technical',
-      members: 80,
-      description: 'Robot building competitions and automation projects',
-      image: 'photo-1485827404703-89b55fcc595e'
-    },
-    {
-      name: 'Cultural Society',
-      category: 'Cultural',
-      members: 200,
-      description: 'Annual fest organization, dance, music, and drama activities',
-      image: 'photo-1493225457124-a3eb161ffa5f'
-    },
-    {
-      name: 'Sports Committee',
       category: 'Sports',
-      members: 150,
-      description: 'Inter-college tournaments and fitness programs',
-      image: 'photo-1571019613454-1cb2f99b2d8b'
-    },
-    {
-      name: 'NSS Unit',
-      category: 'Social',
-      members: 180,
-      description: 'Community service and social awareness programs',
-      image: 'photo-1559027615-cd4628902d4a'
+      clubs: [
+        { name: 'Cricket Team', members: 50, description: 'Inter-college cricket tournaments' },
+        { name: 'Basketball Team', members: 40, description: 'University basketball championships' },
+        { name: 'Table Tennis Club', members: 60, description: 'Indoor sports and competitions' },
+        { name: 'Athletics Club', members: 70, description: 'Track and field events' }
+      ]
     }
   ];
 
   const achievements = [
     {
-      title: 'ACM ICPC World Finals',
-      student: 'Rahul Sharma, Priya Patel, Amit Kumar',
+      title: 'Inter-University Coding Championship',
+      winner: 'Team AlgoMasters',
       year: '2024',
-      position: 'Top 50',
-      category: 'Programming'
-    },
-    {
-      title: 'Smart India Hackathon',
-      student: 'Team InnoTech',
-      year: '2024',
-      position: 'Winner',
-      category: 'Innovation'
-    },
-    {
-      title: 'IEEE International Conference',
-      student: 'Neha Gupta',
-      year: '2023',
-      position: 'Best Paper Award',
-      category: 'Research'
+      description: 'First place in regional programming contest'
     },
     {
       title: 'National Robotics Competition',
-      student: 'Robotics Club UIET',
+      winner: 'RoboTech UIET',
+      year: '2024',
+      description: 'Best Innovation Award for autonomous robot design'
+    },
+    {
+      title: 'Smart India Hackathon',
+      winner: 'Team InnovatED',
       year: '2023',
-      position: '2nd Place',
-      category: 'Technical'
+      description: 'Winner in Education Technology category'
+    },
+    {
+      title: 'IEEE Student Paper Contest',
+      winner: 'Priya Sharma (B.Tech CSE)',
+      year: '2023',
+      description: 'Best paper on sustainable technology solutions'
     }
   ];
 
-  const upcomingEvents = [
+  const facilities = [
     {
-      title: 'TechFest 2024',
-      date: 'March 15-17, 2024',
-      location: 'UIET Campus',
-      type: 'Technical Festival',
-      description: 'Three-day technical extravaganza with competitions, workshops, and exhibitions'
+      name: 'Student Activity Center',
+      description: 'Central hub for all student activities and events',
+      features: ['Auditorium (500 capacity)', 'Meeting rooms', 'Recreation area', 'Food court']
     },
     {
-      title: 'Cultural Night',
-      date: 'February 20, 2024',
-      location: 'Auditorium',
-      type: 'Cultural Event',
-      description: 'Annual cultural celebration showcasing student talents'
+      name: 'Sports Complex',
+      description: 'Modern sports facilities for physical fitness and recreation',
+      features: ['Multi-purpose court', 'Gymnasium', 'Cricket ground', 'Athletic track']
     },
     {
-      title: 'Industry Connect',
-      date: 'March 5, 2024',
-      location: 'Seminar Hall',
-      type: 'Career Event',
-      description: 'Interaction with industry leaders and career guidance'
-    }
-  ];
-
-  const alumniSpotlight = [
-    {
-      name: 'Dr. Rajesh Khanna',
-      batch: '2010-2014',
-      position: 'Senior Software Engineer at Google',
-      achievement: 'Led the development of key features in Google Cloud Platform',
-      image: 'photo-1507003211169-0a1dd7228f2d'
+      name: 'Library & Study Spaces',
+      description: '24/7 study environment with digital resources',
+      features: ['Digital library', 'Group study rooms', 'Silent zones', 'Research databases']
     },
     {
-      name: 'Priya Sharma',
-      batch: '2015-2019',
-      position: 'Data Scientist at Microsoft',
-      achievement: 'Published research on AI applications in healthcare',
-      image: 'photo-1494790108755-2616c34b009c'
-    },
-    {
-      name: 'Amit Singh',
-      batch: '2012-2016',
-      position: 'Founder & CEO, TechStart Inc.',
-      achievement: 'Built a successful startup valued at $50 million',
-      image: 'photo-1472099645785-5658abf4ff4e'
+      name: 'Hostels',
+      description: 'Comfortable accommodation for outstation students',
+      features: ['Wi-Fi enabled', 'Mess facilities', 'Common rooms', 'Security systems']
     }
   ];
 
   return (
-    <section id="students" className="py-20 bg-gradient-to-br from-slate-50 to-white">
+    <section className="py-20 bg-gradient-to-br from-slate-50 to-white">
       <div className="max-w-7xl mx-auto px-4">
         {/* Header */}
         <div className="text-center mb-16">
           <div className="inline-block px-4 py-2 bg-blue-100 text-blue-700 rounded-full text-sm font-medium mb-4">
             Student Life
           </div>
-          <h2 className="text-4xl lg:text-5xl font-bold text-slate-900 mb-6">Vibrant Student Community</h2>
+          <h2 className="text-4xl lg:text-5xl font-bold text-slate-900 mb-6">Vibrant Campus Community</h2>
           <p className="text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed">
-            Experience a dynamic campus life filled with opportunities for growth, learning, and making lifelong connections.
+            Experience a dynamic student life with diverse opportunities for academic growth, personal development, and lifelong friendships.
           </p>
         </div>
 
@@ -164,75 +120,56 @@ const Students = () => {
           ))}
         </div>
 
-        {/* Main Content Tabs */}
-        <Tabs defaultValue="clubs" className="mb-16">
-          <TabsList className="grid grid-cols-2 md:grid-cols-4 w-full lg:w-fit mx-auto mb-12 h-auto p-1 bg-white shadow-lg rounded-xl">
-            <TabsTrigger value="clubs" className="px-4 py-3 rounded-lg data-[state=active]:bg-blue-600 data-[state=active]:text-white">Student Clubs</TabsTrigger>
-            <TabsTrigger value="achievements" className="px-4 py-3 rounded-lg data-[state=active]:bg-blue-600 data-[state=active]:text-white">Achievements</TabsTrigger>
-            <TabsTrigger value="events" className="px-4 py-3 rounded-lg data-[state=active]:bg-blue-600 data-[state=active]:text-white">Events</TabsTrigger>
-            <TabsTrigger value="alumni" className="px-4 py-3 rounded-lg data-[state=active]:bg-blue-600 data-[state=active]:text-white">Alumni</TabsTrigger>
+        {/* Student Life Tabs */}
+        <Tabs defaultValue="activities" className="mb-16">
+          <TabsList className="grid w-full lg:w-fit mx-auto grid-cols-3 mb-8 h-12">
+            <TabsTrigger value="activities" className="px-8 text-base">Activities & Clubs</TabsTrigger>
+            <TabsTrigger value="achievements" className="px-8 text-base">Achievements</TabsTrigger>
+            <TabsTrigger value="facilities" className="px-8 text-base">Facilities</TabsTrigger>
           </TabsList>
 
-          <TabsContent value="clubs">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {studentClubs.map((club, index) => (
-                <Card key={index} className="overflow-hidden hover:shadow-xl transition-all duration-300 border-0 shadow-lg bg-white group">
-                  <div className="relative">
-                    <img
-                      src={`https://images.unsplash.com/${club.image}?w=400&h=200&fit=crop`}
-                      alt={club.name}
-                      className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
-                    />
-                    <div className="absolute top-4 right-4">
-                      <span className={`px-3 py-1 rounded-full text-xs font-semibold ${
-                        club.category === 'Technical' ? 'bg-blue-100 text-blue-800' :
-                        club.category === 'Cultural' ? 'bg-purple-100 text-purple-800' :
-                        club.category === 'Sports' ? 'bg-green-100 text-green-800' :
-                        'bg-orange-100 text-orange-800'
-                      }`}>
-                        {club.category}
-                      </span>
-                    </div>
+          <TabsContent value="activities">
+            <div className="space-y-12">
+              {studentLife.map((category, index) => (
+                <div key={index}>
+                  <h3 className="text-2xl font-bold text-slate-900 mb-6">{category.category}</h3>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    {category.clubs.map((club, clubIndex) => (
+                      <Card key={clubIndex} className="bg-white shadow-md border-0 hover:shadow-lg transition-shadow">
+                        <CardHeader className="pb-3">
+                          <CardTitle className="text-lg text-slate-900">{club.name}</CardTitle>
+                          <div className="text-sm text-blue-600 font-medium">{club.members} active members</div>
+                        </CardHeader>
+                        <CardContent className="pt-0">
+                          <p className="text-slate-600 text-sm mb-4">{club.description}</p>
+                          <Button variant="outline" size="sm" className="w-full">
+                            Join Club
+                          </Button>
+                        </CardContent>
+                      </Card>
+                    ))}
                   </div>
-                  <CardContent className="p-6">
-                    <h3 className="text-xl font-bold text-slate-900 mb-2">{club.name}</h3>
-                    <p className="text-slate-600 mb-4 leading-relaxed">{club.description}</p>
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center text-sm text-slate-500">
-                        <Users className="h-4 w-4 mr-1" />
-                        {club.members} members
-                      </div>
-                      <Button variant="outline" size="sm" className="hover:bg-blue-50 hover:border-blue-300">
-                        Join Club
-                      </Button>
-                    </div>
-                  </CardContent>
-                </Card>
+                </div>
               ))}
             </div>
           </TabsContent>
 
           <TabsContent value="achievements">
-            <div className="space-y-6">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               {achievements.map((achievement, index) => (
-                <Card key={index} className="hover:shadow-lg transition-shadow border-l-4 border-l-yellow-400">
+                <Card key={index} className="bg-white shadow-md border-0 hover:shadow-lg transition-shadow">
                   <CardContent className="p-6">
-                    <div className="flex flex-col lg:flex-row lg:items-center justify-between">
+                    <div className="flex items-start space-x-3 mb-3">
+                      <Award className="h-6 w-6 text-yellow-600 mt-1 flex-shrink-0" />
                       <div className="flex-1">
-                        <div className="flex items-center space-x-3 mb-2">
-                          <Trophy className="h-5 w-5 text-yellow-500" />
-                          <h4 className="text-lg font-semibold text-slate-900">{achievement.title}</h4>
-                        </div>
-                        <p className="text-slate-600 mb-2">{achievement.student}</p>
-                        <div className="flex flex-wrap items-center gap-4 text-sm text-slate-500">
-                          <span className="bg-green-100 text-green-800 px-2 py-1 rounded-full font-semibold">
-                            {achievement.position}
-                          </span>
-                          <span>{achievement.year}</span>
-                          <span className="bg-blue-100 text-blue-800 px-2 py-1 rounded-full">
-                            {achievement.category}
+                        <div className="flex justify-between items-start mb-2">
+                          <h4 className="text-lg font-semibold text-slate-900 pr-4">{achievement.title}</h4>
+                          <span className="bg-yellow-100 text-yellow-800 text-xs font-semibold px-2 py-1 rounded-full whitespace-nowrap">
+                            {achievement.year}
                           </span>
                         </div>
+                        <p className="text-blue-600 font-medium mb-2">{achievement.winner}</p>
+                        <p className="text-slate-600 text-sm">{achievement.description}</p>
                       </div>
                     </div>
                   </CardContent>
@@ -241,51 +178,23 @@ const Students = () => {
             </div>
           </TabsContent>
 
-          <TabsContent value="events">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-              {upcomingEvents.map((event, index) => (
-                <Card key={index} className="hover:shadow-lg transition-shadow bg-gradient-to-br from-white to-blue-50">
-                  <CardContent className="p-6">
-                    <div className="flex items-start justify-between mb-4">
-                      <div>
-                        <h4 className="text-xl font-bold text-slate-900 mb-2">{event.title}</h4>
-                        <div className="flex items-center text-sm text-slate-600 mb-1">
-                          <Calendar className="h-4 w-4 mr-2" />
-                          {event.date}
+          <TabsContent value="facilities">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              {facilities.map((facility, index) => (
+                <Card key={index} className="bg-white shadow-md border-0 hover:shadow-lg transition-shadow">
+                  <CardHeader className="pb-3">
+                    <CardTitle className="text-lg text-slate-900">{facility.name}</CardTitle>
+                    <p className="text-slate-600 text-sm">{facility.description}</p>
+                  </CardHeader>
+                  <CardContent className="pt-0">
+                    <div className="space-y-2">
+                      {facility.features.map((feature, featureIndex) => (
+                        <div key={featureIndex} className="flex items-center space-x-2">
+                          <div className="w-2 h-2 bg-blue-600 rounded-full"></div>
+                          <span className="text-slate-700 text-sm">{feature}</span>
                         </div>
-                        <div className="flex items-center text-sm text-slate-600 mb-3">
-                          <MapPin className="h-4 w-4 mr-2" />
-                          {event.location}
-                        </div>
-                      </div>
-                      <span className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-xs font-semibold">
-                        {event.type}
-                      </span>
+                      ))}
                     </div>
-                    <p className="text-slate-600 mb-4">{event.description}</p>
-                    <Button variant="outline" size="sm" className="w-full hover:bg-blue-50 hover:border-blue-300">
-                      Register Now
-                    </Button>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-          </TabsContent>
-
-          <TabsContent value="alumni">
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-              {alumniSpotlight.map((alum, index) => (
-                <Card key={index} className="text-center hover:shadow-xl transition-all duration-300 border-0 shadow-lg bg-white">
-                  <CardContent className="p-6">
-                    <img
-                      src={`https://images.unsplash.com/${alum.image}?w=120&h=120&fit=crop&crop=face`}
-                      alt={alum.name}
-                      className="w-20 h-20 rounded-full object-cover mx-auto mb-4 border-4 border-blue-100"
-                    />
-                    <h4 className="text-lg font-bold text-slate-900 mb-1">{alum.name}</h4>
-                    <p className="text-blue-600 font-semibold mb-2">{alum.position}</p>
-                    <p className="text-slate-500 text-sm mb-3">{alum.batch}</p>
-                    <p className="text-slate-600 text-sm leading-relaxed">{alum.achievement}</p>
                   </CardContent>
                 </Card>
               ))}
@@ -293,19 +202,65 @@ const Students = () => {
           </TabsContent>
         </Tabs>
 
-        {/* CTA */}
+        {/* Testimonials */}
+        <div className="mb-16">
+          <h3 className="text-3xl font-bold text-slate-900 text-center mb-12">Student Voices</h3>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {[
+              {
+                name: 'Rahul Sharma',
+                program: 'B.Tech Computer Science',
+                year: '4th Year',
+                quote: 'UIET has provided me with incredible opportunities to grow both academically and personally. The coding club helped me secure internships at top tech companies.',
+                image: 'photo-1507003211169-0a1dd7228f2d'
+              },
+              {
+                name: 'Priya Gupta',
+                program: 'B.Tech Electronics',
+                year: '3rd Year',
+                quote: 'The research opportunities and faculty support here are exceptional. I\'ve been able to publish papers and participate in international conferences.',
+                image: 'photo-1494790108755-2616c34b009c'
+              },
+              {
+                name: 'Arjun Patel',
+                program: 'M.Tech Mechanical',
+                year: '2nd Year',
+                quote: 'The campus life is amazing with so many clubs and activities. I\'ve made lifelong friends and developed leadership skills through student organizations.',
+                image: 'photo-1472099645785-5658abf4ff4e'
+              }
+            ].map((testimonial, index) => (
+              <Card key={index} className="bg-white shadow-lg border-0">
+                <CardContent className="p-6 text-center">
+                  <img
+                    src={`https://images.unsplash.com/${testimonial.image}?w=100&h=100&fit=crop&crop=face`}
+                    alt={testimonial.name}
+                    className="w-16 h-16 rounded-full mx-auto mb-4 object-cover"
+                  />
+                  <blockquote className="text-slate-600 text-sm italic mb-4">
+                    "{testimonial.quote}"
+                  </blockquote>
+                  <div className="text-slate-900 font-semibold">{testimonial.name}</div>
+                  <div className="text-slate-500 text-sm">{testimonial.program}</div>
+                  <div className="text-blue-600 text-xs">{testimonial.year}</div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+
+        {/* CTA Section */}
         <div className="text-center">
-          <div className="bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-2xl p-8 shadow-xl">
-            <h3 className="text-2xl font-bold mb-4">Join Our Community</h3>
+          <div className="bg-gradient-to-r from-blue-600 to-blue-800 text-white rounded-2xl p-8 shadow-xl">
+            <h3 className="text-2xl font-bold mb-4">Join Our Student Community</h3>
             <p className="text-blue-100 mb-6 max-w-2xl mx-auto">
-              Be part of a vibrant student community that encourages innovation, creativity, and personal growth.
+              Be part of a vibrant community that nurtures your talents, builds your skills, and prepares you for success.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button className="bg-white text-blue-600 hover:bg-blue-50 font-semibold px-8 py-3">
-                Student Portal
+                Apply Now
               </Button>
-              <Button variant="outline" className="border-white text-white hover:bg-white hover:text-blue-600 px-8 py-3">
-                Alumni Network
+              <Button variant="outline" className="border-white text-white hover:bg-white hover:text-blue-600 font-semibold px-8 py-3">
+                Virtual Tour
               </Button>
             </div>
           </div>

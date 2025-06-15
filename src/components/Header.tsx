@@ -2,11 +2,13 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X, ChevronDown, Phone, Mail, MapPin, Building, GraduationCap } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { Link, useLocation } from 'react-router-dom';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const [isScrolled, setIsScrolled] = useState(false);
+  const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -17,28 +19,47 @@ const Header = () => {
   }, []);
 
   const navigationItems = [
-    { name: 'Home', href: '#home' },
+    { name: 'Home', href: '/' },
     {
       name: 'Institute',
-      href: '#about',
-      dropdown: ['About Institute', 'Vision & Mission', 'Administration', 'History', 'Infrastructure', 'NAAC']
+      href: '/about',
+      dropdown: [
+        { name: 'About Institute', href: '/about' },
+        { name: 'Vision & Mission', href: '/about#mission' },
+        { name: 'Administration', href: '/about#admin' },
+        { name: 'History', href: '/about#history' },
+        { name: 'Infrastructure', href: '/about#infrastructure' },
+        { name: 'NAAC', href: '/about#naac' }
+      ]
     },
     {
       name: 'Academics',
-      href: '#academics',
-      dropdown: ['Undergraduate Programs', 'Postgraduate Programs', 'Ph.D Programs', 'Academic Calendar', 'Syllabus']
+      href: '/academics',
+      dropdown: [
+        { name: 'Undergraduate Programs', href: '/academics#undergraduate' },
+        { name: 'Postgraduate Programs', href: '/academics#postgraduate' },
+        { name: 'Ph.D Programs', href: '/academics#doctoral' },
+        { name: 'Academic Calendar', href: '/academics#calendar' },
+        { name: 'Syllabus', href: '/academics#syllabus' }
+      ]
     },
     {
       name: 'Departments',
-      href: '#departments',
-      dropdown: ['Computer Science & Engineering', 'Electronics & Communication', 'Mechanical Engineering', 'Civil Engineering', 'Biotechnology']
+      href: '/departments',
+      dropdown: [
+        { name: 'Computer Science & Engineering', href: '/departments#cse' },
+        { name: 'Electronics & Communication', href: '/departments#ece' },
+        { name: 'Mechanical Engineering', href: '/departments#me' },
+        { name: 'Civil Engineering', href: '/departments#ce' },
+        { name: 'Biotechnology', href: '/departments#bt' }
+      ]
     },
-    { name: 'Faculty', href: '#faculty' },
-    { name: 'Research', href: '#research' },
-    { name: 'Students', href: '#students' },
-    { name: 'Placements', href: '#placements' },
-    { name: 'Admissions', href: '#admissions' },
-    { name: 'Contact', href: '#contact' }
+    { name: 'Faculty', href: '/faculty' },
+    { name: 'Research', href: '/research' },
+    { name: 'Students', href: '/students' },
+    { name: 'Placements', href: '/placements' },
+    { name: 'Admissions', href: '/admissions' },
+    { name: 'Contact', href: '/contact' }
   ];
 
   return (
@@ -93,7 +114,7 @@ const Header = () => {
       <div className="container-modern">
         <div className="flex justify-between items-center py-4">
           {/* Logo and Institute Name */}
-          <div className="flex items-center space-x-4">
+          <Link to="/" className="flex items-center space-x-4">
             <div className="flex items-center space-x-3">
               <div className="w-12 h-12 bg-gradient-to-br from-blue-600 to-blue-700 rounded-xl flex items-center justify-center shadow-lg">
                 <GraduationCap className="h-7 w-7 text-white" />
@@ -107,7 +128,7 @@ const Header = () => {
                 Panjab University, Chandigarh
               </p>
             </div>
-          </div>
+          </Link>
 
           {/* Desktop Navigation */}
           <nav className="hidden xl:flex items-center space-x-1">
@@ -118,24 +139,28 @@ const Header = () => {
                 onMouseEnter={() => item.dropdown && setActiveDropdown(item.name)}
                 onMouseLeave={() => setActiveDropdown(null)}
               >
-                <a
-                  href={item.href}
-                  className="flex items-center px-4 py-2 text-gray-700 hover:text-blue-600 transition-colors font-medium hover:bg-blue-50 rounded-lg group"
+                <Link
+                  to={item.href}
+                  className={`flex items-center px-4 py-2 transition-colors font-medium hover:bg-blue-50 rounded-lg group ${
+                    location.pathname === item.href 
+                      ? 'text-blue-600 bg-blue-50' 
+                      : 'text-gray-700 hover:text-blue-600'
+                  }`}
                 >
                   {item.name}
                   {item.dropdown && <ChevronDown className="ml-1 h-4 w-4 transition-transform group-hover:rotate-180" />}
-                </a>
+                </Link>
                 
                 {item.dropdown && activeDropdown === item.name && (
                   <div className="absolute top-full left-0 mt-2 w-64 bg-white rounded-xl shadow-xl border border-gray-200 z-50 py-2 animate-scale-in">
                     {item.dropdown.map((subItem) => (
-                      <a
-                        key={subItem}
-                        href="#"
+                      <Link
+                        key={subItem.name}
+                        to={subItem.href}
                         className="block px-4 py-3 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-700 transition-colors border-b border-gray-100 last:border-b-0"
                       >
-                        {subItem}
-                      </a>
+                        {subItem.name}
+                      </Link>
                     ))}
                   </div>
                 )}
@@ -145,9 +170,11 @@ const Header = () => {
 
           {/* CTA Button + Mobile Menu */}
           <div className="flex items-center space-x-4">
-            <Button className="hidden lg:flex modern-button">
-              Apply Online
-            </Button>
+            <Link to="/admissions">
+              <Button className="hidden lg:flex modern-button">
+                Apply Online
+              </Button>
+            </Link>
             <Button
               variant="ghost"
               size="sm"
@@ -165,32 +192,39 @@ const Header = () => {
             <nav className="py-4 space-y-1 max-h-96 overflow-y-auto">
               {navigationItems.map((item) => (
                 <div key={item.name}>
-                  <a
-                    href={item.href}
-                    className="block px-4 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-700 transition-colors rounded-lg mx-2 font-medium"
+                  <Link
+                    to={item.href}
+                    className={`block px-4 py-3 transition-colors rounded-lg mx-2 font-medium ${
+                      location.pathname === item.href 
+                        ? 'text-blue-700 bg-blue-50' 
+                        : 'text-gray-700 hover:bg-blue-50 hover:text-blue-700'
+                    }`}
                     onClick={() => setIsMenuOpen(false)}
                   >
                     {item.name}
-                  </a>
+                  </Link>
                   {item.dropdown && (
                     <div className="pl-6 space-y-1">
                       {item.dropdown.map((subItem) => (
-                        <a
-                          key={subItem}
-                          href="#"
+                        <Link
+                          key={subItem.name}
+                          to={subItem.href}
                           className="block px-4 py-2 text-sm text-gray-600 hover:text-blue-600 transition-colors"
+                          onClick={() => setIsMenuOpen(false)}
                         >
-                          {subItem}
-                        </a>
+                          {subItem.name}
+                        </Link>
                       ))}
                     </div>
                   )}
                 </div>
               ))}
               <div className="px-4 pt-4">
-                <Button className="w-full modern-button">
-                  Apply Online
-                </Button>
+                <Link to="/admissions">
+                  <Button className="w-full modern-button" onClick={() => setIsMenuOpen(false)}>
+                    Apply Online
+                  </Button>
+                </Link>
               </div>
             </nav>
           </div>

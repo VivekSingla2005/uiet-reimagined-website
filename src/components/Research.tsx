@@ -3,117 +3,101 @@ import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { BookOpen, Users, Award, TrendingUp, FileText, Globe, Microscope, Cpu } from 'lucide-react';
+import { Microscope, BookOpen, Users, Award, TrendingUp, Globe, Lightbulb, FileText } from 'lucide-react';
 
 const Research = () => {
   const researchAreas = [
     {
       title: 'Artificial Intelligence & Machine Learning',
-      description: 'Advanced research in AI algorithms, deep learning, and neural networks',
+      icon: Lightbulb,
       projects: 12,
       publications: 45,
-      funding: '₹2.5 Crores',
-      icon: Cpu,
-      image: 'photo-1677442136019-21780ecad995'
+      funding: '₹2.5 Cr',
+      description: 'Advanced research in AI, ML, deep learning, and neural networks.',
+      highlights: ['Computer Vision', 'Natural Language Processing', 'Robotics', 'Data Analytics']
     },
     {
-      title: 'Robotics & Automation',
-      description: 'Development of intelligent robotic systems and industrial automation',
-      projects: 8,
-      publications: 28,
-      funding: '₹1.8 Crores',
+      title: 'VLSI Design & Embedded Systems',
       icon: Microscope,
-      image: 'photo-1485827404703-89b55fcc595e'
+      projects: 8,
+      publications: 32,
+      funding: '₹1.8 Cr',
+      description: 'Cutting-edge research in chip design and embedded system development.',
+      highlights: ['Chip Architecture', 'IoT Systems', 'Signal Processing', 'Hardware Security']
     },
     {
-      title: 'Cybersecurity & Privacy',
-      description: 'Research in network security, cryptography, and data privacy',
-      projects: 10,
-      publications: 35,
-      funding: '₹2.2 Crores',
+      title: 'Sustainable Engineering',
       icon: Globe,
-      image: 'photo-1563206767-5b18f218e8de'
+      projects: 15,
+      publications: 38,
+      funding: '₹3.2 Cr',
+      description: 'Research focused on sustainable and environmentally friendly engineering solutions.',
+      highlights: ['Green Technology', 'Renewable Energy', 'Waste Management', 'Smart Cities']
     },
     {
-      title: 'Sustainable Energy Systems',
-      description: 'Green energy solutions and renewable energy technologies',
-      projects: 6,
-      publications: 22,
-      funding: '₹1.5 Crores',
+      title: 'Biotechnology & Bioinformatics',
       icon: TrendingUp,
-      image: 'photo-1466611653911-95081537e5b7'
+      projects: 10,
+      publications: 28,
+      funding: '₹2.1 Cr',
+      description: 'Interdisciplinary research combining biology with advanced computational methods.',
+      highlights: ['Genetic Engineering', 'Drug Discovery', 'Computational Biology', 'Biomedical Devices']
     }
   ];
 
-  const researchStats = [
-    { icon: BookOpen, label: 'Research Papers', value: '450+' },
-    { icon: Users, label: 'Research Scholars', value: '125' },
-    { icon: Award, label: 'Patents Filed', value: '28' },
-    { icon: TrendingUp, label: 'H-Index', value: '42' }
-  ];
-
-  const recentPublications = [
+  const publications = [
     {
-      title: 'Deep Learning Approaches for Medical Image Analysis',
+      title: 'Advanced Deep Learning Architectures for Medical Image Analysis',
       authors: 'Dr. Rajesh Kumar, Dr. Priya Sharma',
       journal: 'IEEE Transactions on Medical Imaging',
       year: '2024',
       citations: 45
     },
     {
-      title: 'Blockchain-based Secure IoT Architecture',
+      title: 'Sustainable Smart Grid Technologies for Urban Infrastructure',
       authors: 'Dr. Amit Singh, Dr. Neha Gupta',
-      journal: 'Journal of Network and Computer Applications',
+      journal: 'Nature Energy',
       year: '2024',
       citations: 32
     },
     {
-      title: 'Sustainable Manufacturing Processes using AI',
-      authors: 'Dr. Ravi Kumar, Dr. Sunita Verma',
-      journal: 'Manufacturing Science and Engineering',
+      title: 'Novel VLSI Architectures for Low-Power IoT Applications',
+      authors: 'Dr. Suresh Patel, Dr. Ravi Kumar',
+      journal: 'IEEE Journal of Solid-State Circuits',
       year: '2023',
       citations: 28
     }
   ];
 
-  const researchProjects = [
+  const facilities = [
     {
-      title: 'Smart City Infrastructure Development',
-      pi: 'Dr. Sunita Verma',
-      funding: '₹85 Lakhs',
-      duration: '2022-2025',
-      agency: 'DST, Government of India',
-      status: 'Ongoing'
+      name: 'AI & ML Research Lab',
+      equipment: 'High-performance Computing Clusters, GPU Servers',
+      area: '500 sq ft',
+      capacity: '25 researchers'
     },
     {
-      title: 'AI-Powered Healthcare Solutions',
-      pi: 'Dr. Rajesh Kumar',
-      funding: '₹1.2 Crores',
-      duration: '2023-2026',
-      agency: 'ICMR',
-      status: 'Ongoing'
+      name: 'VLSI Design Center',
+      equipment: 'EDA Tools, FPGA Development Boards, Testing Equipment',
+      area: '400 sq ft',
+      capacity: '20 researchers'
     },
     {
-      title: 'Green Energy Optimization Systems',
-      pi: 'Dr. Ravi Kumar',
-      funding: '₹75 Lakhs',
-      duration: '2021-2024',
-      agency: 'MNRE',
-      status: 'Completed'
+      name: 'Biotechnology Research Lab',
+      equipment: 'PCR Machines, Spectrophotometers, Cell Culture Facilities',
+      area: '600 sq ft',
+      capacity: '30 researchers'
+    },
+    {
+      name: 'Sustainable Technology Lab',
+      equipment: 'Solar Panels, Wind Turbines, Energy Storage Systems',
+      area: '800 sq ft',
+      capacity: '35 researchers'
     }
   ];
 
-  const collaborations = [
-    { name: 'Indian Institute of Technology, Delhi', type: 'Academic' },
-    { name: 'Microsoft Research India', type: 'Industry' },
-    { name: 'CSIR-CEERI, Pilani', type: 'Research Lab' },
-    { name: 'Tata Consultancy Services', type: 'Industry' },
-    { name: 'University of California, Berkeley', type: 'International' },
-    { name: 'DRDO, Delhi', type: 'Government' }
-  ];
-
   return (
-    <section id="research" className="py-20 bg-white">
+    <section className="py-20 bg-gradient-to-br from-slate-50 to-white">
       <div className="max-w-7xl mx-auto px-4">
         {/* Header */}
         <div className="text-center mb-16">
@@ -122,62 +106,87 @@ const Research = () => {
           </div>
           <h2 className="text-4xl lg:text-5xl font-bold text-slate-900 mb-6">Advancing Knowledge Through Research</h2>
           <p className="text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed">
-            Our research endeavors span cutting-edge technologies and address real-world challenges through innovative solutions and collaborative partnerships.
+            Our research initiatives drive innovation and contribute to solving real-world challenges through cutting-edge technology and interdisciplinary collaboration.
           </p>
         </div>
 
         {/* Research Stats */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
-          {researchStats.map((stat, index) => (
-            <Card key={index} className="text-center bg-gradient-to-br from-white to-blue-50 shadow-lg border-0 hover:shadow-xl transition-shadow">
-              <CardContent className="p-6">
-                <stat.icon className="h-8 w-8 text-blue-600 mx-auto mb-3" />
-                <div className="text-2xl font-bold text-slate-900 mb-1">{stat.value}</div>
-                <div className="text-slate-600 text-sm">{stat.label}</div>
-              </CardContent>
-            </Card>
-          ))}
+          <Card className="text-center bg-white shadow-lg border-0 hover:shadow-xl transition-shadow">
+            <CardContent className="p-6">
+              <FileText className="h-8 w-8 text-blue-600 mx-auto mb-3" />
+              <div className="text-2xl font-bold text-slate-900 mb-1">200+</div>
+              <div className="text-slate-600 text-sm">Research Papers</div>
+            </CardContent>
+          </Card>
+          <Card className="text-center bg-white shadow-lg border-0 hover:shadow-xl transition-shadow">
+            <CardContent className="p-6">
+              <Award className="h-8 w-8 text-green-600 mx-auto mb-3" />
+              <div className="text-2xl font-bold text-slate-900 mb-1">45</div>
+              <div className="text-slate-600 text-sm">Active Projects</div>
+            </CardContent>
+          </Card>
+          <Card className="text-center bg-white shadow-lg border-0 hover:shadow-xl transition-shadow">
+            <CardContent className="p-6">
+              <Users className="h-8 w-8 text-purple-600 mx-auto mb-3" />
+              <div className="text-2xl font-bold text-slate-900 mb-1">150+</div>
+              <div className="text-slate-600 text-sm">Researchers</div>
+            </CardContent>
+          </Card>
+          <Card className="text-center bg-white shadow-lg border-0 hover:shadow-xl transition-shadow">
+            <CardContent className="p-6">
+              <TrendingUp className="h-8 w-8 text-orange-600 mx-auto mb-3" />
+              <div className="text-2xl font-bold text-slate-900 mb-1">₹15 Cr</div>
+              <div className="text-slate-600 text-sm">Research Funding</div>
+            </CardContent>
+          </Card>
         </div>
 
         {/* Research Areas */}
-        <div className="mb-20">
+        <div className="mb-16">
           <h3 className="text-3xl font-bold text-slate-900 text-center mb-12">Key Research Areas</h3>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             {researchAreas.map((area, index) => (
-              <Card key={index} className="overflow-hidden hover:shadow-xl transition-all duration-300 border-0 shadow-lg bg-white group">
-                <div className="flex flex-col md:flex-row">
-                  <div className="md:w-2/5">
-                    <img
-                      src={`https://images.unsplash.com/${area.image}?w=300&h=250&fit=crop`}
-                      alt={area.title}
-                      className="w-full h-48 md:h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                    />
+              <Card key={index} className="bg-white shadow-lg border-0 hover:shadow-xl transition-all duration-300 overflow-hidden">
+                <CardHeader className="pb-4">
+                  <div className="flex items-center space-x-3 mb-3">
+                    <area.icon className="h-8 w-8 text-blue-600" />
+                    <CardTitle className="text-xl text-slate-900">{area.title}</CardTitle>
                   </div>
-                  <div className="md:w-3/5 p-6">
-                    <div className="flex items-center space-x-3 mb-3">
-                      <area.icon className="h-6 w-6 text-blue-600" />
-                      <h4 className="text-xl font-bold text-slate-900">{area.title}</h4>
+                  <p className="text-slate-600 leading-relaxed">{area.description}</p>
+                </CardHeader>
+                <CardContent className="pt-0">
+                  <div className="grid grid-cols-3 gap-4 text-center mb-4">
+                    <div>
+                      <div className="text-lg font-semibold text-slate-900">{area.projects}</div>
+                      <div className="text-sm text-slate-600">Projects</div>
                     </div>
-                    <p className="text-slate-600 mb-4 leading-relaxed">{area.description}</p>
-                    <div className="grid grid-cols-3 gap-4 text-center mb-4">
-                      <div>
-                        <div className="text-lg font-semibold text-blue-600">{area.projects}</div>
-                        <div className="text-xs text-slate-600">Projects</div>
-                      </div>
-                      <div>
-                        <div className="text-lg font-semibold text-green-600">{area.publications}</div>
-                        <div className="text-xs text-slate-600">Papers</div>
-                      </div>
-                      <div>
-                        <div className="text-lg font-semibold text-purple-600">{area.funding}</div>
-                        <div className="text-xs text-slate-600">Funding</div>
-                      </div>
+                    <div>
+                      <div className="text-lg font-semibold text-slate-900">{area.publications}</div>
+                      <div className="text-sm text-slate-600">Publications</div>
                     </div>
-                    <Button variant="outline" size="sm" className="w-full hover:bg-blue-50 hover:border-blue-300">
-                      Explore Research
-                    </Button>
+                    <div>
+                      <div className="text-lg font-semibold text-slate-900">{area.funding}</div>
+                      <div className="text-sm text-slate-600">Funding</div>
+                    </div>
                   </div>
-                </div>
+                  <div className="mb-4">
+                    <div className="text-sm font-semibold text-slate-900 mb-2">Key Focus Areas:</div>
+                    <div className="flex flex-wrap gap-2">
+                      {area.highlights.map((highlight, idx) => (
+                        <span
+                          key={idx}
+                          className="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full"
+                        >
+                          {highlight}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                  <Button variant="outline" className="w-full">
+                    Learn More
+                  </Button>
+                </CardContent>
               </Card>
             ))}
           </div>
@@ -185,74 +194,26 @@ const Research = () => {
 
         {/* Research Tabs */}
         <Tabs defaultValue="publications" className="mb-16">
-          <TabsList className="grid grid-cols-1 md:grid-cols-3 w-full lg:w-fit mx-auto mb-12 h-auto p-1 bg-white shadow-lg rounded-xl">
-            <TabsTrigger value="publications" className="px-6 py-3 rounded-lg data-[state=active]:bg-blue-600 data-[state=active]:text-white">Recent Publications</TabsTrigger>
-            <TabsTrigger value="projects" className="px-6 py-3 rounded-lg data-[state=active]:bg-blue-600 data-[state=active]:text-white">Active Projects</TabsTrigger>
-            <TabsTrigger value="collaborations" className="px-6 py-3 rounded-lg data-[state=active]:bg-blue-600 data-[state=active]:text-white">Collaborations</TabsTrigger>
+          <TabsList className="grid w-full lg:w-fit mx-auto grid-cols-2 mb-8 h-12">
+            <TabsTrigger value="publications" className="px-8 text-base">Recent Publications</TabsTrigger>
+            <TabsTrigger value="facilities" className="px-8 text-base">Research Facilities</TabsTrigger>
           </TabsList>
 
           <TabsContent value="publications">
             <div className="space-y-6">
-              {recentPublications.map((pub, index) => (
-                <Card key={index} className="hover:shadow-lg transition-shadow border-l-4 border-l-blue-500">
+              {publications.map((publication, index) => (
+                <Card key={index} className="bg-white shadow-md border-0">
                   <CardContent className="p-6">
-                    <div className="flex flex-col lg:flex-row lg:items-center justify-between">
-                      <div className="flex-1">
-                        <h4 className="text-lg font-semibold text-slate-900 mb-2">{pub.title}</h4>
-                        <p className="text-slate-600 mb-2">{pub.authors}</p>
-                        <div className="flex flex-wrap items-center gap-4 text-sm text-slate-500">
-                          <span className="flex items-center">
-                            <FileText className="h-4 w-4 mr-1" />
-                            {pub.journal}
-                          </span>
-                          <span>{pub.year}</span>
-                          <span className="bg-green-100 text-green-800 px-2 py-1 rounded-full">
-                            {pub.citations} citations
-                          </span>
-                        </div>
-                      </div>
-                      <Button variant="outline" size="sm" className="mt-4 lg:mt-0 hover:bg-blue-50">
-                        View Paper
-                      </Button>
-                    </div>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-          </TabsContent>
-
-          <TabsContent value="projects">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-              {researchProjects.map((project, index) => (
-                <Card key={index} className="hover:shadow-lg transition-shadow">
-                  <CardHeader>
-                    <div className="flex items-start justify-between">
-                      <CardTitle className="text-lg text-slate-900 pr-4">{project.title}</CardTitle>
-                      <span className={`px-3 py-1 rounded-full text-xs font-semibold ${
-                        project.status === 'Ongoing' ? 'bg-green-100 text-green-800' : 'bg-gray-100 text-gray-800'
-                      }`}>
-                        {project.status}
+                    <div className="flex justify-between items-start mb-3">
+                      <h4 className="text-lg font-semibold text-slate-900 leading-tight pr-4">{publication.title}</h4>
+                      <span className="bg-green-100 text-green-800 text-xs font-semibold px-3 py-1 rounded-full whitespace-nowrap">
+                        {publication.year}
                       </span>
                     </div>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="space-y-3 text-sm">
-                      <div className="flex justify-between">
-                        <span className="text-slate-600">Principal Investigator:</span>
-                        <span className="font-semibold text-slate-900">{project.pi}</span>
-                      </div>
-                      <div className="flex justify-between">
-                        <span className="text-slate-600">Funding:</span>
-                        <span className="font-semibold text-green-600">{project.funding}</span>
-                      </div>
-                      <div className="flex justify-between">
-                        <span className="text-slate-600">Duration:</span>
-                        <span className="font-semibold text-slate-900">{project.duration}</span>
-                      </div>
-                      <div className="flex justify-between">
-                        <span className="text-slate-600">Funding Agency:</span>
-                        <span className="font-semibold text-blue-600">{project.agency}</span>
-                      </div>
+                    <p className="text-slate-600 mb-2">{publication.authors}</p>
+                    <div className="flex justify-between items-center text-sm text-slate-500">
+                      <span className="italic">{publication.journal}</span>
+                      <span>{publication.citations} citations</span>
                     </div>
                   </CardContent>
                 </Card>
@@ -260,20 +221,17 @@ const Research = () => {
             </div>
           </TabsContent>
 
-          <TabsContent value="collaborations">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {collaborations.map((collab, index) => (
-                <Card key={index} className="text-center hover:shadow-lg transition-shadow">
+          <TabsContent value="facilities">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              {facilities.map((facility, index) => (
+                <Card key={index} className="bg-white shadow-md border-0">
                   <CardContent className="p-6">
-                    <h4 className="font-semibold text-slate-900 mb-2">{collab.name}</h4>
-                    <span className={`px-3 py-1 rounded-full text-xs font-semibold ${
-                      collab.type === 'Academic' ? 'bg-blue-100 text-blue-800' :
-                      collab.type === 'Industry' ? 'bg-green-100 text-green-800' :
-                      collab.type === 'International' ? 'bg-purple-100 text-purple-800' :
-                      'bg-gray-100 text-gray-800'
-                    }`}>
-                      {collab.type}
-                    </span>
+                    <h4 className="text-lg font-semibold text-slate-900 mb-3">{facility.name}</h4>
+                    <div className="space-y-2 text-sm text-slate-600">
+                      <div><strong>Equipment:</strong> {facility.equipment}</div>
+                      <div><strong>Area:</strong> {facility.area}</div>
+                      <div><strong>Capacity:</strong> {facility.capacity}</div>
+                    </div>
                   </CardContent>
                 </Card>
               ))}
@@ -281,19 +239,19 @@ const Research = () => {
           </TabsContent>
         </Tabs>
 
-        {/* CTA */}
+        {/* CTA Section */}
         <div className="text-center">
-          <div className="bg-gradient-to-r from-slate-900 to-blue-900 text-white rounded-2xl p-8 shadow-xl">
-            <h3 className="text-2xl font-bold mb-4">Research Opportunities</h3>
-            <p className="text-slate-300 mb-6 max-w-2xl mx-auto">
-              Join our research community and contribute to cutting-edge innovations that shape the future.
+          <div className="bg-gradient-to-r from-blue-600 to-blue-800 text-white rounded-2xl p-8 shadow-xl">
+            <h3 className="text-2xl font-bold mb-4">Join Our Research Community</h3>
+            <p className="text-blue-100 mb-6 max-w-2xl mx-auto">
+              Collaborate with leading researchers and contribute to groundbreaking discoveries that shape the future.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button className="bg-white text-slate-900 hover:bg-slate-100 font-semibold px-8 py-3">
-                Ph.D Admissions
+              <Button className="bg-white text-blue-600 hover:bg-blue-50 font-semibold px-8 py-3">
+                Research Opportunities
               </Button>
-              <Button variant="outline" className="border-white text-white hover:bg-white hover:text-slate-900 px-8 py-3">
-                Research Proposals
+              <Button variant="outline" className="border-white text-white hover:bg-white hover:text-blue-600 font-semibold px-8 py-3">
+                Collaboration Proposals
               </Button>
             </div>
           </div>
