@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Menu, X, ChevronDown, Phone, Mail, MapPin, Building, GraduationCap } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -41,7 +40,9 @@ const Header = () => {
         { name: 'Academic Calendar', href: '/academics#calendar' },
         { name: 'Syllabus', href: '/academics#syllabus' },
         { name: 'Timetable', href: '/academics#timetable' },
-        { name: 'Examination', href: '/academics#examination' }
+        { name: 'Examination', href: '/academics#examination' },
+        { name: 'Previous Year Papers', href: '/previous-papers' },
+        { name: 'Important Downloads', href: '/downloads' }
       ]
     },
     {
@@ -82,7 +83,8 @@ const Header = () => {
         { name: 'Events & Activities', href: '/students#events' },
         { name: 'Alumni Network', href: '/students#alumni' },
         { name: 'Newsletter', href: '/students#newsletter' },
-        { name: 'Achievements', href: '/students#achievements' }
+        { name: 'Achievements', href: '/students#achievements' },
+        { name: 'Employment & Jobs', href: '/employment' }
       ]
     },
     {
@@ -100,7 +102,18 @@ const Header = () => {
         { name: 'UTechnos Committee', href: '/committees#utechnos' }
       ]
     },
-    { name: 'Placements', href: '/placements' },
+    {
+      name: 'Placements',
+      href: '/placements',
+      dropdown: [
+        { name: 'Placement Overview', href: '/placements' },
+        { name: 'Campus Placement Process', href: '/placements#process' },
+        { name: 'Placement Statistics', href: '/placements#statistics' },
+        { name: 'Training & Preparation', href: '/placements#training' },
+        { name: 'Placement Brochure', href: '/placements#brochure' },
+        { name: 'Employment Opportunities', href: '/employment' }
+      ]
+    },
     { name: 'Contact', href: '/contact' }
   ];
 

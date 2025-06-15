@@ -2,44 +2,45 @@
 import React from 'react';
 import { Facebook, Twitter, Linkedin, Instagram, Youtube, Mail, Phone, MapPin, ExternalLink } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { Link } from 'react-router-dom';
 
 const Footer = () => {
   const quickLinks = [
-    'About UIET',
-    'Academic Programs',
-    'Admissions',
-    'Research',
-    'Faculty',
-    'Student Life',
-    'Alumni',
-    'Careers'
+    { name: 'About UIET', href: '/about' },
+    { name: 'Academic Programs', href: '/academics' },
+    { name: 'Admissions', href: '/admissions' },
+    { name: 'Research', href: '/research' },
+    { name: 'Faculty', href: '/faculty' },
+    { name: 'Student Life', href: '/students' },
+    { name: 'Alumni', href: '/students#alumni' },
+    { name: 'Employment', href: '/employment' }
   ];
 
   const departments = [
-    'Computer Science & Engineering',
-    'Electronics & Communication',
-    'Mechanical Engineering',
-    'Civil Engineering',
-    'Biotechnology'
+    { name: 'Computer Science & Engineering', href: '/departments/cse' },
+    { name: 'Electronics & Communication', href: '/departments/ece' },
+    { name: 'Mechanical Engineering', href: '/departments/me' },
+    { name: 'Information Technology', href: '/departments/it' },
+    { name: 'Biotechnology', href: '/departments/bt' }
   ];
 
   const resources = [
-    'Library',
-    'Student Portal',
-    'Faculty Portal',
-    'Alumni Portal',
-    'E-Learning',
-    'Campus Map',
-    'Academic Calendar',
-    'Examination'
+    { name: 'Library', href: '/academics#library' },
+    { name: 'Student Portal', href: '/students#portal' },
+    { name: 'Faculty Portal', href: '/faculty#portal' },
+    { name: 'Alumni Portal', href: '/students#alumni' },
+    { name: 'E-Learning', href: '/academics#elearning' },
+    { name: 'Campus Map', href: '/about#location' },
+    { name: 'Academic Calendar', href: '/academics#calendar' },
+    { name: 'Previous Papers', href: '/previous-papers' }
   ];
 
   const socialLinks = [
-    { icon: Facebook, href: '#', label: 'Facebook' },
-    { icon: Twitter, href: '#', label: 'Twitter' },
-    { icon: Linkedin, href: '#', label: 'LinkedIn' },
-    { icon: Instagram, href: '#', label: 'Instagram' },
-    { icon: Youtube, href: '#', label: 'YouTube' }
+    { icon: Facebook, href: 'https://facebook.com/uiet', label: 'Facebook' },
+    { icon: Twitter, href: 'https://twitter.com/uiet', label: 'Twitter' },
+    { icon: Linkedin, href: 'https://linkedin.com/company/uiet', label: 'LinkedIn' },
+    { icon: Instagram, href: 'https://instagram.com/uiet', label: 'Instagram' },
+    { icon: Youtube, href: 'https://youtube.com/uiet', label: 'YouTube' }
   ];
 
   return (
@@ -73,25 +74,30 @@ const Footer = () => {
               </div>
               <div className="flex items-center text-sm">
                 <Phone className="h-4 w-4 mr-2 text-blue-400 flex-shrink-0" />
-                <span>+91-172-2534816</span>
+                <a href="tel:+91-172-2534816" className="hover:text-blue-400 transition-colors">
+                  +91-172-2534816
+                </a>
               </div>
               <div className="flex items-center text-sm">
                 <Mail className="h-4 w-4 mr-2 text-blue-400 flex-shrink-0" />
-                <span>info@uiet.puchd.ac.in</span>
+                <a href="mailto:info@uiet.puchd.ac.in" className="hover:text-blue-400 transition-colors">
+                  info@uiet.puchd.ac.in
+                </a>
               </div>
             </div>
 
             {/* Social Links */}
             <div className="flex space-x-3 mt-6">
               {socialLinks.map((social) => (
-                <Button
+                <a
                   key={social.label}
-                  variant="ghost"
-                  size="sm"
-                  className="h-10 w-10 p-0 text-gray-400 hover:text-white hover:bg-blue-600"
+                  href={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="h-10 w-10 flex items-center justify-center text-gray-400 hover:text-white hover:bg-blue-600 rounded-full transition-colors"
                 >
                   <social.icon className="h-4 w-4" />
-                </Button>
+                </a>
               ))}
             </div>
           </div>
@@ -101,14 +107,14 @@ const Footer = () => {
             <h3 className="text-lg font-semibold mb-6">Quick Links</h3>
             <ul className="space-y-3">
               {quickLinks.map((link) => (
-                <li key={link}>
-                  <a
-                    href="#"
+                <li key={link.name}>
+                  <Link
+                    to={link.href}
                     className="text-gray-300 hover:text-white transition-colors text-sm flex items-center"
                   >
                     <ExternalLink className="h-3 w-3 mr-2" />
-                    {link}
-                  </a>
+                    {link.name}
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -119,13 +125,13 @@ const Footer = () => {
             <h3 className="text-lg font-semibold mb-6">Departments</h3>
             <ul className="space-y-3">
               {departments.map((dept) => (
-                <li key={dept}>
-                  <a
-                    href="#"
+                <li key={dept.name}>
+                  <Link
+                    to={dept.href}
                     className="text-gray-300 hover:text-white transition-colors text-sm"
                   >
-                    {dept}
-                  </a>
+                    {dept.name}
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -136,13 +142,13 @@ const Footer = () => {
             <h3 className="text-lg font-semibold mb-6">Resources</h3>
             <ul className="space-y-3">
               {resources.map((resource) => (
-                <li key={resource}>
-                  <a
-                    href="#"
+                <li key={resource.name}>
+                  <Link
+                    to={resource.href}
                     className="text-gray-300 hover:text-white transition-colors text-sm"
                   >
-                    {resource}
-                  </a>
+                    {resource.name}
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -178,18 +184,18 @@ const Footer = () => {
               © 2024 University Institute of Engineering & Technology, Panjab University. All rights reserved.
             </div>
             <div className="flex space-x-6 text-sm">
-              <a href="#" className="text-gray-400 hover:text-white transition-colors">
+              <Link to="/about#privacy" className="text-gray-400 hover:text-white transition-colors">
                 Privacy Policy
-              </a>
-              <a href="#" className="text-gray-400 hover:text-white transition-colors">
+              </Link>
+              <Link to="/about#terms" className="text-gray-400 hover:text-white transition-colors">
                 Terms of Service
-              </a>
-              <a href="#" className="text-gray-400 hover:text-white transition-colors">
+              </Link>
+              <Link to="/about#cookies" className="text-gray-400 hover:text-white transition-colors">
                 Cookie Policy
-              </a>
-              <a href="#" className="text-gray-400 hover:text-white transition-colors">
+              </Link>
+              <Link to="/about#accessibility" className="text-gray-400 hover:text-white transition-colors">
                 Accessibility
-              </a>
+              </Link>
             </div>
           </div>
         </div>

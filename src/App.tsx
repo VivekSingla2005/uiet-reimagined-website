@@ -16,6 +16,9 @@ import PlacementsPage from "./pages/PlacementsPage";
 import AdmissionsPage from "./pages/AdmissionsPage";
 import ContactPage from "./pages/ContactPage";
 import CommitteesPage from "./pages/CommitteesPage";
+import PreviousYearPapersPage from "./pages/PreviousYearPapersPage";
+import EmploymentPage from "./pages/EmploymentPage";
+import ImportantDownloadsPage from "./pages/ImportantDownloadsPage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -39,6 +42,9 @@ const App = () => (
           <Route path="/admissions" element={<AdmissionsPage />} />
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/committees" element={<CommitteesPage />} />
+          <Route path="/previous-papers" element={<PreviousYearPapersPage />} />
+          <Route path="/employment" element={<EmploymentPage />} />
+          <Route path="/downloads" element={<ImportantDownloadsPage />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
