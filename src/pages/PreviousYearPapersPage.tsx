@@ -8,13 +8,28 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Download, FileText, Calendar, Book, Search, Filter, X } from 'lucide-react';
 
+interface Paper {
+  year: string;
+  semester: string;
+  subject: string;
+  department: string;
+  file: string;
+  credits: number;
+}
+
+interface PapersData {
+  btech: Paper[];
+  mtech: Paper[];
+  phd: Paper[];
+}
+
 const PreviousYearPapersPage = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedDepartment, setSelectedDepartment] = useState('All');
   const [selectedYear, setSelectedYear] = useState('All');
   const [selectedSemester, setSelectedSemester] = useState('All');
 
-  const papers = {
+  const papers: PapersData = {
     btech: [
       { year: '2023', semester: '8th', subject: 'Software Engineering', department: 'CSE', file: 'se_2023_8th.pdf', credits: 4 },
       { year: '2023', semester: '7th', subject: 'Machine Learning', department: 'CSE', file: 'ml_2023_7th.pdf', credits: 4 },
@@ -61,11 +76,16 @@ const PreviousYearPapersPage = () => {
   const years = ['All', '2023', '2022', '2021', '2020', '2019', '2018', '2017'];
   const semesters = ['All', '1st', '2nd', '3rd', '4th', '5th', '6th', '7th', '8th', 'Entrance'];
 
-  const filteredPapers = useMemo(() => {
-    const result = {};
+  const filteredPapers: PapersData = useMemo(() => {
+    const result: PapersData = {
+      btech: [],
+      mtech: [],
+      phd: []
+    };
     
     Object.entries(papers).forEach(([program, paperList]) => {
-      result[program] = paperList.filter(paper => {
+      const key = program as keyof PapersData;
+      result[key] = paperList.filter(paper => {
         const matchesSearch = paper.subject.toLowerCase().includes(searchTerm.toLowerCase()) ||
                             paper.department.toLowerCase().includes(searchTerm.toLowerCase());
         const matchesDepartment = selectedDepartment === 'All' || paper.department === selectedDepartment;
@@ -86,8 +106,13 @@ const PreviousYearPapersPage = () => {
     setSelectedSemester('All');
   };
 
-  const getTotalPapers = () => {
+  const getTotalPapers = (): number => {
     return Object.values(filteredPapers).reduce((total, papers) => total + papers.length, 0);
+  };
+
+  const handleDownload = (fileName: string) => {
+    console.log(`Downloading: ${fileName}`);
+    // In a real application, this would trigger the actual file download
   };
 
   return (
@@ -214,9 +239,9 @@ const PreviousYearPapersPage = () => {
 
         <Tabs defaultValue="btech" className="space-y-8">
           <TabsList className="grid w-full grid-cols-3">
-            <TabsTrigger value="btech">B.Tech Papers ({filteredPapers.btech?.length || 0})</TabsTrigger>
-            <TabsTrigger value="mtech">M.Tech Papers ({filteredPapers.mtech?.length || 0})</TabsTrigger>
-            <TabsTrigger value="phd">Ph.D Papers ({filteredPapers.phd?.length || 0})</TabsTrigger>
+            <TabsTrigger value="btech">B.Tech Papers ({filteredPapers.btech.length})</TabsTrigger>
+            <TabsTrigger value="mtech">M.Tech Papers ({filteredPapers.mtech.length})</TabsTrigger>
+            <TabsTrigger value="phd">Ph.D Papers ({filteredPapers.phd.length})</TabsTrigger>
           </TabsList>
 
           {Object.entries(filteredPapers).map(([program, paperList]) => (
@@ -253,7 +278,10 @@ const PreviousYearPapersPage = () => {
                               </div>
                             </div>
                           </div>
-                          <Button className="bg-green-600 hover:bg-green-700">
+                          <Button 
+                            className="bg-green-600 hover:bg-green-700"
+                            onClick={() => handleDownload(paper.file)}
+                          >
                             <Download className="h-4 w-4 mr-2" />
                             Download
                           </Button>
