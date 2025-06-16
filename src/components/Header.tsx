@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { Menu, X, ChevronDown, Phone, Mail, MapPin, Building, GraduationCap } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -17,6 +18,12 @@ const Header = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Close mobile menu when route changes
+  useEffect(() => {
+    setIsMenuOpen(false);
+    setActiveDropdown(null);
+  }, [location.pathname]);
+
   const navigationItems = [
     { name: 'Home', href: '/' },
     {
@@ -24,12 +31,12 @@ const Header = () => {
       href: '/about',
       dropdown: [
         { name: 'About UIET', href: '/about' },
-        { name: 'About Panjab University', href: '/about#pu' },
-        { name: 'About Chandigarh', href: '/about#chandigarh' },
-        { name: 'Location & Campus', href: '/about#location' },
-        { name: "Director's Message", href: '/about#director' },
+        { name: 'About Panjab University', href: '/about/pu' },
         { name: 'Vision & Mission', href: '/about#mission' },
-        { name: 'Infrastructure', href: '/about#infrastructure' }
+        { name: "Director's Message", href: '/about#director' },
+        { name: 'Campus & Location', href: '/about#location' },
+        { name: 'Infrastructure', href: '/about#infrastructure' },
+        { name: 'Chandigarh City', href: '/about#chandigarh' }
       ]
     },
     {
@@ -38,9 +45,9 @@ const Header = () => {
       dropdown: [
         { name: 'Academic Programs', href: '/academics' },
         { name: 'Academic Calendar', href: '/academics#calendar' },
-        { name: 'Syllabus', href: '/academics#syllabus' },
+        { name: 'Curriculum & Syllabus', href: '/academics#syllabus' },
         { name: 'Timetable', href: '/academics#timetable' },
-        { name: 'Examination', href: '/academics#examination' },
+        { name: 'Examination System', href: '/academics#examination' },
         { name: 'Previous Year Papers', href: '/previous-papers' },
         { name: 'Important Downloads', href: '/downloads' }
       ]
@@ -66,25 +73,30 @@ const Header = () => {
       href: '/admissions',
       dropdown: [
         { name: 'B.E. Admissions 2024', href: '/admissions' },
-        { name: 'M.E./M.Tech Admissions 2024', href: '/admissions#mtech' },
+        { name: 'M.E./M.Tech Admissions', href: '/admissions#mtech' },
         { name: 'Ph.D Admissions', href: '/admissions#phd' },
         { name: 'NRI/Foreign Admissions', href: '/admissions#nri' },
-        { name: 'Sports Quota', href: '/admissions#sports' },
-        { name: 'PUMEET', href: '/admissions#pumeet' },
-        { name: 'PULEET', href: '/admissions#puleet' }
+        { name: 'Sports Quota Admissions', href: '/admissions#sports' },
+        { name: 'PUMEET Information', href: '/admissions#pumeet' },
+        { name: 'PULEET Information', href: '/admissions#puleet' }
       ]
     },
     {
       name: 'Students',
       href: '/students',
       dropdown: [
-        { name: 'Student Life', href: '/students' },
+        { name: 'Student Life Overview', href: '/students' },
+        { name: 'B.E. 1st Year Batch', href: '/students#be-first-year' },
+        { name: 'Research Scholars', href: '/students#research-scholars' },
         { name: 'Clubs & Societies', href: '/students#clubs' },
-        { name: 'Events & Activities', href: '/students#events' },
+        { name: 'Student Activities', href: '/students#activities' },
+        { name: 'Student Achievements', href: '/students#achievements' },
+        { name: 'Notices & Updates', href: '/students#notices' },
+        { name: 'Scholarships', href: '/students#scholarships' },
+        { name: 'AICTE Scholarships', href: '/students#aicte-scholarships' },
+        { name: 'Medical Emergency', href: '/students#medical-emergency' },
         { name: 'Alumni Network', href: '/students#alumni' },
-        { name: 'Newsletter', href: '/students#newsletter' },
-        { name: 'Achievements', href: '/students#achievements' },
-        { name: 'Employment & Jobs', href: '/employment' }
+        { name: 'Employment Opportunities', href: '/employment' }
       ]
     },
     {
@@ -107,9 +119,13 @@ const Header = () => {
       href: '/placements',
       dropdown: [
         { name: 'Placement Overview', href: '/placements' },
-        { name: 'Campus Placement Process', href: '/placements#process' },
+        { name: "TPO's Message", href: '/placements#tpo-message' },
         { name: 'Placement Statistics', href: '/placements#statistics' },
-        { name: 'Training & Preparation', href: '/placements#training' },
+        { name: 'Past Recruiters', href: '/placements#recruiters' },
+        { name: 'Campus Placement Procedure', href: '/placements#procedure' },
+        { name: 'Placement Web Portal', href: '/placements#portal' },
+        { name: 'Training Programs', href: '/placements#training' },
+        { name: 'TPC Team Contact', href: '/placements#tpc-contact' },
         { name: 'Placement Brochure', href: '/placements#brochure' },
         { name: 'Employment Opportunities', href: '/employment' }
       ]
@@ -117,11 +133,20 @@ const Header = () => {
     { name: 'Contact', href: '/contact' }
   ];
 
+  const isActivePath = (href: string) => {
+    if (href === '/') return location.pathname === '/';
+    return location.pathname.startsWith(href);
+  };
+
+  const hasActiveDropdownItem = (dropdown: any[]) => {
+    return dropdown.some(item => isActivePath(item.href.split('#')[0]));
+  };
+
   return (
     <header className={`bg-white/95 backdrop-blur-md shadow-sm sticky top-0 z-50 transition-all duration-300 ${isScrolled ? 'shadow-lg' : ''}`}>
       {/* Government Info Bar */}
       <div className="bg-gradient-to-r from-blue-600 to-blue-700 text-white py-1 sm:py-2">
-        <div className="container-modern">
+        <div className="container mx-auto px-4 max-w-7xl">
           <div className="flex justify-between items-center text-xs sm:text-sm">
             <div className="flex items-center space-x-3 sm:space-x-6">
               <div className="flex items-center space-x-1 sm:space-x-2">
@@ -134,7 +159,7 @@ const Header = () => {
               </div>
             </div>
             <div className="flex items-center">
-              <div className="gov-badge bg-white/20 text-white border-white/30 text-xs px-2 py-1">
+              <div className="bg-white/20 text-white border border-white/30 text-xs px-2 py-1 rounded">
                 NAAC A+ 
               </div>
             </div>
@@ -144,7 +169,7 @@ const Header = () => {
 
       {/* Contact Info */}
       <div className="bg-gray-50/80 backdrop-blur-sm border-b py-1 sm:py-2">
-        <div className="container-modern">
+        <div className="container mx-auto px-4 max-w-7xl">
           <div className="flex justify-between items-center text-xs sm:text-sm text-gray-700">
             <div className="flex items-center space-x-3 sm:space-x-6">
               <a href="tel:+91-172-2534816" className="flex items-center hover:text-blue-600 transition-colors">
@@ -168,10 +193,10 @@ const Header = () => {
       </div>
 
       {/* Main Header */}
-      <div className="container-modern">
+      <div className="container mx-auto px-4 max-w-7xl">
         <div className="flex justify-between items-center py-3 sm:py-4">
           {/* Logo and Institute Name */}
-          <Link to="/" className="flex items-center space-x-2 sm:space-x-4">
+          <Link to="/" className="flex items-center space-x-2 sm:space-x-4 flex-shrink-0">
             <div className="flex items-center space-x-2 sm:space-x-3">
               <div className="w-8 h-8 sm:w-12 sm:h-12 bg-gradient-to-br from-blue-600 to-blue-700 rounded-xl flex items-center justify-center shadow-lg">
                 <GraduationCap className="h-5 w-5 sm:h-7 sm:w-7 text-white" />
@@ -201,7 +226,7 @@ const Header = () => {
                 <Link
                   to={item.href}
                   className={`flex items-center px-3 py-2 transition-colors font-medium hover:bg-blue-50 rounded-lg group text-sm ${
-                    location.pathname === item.href 
+                    isActivePath(item.href) || (item.dropdown && hasActiveDropdownItem(item.dropdown))
                       ? 'text-blue-600 bg-blue-50' 
                       : 'text-gray-700 hover:text-blue-600'
                   }`}
@@ -216,7 +241,11 @@ const Header = () => {
                       <Link
                         key={subItem.name}
                         to={subItem.href}
-                        className="block px-4 py-3 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-700 transition-colors border-b border-gray-100 last:border-b-0"
+                        className={`block px-4 py-3 text-sm transition-colors border-b border-gray-100 last:border-b-0 ${
+                          isActivePath(subItem.href.split('#')[0])
+                            ? 'bg-blue-50 text-blue-700 font-medium'
+                            : 'text-gray-700 hover:bg-blue-50 hover:text-blue-700'
+                        }`}
                       >
                         {subItem.name}
                       </Link>
@@ -230,14 +259,14 @@ const Header = () => {
           {/* CTA Button + Mobile Menu */}
           <div className="flex items-center space-x-2 sm:space-x-4">
             <Link to="/admissions" className="hidden lg:block">
-              <Button className="modern-button text-sm">
+              <Button className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-medium text-sm px-4 py-2 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300">
                 Apply Online
               </Button>
             </Link>
             <Button
               variant="ghost"
               size="sm"
-              className="xl:hidden p-2"
+              className="xl:hidden p-2 hover:bg-blue-50"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
             >
               {isMenuOpen ? <X className="h-5 w-5 sm:h-6 sm:w-6" /> : <Menu className="h-5 w-5 sm:h-6 sm:w-6" />}
@@ -247,28 +276,44 @@ const Header = () => {
 
         {/* Mobile Navigation */}
         {isMenuOpen && (
-          <div className="xl:hidden border-t bg-white/95 backdrop-blur-md shadow-lg rounded-b-xl mb-2 animate-fade-in-up">
+          <div className="xl:hidden border-t bg-white/95 backdrop-blur-md shadow-lg rounded-b-xl mb-2 animate-fade-in">
             <nav className="py-4 space-y-1 max-h-96 overflow-y-auto">
               {navigationItems.map((item) => (
                 <div key={item.name}>
-                  <Link
-                    to={item.href}
-                    className={`block px-4 py-3 transition-colors rounded-lg mx-2 font-medium text-sm ${
-                      location.pathname === item.href 
-                        ? 'text-blue-700 bg-blue-50' 
-                        : 'text-gray-700 hover:bg-blue-50 hover:text-blue-700'
-                    }`}
-                    onClick={() => setIsMenuOpen(false)}
-                  >
-                    {item.name}
-                  </Link>
-                  {item.dropdown && (
-                    <div className="pl-6 space-y-1">
+                  <div className="flex items-center justify-between">
+                    <Link
+                      to={item.href}
+                      className={`flex-1 block px-4 py-3 transition-colors rounded-lg mx-2 font-medium text-sm ${
+                        isActivePath(item.href) || (item.dropdown && hasActiveDropdownItem(item.dropdown))
+                          ? 'text-blue-700 bg-blue-50' 
+                          : 'text-gray-700 hover:bg-blue-50 hover:text-blue-700'
+                      }`}
+                      onClick={() => !item.dropdown && setIsMenuOpen(false)}
+                    >
+                      {item.name}
+                    </Link>
+                    {item.dropdown && (
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        className="mx-2 p-2"
+                        onClick={() => setActiveDropdown(activeDropdown === item.name ? null : item.name)}
+                      >
+                        <ChevronDown className={`h-4 w-4 transition-transform ${activeDropdown === item.name ? 'rotate-180' : ''}`} />
+                      </Button>
+                    )}
+                  </div>
+                  {item.dropdown && activeDropdown === item.name && (
+                    <div className="pl-6 space-y-1 animate-fade-in">
                       {item.dropdown.map((subItem) => (
                         <Link
                           key={subItem.name}
                           to={subItem.href}
-                          className="block px-4 py-2 text-sm text-gray-600 hover:text-blue-600 transition-colors"
+                          className={`block px-4 py-2 text-sm transition-colors rounded ${
+                            isActivePath(subItem.href.split('#')[0])
+                              ? 'text-blue-600 bg-blue-50 font-medium'
+                              : 'text-gray-600 hover:text-blue-600 hover:bg-blue-50'
+                          }`}
                           onClick={() => setIsMenuOpen(false)}
                         >
                           {subItem.name}
@@ -280,7 +325,10 @@ const Header = () => {
               ))}
               <div className="px-4 pt-4">
                 <Link to="/admissions">
-                  <Button className="w-full modern-button text-sm" onClick={() => setIsMenuOpen(false)}>
+                  <Button 
+                    className="w-full bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-medium text-sm shadow-lg" 
+                    onClick={() => setIsMenuOpen(false)}
+                  >
                     Apply Online
                   </Button>
                 </Link>
