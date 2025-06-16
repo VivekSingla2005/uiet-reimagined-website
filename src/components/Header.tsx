@@ -24,6 +24,7 @@ const Header = () => {
     setActiveDropdown(null);
   }, [location.pathname]);
 
+  // Improved navigation with better organization
   const navigationItems = [
     { name: 'Home', href: '/' },
     {
@@ -214,36 +215,36 @@ const Header = () => {
             </div>
           </Link>
 
-          {/* Desktop Navigation */}
+          {/* Desktop Navigation - Enhanced responsive design */}
           <nav className="hidden xl:flex items-center space-x-1">
             {navigationItems.map((item) => (
               <div
                 key={item.name}
-                className="relative"
+                className="relative group"
                 onMouseEnter={() => item.dropdown && setActiveDropdown(item.name)}
                 onMouseLeave={() => setActiveDropdown(null)}
               >
                 <Link
                   to={item.href}
-                  className={`flex items-center px-3 py-2 transition-colors font-medium hover:bg-blue-50 rounded-lg group text-sm ${
+                  className={`flex items-center px-3 py-2 transition-all duration-200 font-medium hover:bg-blue-50 rounded-lg text-sm ${
                     isActivePath(item.href) || (item.dropdown && hasActiveDropdownItem(item.dropdown))
-                      ? 'text-blue-600 bg-blue-50' 
+                      ? 'text-blue-600 bg-blue-50 shadow-sm' 
                       : 'text-gray-700 hover:text-blue-600'
                   }`}
                 >
                   {item.name}
-                  {item.dropdown && <ChevronDown className="ml-1 h-3 w-3 transition-transform group-hover:rotate-180" />}
+                  {item.dropdown && <ChevronDown className="ml-1 h-3 w-3 transition-transform duration-200 group-hover:rotate-180" />}
                 </Link>
                 
                 {item.dropdown && activeDropdown === item.name && (
-                  <div className="absolute top-full left-0 mt-2 w-64 bg-white rounded-xl shadow-xl border border-gray-200 z-50 py-2 animate-scale-in">
+                  <div className="absolute top-full left-0 mt-2 w-64 bg-white rounded-xl shadow-xl border border-gray-200 z-50 py-2 opacity-0 translate-y-2 animate-[fadeInUp_0.2s_ease-out_forwards]">
                     {item.dropdown.map((subItem) => (
                       <Link
                         key={subItem.name}
                         to={subItem.href}
-                        className={`block px-4 py-3 text-sm transition-colors border-b border-gray-100 last:border-b-0 ${
+                        className={`block px-4 py-3 text-sm transition-all duration-150 border-b border-gray-100 last:border-b-0 hover:pl-6 ${
                           isActivePath(subItem.href.split('#')[0])
-                            ? 'bg-blue-50 text-blue-700 font-medium'
+                            ? 'bg-blue-50 text-blue-700 font-medium border-l-4 border-l-blue-600'
                             : 'text-gray-700 hover:bg-blue-50 hover:text-blue-700'
                         }`}
                       >
@@ -259,14 +260,14 @@ const Header = () => {
           {/* CTA Button + Mobile Menu */}
           <div className="flex items-center space-x-2 sm:space-x-4">
             <Link to="/admissions" className="hidden lg:block">
-              <Button className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-medium text-sm px-4 py-2 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300">
+              <Button className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-medium text-sm px-4 py-2 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
                 Apply Online
               </Button>
             </Link>
             <Button
               variant="ghost"
               size="sm"
-              className="xl:hidden p-2 hover:bg-blue-50"
+              className="xl:hidden p-2 hover:bg-blue-50 transition-colors"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
             >
               {isMenuOpen ? <X className="h-5 w-5 sm:h-6 sm:w-6" /> : <Menu className="h-5 w-5 sm:h-6 sm:w-6" />}
@@ -274,18 +275,18 @@ const Header = () => {
           </div>
         </div>
 
-        {/* Mobile Navigation */}
+        {/* Mobile Navigation - Enhanced design */}
         {isMenuOpen && (
-          <div className="xl:hidden border-t bg-white/95 backdrop-blur-md shadow-lg rounded-b-xl mb-2 animate-fade-in">
-            <nav className="py-4 space-y-1 max-h-96 overflow-y-auto">
+          <div className="xl:hidden border-t bg-white/95 backdrop-blur-md shadow-lg rounded-b-xl mb-2 max-h-96 overflow-y-auto">
+            <nav className="py-4 space-y-1">
               {navigationItems.map((item) => (
                 <div key={item.name}>
                   <div className="flex items-center justify-between">
                     <Link
                       to={item.href}
-                      className={`flex-1 block px-4 py-3 transition-colors rounded-lg mx-2 font-medium text-sm ${
+                      className={`flex-1 block px-4 py-3 transition-all duration-200 rounded-lg mx-2 font-medium text-sm ${
                         isActivePath(item.href) || (item.dropdown && hasActiveDropdownItem(item.dropdown))
-                          ? 'text-blue-700 bg-blue-50' 
+                          ? 'text-blue-700 bg-blue-50 shadow-sm' 
                           : 'text-gray-700 hover:bg-blue-50 hover:text-blue-700'
                       }`}
                       onClick={() => !item.dropdown && setIsMenuOpen(false)}
@@ -299,17 +300,17 @@ const Header = () => {
                         className="mx-2 p-2"
                         onClick={() => setActiveDropdown(activeDropdown === item.name ? null : item.name)}
                       >
-                        <ChevronDown className={`h-4 w-4 transition-transform ${activeDropdown === item.name ? 'rotate-180' : ''}`} />
+                        <ChevronDown className={`h-4 w-4 transition-transform duration-200 ${activeDropdown === item.name ? 'rotate-180' : ''}`} />
                       </Button>
                     )}
                   </div>
                   {item.dropdown && activeDropdown === item.name && (
-                    <div className="pl-6 space-y-1 animate-fade-in">
+                    <div className="pl-6 space-y-1 bg-gray-50/50 mx-2 rounded-lg py-2">
                       {item.dropdown.map((subItem) => (
                         <Link
                           key={subItem.name}
                           to={subItem.href}
-                          className={`block px-4 py-2 text-sm transition-colors rounded ${
+                          className={`block px-4 py-2 text-sm transition-all duration-150 rounded ${
                             isActivePath(subItem.href.split('#')[0])
                               ? 'text-blue-600 bg-blue-50 font-medium'
                               : 'text-gray-600 hover:text-blue-600 hover:bg-blue-50'
@@ -337,6 +338,19 @@ const Header = () => {
           </div>
         )}
       </div>
+
+      <style jsx>{`
+        @keyframes fadeInUp {
+          from {
+            opacity: 0;
+            transform: translateY(8px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+      `}</style>
     </header>
   );
 };

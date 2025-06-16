@@ -1,11 +1,128 @@
 import React from 'react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import DepartmentFaculty from '@/components/DepartmentFaculty';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Users, BookOpen, Target, Award, Beaker, Calendar, GraduationCap, Code } from 'lucide-react';
+import { Badge } from '@/components/ui/badge';
+import { 
+  Cpu, Users, GraduationCap, Award, BookOpen, Building, 
+  Calendar, MapPin, Phone, Mail, Globe, ExternalLink,
+  TrendingUp, Target, Lightbulb, Trophy, Star
+} from 'lucide-react';
 
 const DepartmentCSE = () => {
+  const facultyData = {
+    coordinator: [
+      {
+        name: 'Dr. Rajesh Kumar',
+        designation: 'Professor & Head',
+        specialization: 'Artificial Intelligence, Machine Learning',
+        email: 'rajesh.kumar@uiet.puchd.ac.in',
+        phone: '+91-172-2534820',
+        office: 'Room 301, CSE Block',
+        experience: '18 years',
+        qualification: 'Ph.D in Computer Science',
+        publications: 45,
+        image: 'photo-1507003211169-0a1dd7228f2d',
+        isCoordinator: true,
+        researchAreas: ['AI/ML', 'Deep Learning', 'Computer Vision'],
+        courses: ['Machine Learning', 'Artificial Intelligence', 'Data Structures']
+      }
+    ],
+    professors: [
+      {
+        name: 'Dr. Priya Sharma',
+        designation: 'Professor',
+        specialization: 'Data Science, Big Data Analytics',
+        email: 'priya.sharma@uiet.puchd.ac.in',
+        phone: '+91-172-2534821',
+        office: 'Room 302, CSE Block',
+        experience: '15 years',
+        qualification: 'Ph.D in Computer Science',
+        publications: 42,
+        image: 'photo-1494790108755-2616c34b009c',
+        researchAreas: ['Data Science', 'Big Data', 'Analytics'],
+        courses: ['Database Systems', 'Data Mining', 'Big Data Analytics']
+      }
+    ],
+    associateProfessors: [
+      {
+        name: 'Dr. Amit Singh',
+        designation: 'Associate Professor',
+        specialization: 'Cybersecurity, Network Security',
+        email: 'amit.singh@uiet.puchd.ac.in',
+        phone: '+91-172-2534822',
+        office: 'Room 203, CSE Block',
+        experience: '12 years',
+        qualification: 'Ph.D in Computer Science',
+        publications: 35,
+        image: 'photo-1472099645785-5658abf4ff4e',
+        researchAreas: ['Cybersecurity', 'Network Security', 'Cryptography'],
+        courses: ['Network Security', 'Cryptography', 'Computer Networks']
+      },
+      {
+        name: 'Dr. Neha Verma',
+        designation: 'Associate Professor',
+        specialization: 'Software Engineering, HCI',
+        email: 'neha.verma@uiet.puchd.ac.in',
+        phone: '+91-172-2534823',
+        office: 'Room 204, CSE Block',
+        experience: '10 years',
+        qualification: 'Ph.D in Computer Science',
+        publications: 28,
+        image: 'photo-1438761681033-6461ffad8d80',
+        researchAreas: ['Software Engineering', 'HCI', 'UI/UX'],
+        courses: ['Software Engineering', 'Human Computer Interaction', 'Web Development']
+      }
+    ],
+    assistantProfessors: [
+      {
+        name: 'Dr. Rohit Gupta',
+        designation: 'Assistant Professor',
+        specialization: 'Cloud Computing, IoT',
+        email: 'rohit.gupta@uiet.puchd.ac.in',
+        phone: '+91-172-2534824',
+        office: 'Room 105, CSE Block',
+        experience: '8 years',
+        qualification: 'Ph.D in Computer Science',
+        publications: 22,
+        image: 'photo-1560250097-0b93528c311a',
+        researchAreas: ['Cloud Computing', 'IoT', 'Distributed Systems'],
+        courses: ['Cloud Computing', 'Internet of Things', 'Operating Systems']
+      },
+      {
+        name: 'Dr. Kavita Jain',
+        designation: 'Assistant Professor',
+        specialization: 'Computer Graphics, Image Processing',
+        email: 'kavita.jain@uiet.puchd.ac.in',
+        phone: '+91-172-2534825',
+        office: 'Room 106, CSE Block',
+        experience: '6 years',
+        qualification: 'Ph.D in Computer Science',
+        publications: 18,
+        image: 'photo-1573496359142-b8d87734a5a2',
+        researchAreas: ['Computer Graphics', 'Image Processing', 'Computer Vision'],
+        courses: ['Computer Graphics', 'Image Processing', 'Multimedia Systems']
+      }
+    ],
+    guestFaculty: [
+      {
+        name: 'Mr. Suresh Patel',
+        designation: 'Guest Faculty',
+        specialization: 'Industry Expert - Software Development',
+        email: 'suresh.patel@uiet.puchd.ac.in',
+        experience: '12 years (Industry)',
+        qualification: 'M.Tech in Computer Science',
+        publications: 5,
+        image: 'photo-1519085360753-af0119f7cbe7',
+        researchAreas: ['Software Development', 'Agile', 'DevOps'],
+        courses: ['Software Project Management', 'Industry Practices']
+      }
+    ]
+  };
+
   const faculty = [
     { name: 'Dr. Rajesh Kumar', designation: 'Professor & HOD', specialization: 'Machine Learning, AI', experience: '20 years' },
     { name: 'Dr. Priya Sharma', designation: 'Associate Professor', specialization: 'Data Structures, Algorithms', experience: '15 years' },
@@ -30,30 +147,47 @@ const DepartmentCSE = () => {
     <div className="min-h-screen">
       <Header />
       
-      {/* Department Hero */}
-      <section className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white py-16">
-        <div className="container-modern">
-          <div className="text-center">
-            <Code className="h-16 w-16 mx-auto mb-4" />
-            <h1 className="text-4xl font-bold mb-4">Computer Science & Engineering</h1>
-            <p className="text-xl text-blue-100">
-              Pioneering innovation in computing technologies and software development
+      {/* Hero Section */}
+      <section className="bg-gradient-to-r from-blue-600 to-purple-600 text-white py-16">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto text-center">
+            <Cpu className="h-16 w-16 mx-auto mb-6" />
+            <h1 className="text-4xl md:text-5xl font-bold mb-6">Computer Science & Engineering</h1>
+            <p className="text-xl text-blue-100 mb-8 leading-relaxed">
+              Pioneering innovation in computing technology, artificial intelligence, and software engineering 
+              to shape the digital future.
             </p>
+            <div className="flex flex-wrap justify-center gap-3 mb-8">
+              <Badge className="bg-white/20 text-white border-white/30">NAAC A+ Accredited</Badge>
+              <Badge className="bg-white/20 text-white border-white/30">NBA Accredited</Badge>
+              <Badge className="bg-white/20 text-white border-white/30">Industry Partnerships</Badge>
+              <Badge className="bg-white/20 text-white border-white/30">100% Placement</Badge>
+            </div>
+            <div className="flex flex-wrap justify-center gap-4">
+              <Button className="bg-white text-blue-600 hover:bg-blue-50">
+                <GraduationCap className="h-5 w-5 mr-2" />
+                Apply Now
+              </Button>
+              <Button variant="outline" className="border-white text-white hover:bg-white hover:text-blue-600">
+                <BookOpen className="h-5 w-5 mr-2" />
+                View Curriculum
+              </Button>
+            </div>
           </div>
         </div>
       </section>
 
-      <div className="container-modern py-12">
-        <Tabs defaultValue="overview" className="space-y-8">
-          <TabsList className="grid w-full grid-cols-4 lg:grid-cols-8 h-auto p-1">
-            <TabsTrigger value="overview" className="px-3 py-2 text-xs">Overview</TabsTrigger>
-            <TabsTrigger value="programs" className="px-3 py-2 text-xs">Programs</TabsTrigger>
-            <TabsTrigger value="faculty" className="px-3 py-2 text-xs">Faculty</TabsTrigger>
-            <TabsTrigger value="research" className="px-3 py-2 text-xs">Research</TabsTrigger>
-            <TabsTrigger value="labs" className="px-3 py-2 text-xs">Labs</TabsTrigger>
-            <TabsTrigger value="events" className="px-3 py-2 text-xs">Events</TabsTrigger>
-            <TabsTrigger value="alumni" className="px-3 py-2 text-xs">Alumni</TabsTrigger>
-            <TabsTrigger value="achievements" className="px-3 py-2 text-xs">Achievements</TabsTrigger>
+      <div className="container mx-auto px-4 py-12">
+        <Tabs defaultValue="overview" className="w-full">
+          <TabsList className="grid w-full grid-cols-3 lg:grid-cols-8 mb-8">
+            <TabsTrigger value="overview">Overview</TabsTrigger>
+            <TabsTrigger value="programs">Programs</TabsTrigger>
+            <TabsTrigger value="faculty">Faculty</TabsTrigger>
+            <TabsTrigger value="research">Research</TabsTrigger>
+            <TabsTrigger value="labs">Labs</TabsTrigger>
+            <TabsTrigger value="placements">Placements</TabsTrigger>
+            <TabsTrigger value="events">Events</TabsTrigger>
+            <TabsTrigger value="contact">Contact</TabsTrigger>
           </TabsList>
 
           <TabsContent value="overview" className="space-y-8">
@@ -147,25 +281,10 @@ const DepartmentCSE = () => {
           </TabsContent>
 
           <TabsContent value="faculty">
-            <div className="grid md:grid-cols-2 gap-6">
-              {faculty.map((member, index) => (
-                <Card key={index}>
-                  <CardContent className="p-6">
-                    <div className="flex items-start space-x-4">
-                      <div className="w-16 h-16 bg-gray-200 rounded-full flex items-center justify-center">
-                        <Users className="h-8 w-8 text-gray-500" />
-                      </div>
-                      <div className="flex-1">
-                        <h3 className="text-lg font-semibold text-gray-900">{member.name}</h3>
-                        <p className="text-blue-600 font-medium">{member.designation}</p>
-                        <p className="text-sm text-gray-600 mt-1">{member.specialization}</p>
-                        <p className="text-sm text-gray-500">{member.experience}</p>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
+            <DepartmentFaculty 
+              departmentName="Computer Science & Engineering"
+              facultyData={facultyData}
+            />
           </TabsContent>
 
           <TabsContent value="research">
@@ -246,6 +365,43 @@ const DepartmentCSE = () => {
             </div>
           </TabsContent>
 
+          <TabsContent value="placements">
+            <div className="space-y-6">
+              <Card>
+                <CardHeader>
+                  <CardTitle className="flex items-center">
+                    <Trophy className="h-5 w-5 mr-2 text-yellow-600" />
+                    Placement Statistics
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-4">
+                    <div className="flex items-center space-x-4 p-4 bg-gray-50 rounded-lg">
+                      <div className="text-center">
+                        <div className="text-lg font-bold text-blue-600">100%</div>
+                        <div className="text-sm text-gray-600">Placement Rate</div>
+                      </div>
+                      <div>
+                        <h4 className="font-semibold">Top Companies</h4>
+                        <p className="text-sm text-gray-600">Google, Microsoft, Amazon</p>
+                      </div>
+                    </div>
+                    <div className="flex items-center space-x-4 p-4 bg-gray-50 rounded-lg">
+                      <div className="text-center">
+                        <div className="text-lg font-bold text-blue-600">80%</div>
+                        <div className="text-sm text-gray-600">Placement Package</div>
+                      </div>
+                      <div>
+                        <h4 className="font-semibold">Average Package</h4>
+                        <p className="text-sm text-gray-600">$100,000</p>
+                      </div>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+          </TabsContent>
+
           <TabsContent value="events">
             <div className="space-y-6">
               <Card>
@@ -283,58 +439,35 @@ const DepartmentCSE = () => {
             </div>
           </TabsContent>
 
-          <TabsContent value="alumni">
-            <div className="grid md:grid-cols-3 gap-6">
-              {[
-                { name: 'Rahul Sharma', batch: '2020', company: 'Google', position: 'Software Engineer' },
-                { name: 'Priya Gupta', batch: '2019', company: 'Microsoft', position: 'Senior Developer' },
-                { name: 'Amit Kumar', batch: '2018', company: 'Amazon', position: 'Tech Lead' }
-              ].map((alumni, index) => (
-                <Card key={index}>
-                  <CardContent className="p-6 text-center">
-                    <div className="w-16 h-16 bg-gray-200 rounded-full mx-auto mb-4 flex items-center justify-center">
-                      <GraduationCap className="h-8 w-8 text-gray-500" />
-                    </div>
-                    <h3 className="font-semibold text-gray-900">{alumni.name}</h3>
-                    <p className="text-blue-600">{alumni.position}</p>
-                    <p className="text-sm text-gray-600">{alumni.company}</p>
-                    <p className="text-xs text-gray-500">Batch of {alumni.batch}</p>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-          </TabsContent>
-
-          <TabsContent value="achievements">
+          <TabsContent value="contact">
             <div className="space-y-6">
               <Card>
                 <CardHeader>
                   <CardTitle className="flex items-center">
-                    <Award className="h-5 w-5 mr-2 text-yellow-600" />
-                    Department Achievements
+                    <MapPin className="h-5 w-5 mr-2 text-green-600" />
+                    Contact Information
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
                   <div className="space-y-4">
-                    <div className="flex items-start space-x-3">
-                      <div className="w-2 h-2 bg-yellow-500 rounded-full mt-2"></div>
+                    <div className="flex items-center space-x-4 p-4 bg-gray-50 rounded-lg">
+                      <div className="text-center">
+                        <div className="text-lg font-bold text-blue-600">+91-172-2534820</div>
+                        <div className="text-sm text-gray-600">Phone</div>
+                      </div>
                       <div>
-                        <h4 className="font-semibold">Best Department Award 2023</h4>
-                        <p className="text-sm text-gray-600">Recognized by Panjab University for excellence in academics and research</p>
+                        <h4 className="font-semibold">Email</h4>
+                        <p className="text-sm text-gray-600">info@uiet.puchd.ac.in</p>
                       </div>
                     </div>
-                    <div className="flex items-start space-x-3">
-                      <div className="w-2 h-2 bg-yellow-500 rounded-full mt-2"></div>
-                      <div>
-                        <h4 className="font-semibold">5 Patents Filed in 2023</h4>
-                        <p className="text-sm text-gray-600">Faculty and students filed patents in AI, IoT, and Blockchain domains</p>
+                    <div className="flex items-center space-x-4 p-4 bg-gray-50 rounded-lg">
+                      <div className="text-center">
+                        <div className="text-lg font-bold text-blue-600">Punjab University</div>
+                        <div className="text-sm text-gray-600">Address</div>
                       </div>
-                    </div>
-                    <div className="flex items-start space-x-3">
-                      <div className="w-2 h-2 bg-yellow-500 rounded-full mt-2"></div>
                       <div>
-                        <h4 className="font-semibold">100% Placement Record</h4>
-                        <p className="text-sm text-gray-600">All eligible students placed in top companies with excellent packages</p>
+                        <h4 className="font-semibold">Website</h4>
+                        <p className="text-sm text-gray-600"><a href="https://www.uiet.puchd.ac.in" target="_blank" rel="noopener noreferrer">www.uiet.puchd.ac.in</a></p>
                       </div>
                     </div>
                   </div>

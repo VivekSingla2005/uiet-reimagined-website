@@ -67,15 +67,18 @@ const AboutPage = () => {
 
       <div className="container mx-auto px-4 py-12">
         <Tabs defaultValue="overview" className="w-full">
-          <TabsList className="grid w-full grid-cols-4 lg:grid-cols-7">
-            <TabsTrigger value="overview">Overview</TabsTrigger>
-            <TabsTrigger value="pu">Panjab University</TabsTrigger>
-            <TabsTrigger value="chandigarh">Chandigarh</TabsTrigger>
-            <TabsTrigger value="location">Location</TabsTrigger>
-            <TabsTrigger value="director">Director's Message</TabsTrigger>
-            <TabsTrigger value="mission">Vision & Mission</TabsTrigger>
-            <TabsTrigger value="infrastructure">Infrastructure</TabsTrigger>
-          </TabsList>
+          {/* Fixed TabsList for better responsiveness */}
+          <div className="w-full overflow-x-auto mb-8">
+            <TabsList className="flex flex-nowrap w-max min-w-full justify-start gap-1 bg-gray-100 p-1 rounded-lg">
+              <TabsTrigger value="overview" className="whitespace-nowrap px-3 py-2 text-sm">Overview</TabsTrigger>
+              <TabsTrigger value="pu" className="whitespace-nowrap px-3 py-2 text-sm">Panjab University</TabsTrigger>
+              <TabsTrigger value="chandigarh" className="whitespace-nowrap px-3 py-2 text-sm">Chandigarh</TabsTrigger>
+              <TabsTrigger value="location" className="whitespace-nowrap px-3 py-2 text-sm">Location</TabsTrigger>
+              <TabsTrigger value="director" className="whitespace-nowrap px-3 py-2 text-sm">Director's Message</TabsTrigger>
+              <TabsTrigger value="mission" className="whitespace-nowrap px-3 py-2 text-sm">Vision & Mission</TabsTrigger>
+              <TabsTrigger value="infrastructure" className="whitespace-nowrap px-3 py-2 text-sm">Infrastructure</TabsTrigger>
+            </TabsList>
+          </div>
 
           <TabsContent value="overview" className="space-y-8">
             {/* Statistics */}
