@@ -6,9 +6,16 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import AboutPage from "./pages/AboutPage";
+import AboutPU from "./pages/AboutPU";
 import AcademicsPage from "./pages/AcademicsPage";
 import DepartmentsPage from "./pages/DepartmentsPage";
 import DepartmentCSE from "./pages/DepartmentCSE";
+import DepartmentECE from "./pages/DepartmentECE";
+import DepartmentEEE from "./pages/DepartmentEEE";
+import DepartmentIT from "./pages/DepartmentIT";
+import DepartmentME from "./pages/DepartmentME";
+import DepartmentBT from "./pages/DepartmentBT";
+import DepartmentAS from "./pages/DepartmentAS";
 import FacultyPage from "./pages/FacultyPage";
 import ResearchPage from "./pages/ResearchPage";
 import StudentsPage from "./pages/StudentsPage";
@@ -32,9 +39,16 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/about" element={<AboutPage />} />
+          <Route path="/about/pu" element={<AboutPU />} />
           <Route path="/academics" element={<AcademicsPage />} />
           <Route path="/departments" element={<DepartmentsPage />} />
           <Route path="/departments/cse" element={<DepartmentCSE />} />
+          <Route path="/departments/ece" element={<DepartmentECE />} />
+          <Route path="/departments/eee" element={<DepartmentEEE />} />
+          <Route path="/departments/it" element={<DepartmentIT />} />
+          <Route path="/departments/me" element={<DepartmentME />} />
+          <Route path="/departments/bt" element={<DepartmentBT />} />
+          <Route path="/departments/as" element={<DepartmentAS />} />
           <Route path="/faculty" element={<FacultyPage />} />
           <Route path="/research" element={<ResearchPage />} />
           <Route path="/students" element={<StudentsPage />} />
