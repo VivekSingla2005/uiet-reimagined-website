@@ -1,9 +1,9 @@
-
 import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { GraduationCap, Clock, Users, BookOpen, Award } from 'lucide-react';
+import { GraduationCap, Clock, Users, BookOpen, Award, ArrowRight, Calculator } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const Academics = () => {
   const programs = {
@@ -14,7 +14,8 @@ const Academics = () => {
         seats: '60',
         code: 'CSE',
         description: 'Comprehensive program covering software development, algorithms, and emerging technologies.',
-        highlights: ['AI/ML', 'Data Science', 'Software Engineering', 'Cybersecurity']
+        highlights: ['AI/ML', 'Data Science', 'Software Engineering', 'Cybersecurity'],
+        link: '/departments/cse'
       },
       {
         name: 'Electronics & Communication Engineering',
@@ -22,7 +23,26 @@ const Academics = () => {
         seats: '60',
         code: 'ECE',
         description: 'Focus on electronics, communication systems, and signal processing.',
-        highlights: ['VLSI Design', 'Embedded Systems', 'Communication Networks', 'IoT']
+        highlights: ['VLSI Design', 'Embedded Systems', 'Communication Networks', 'IoT'],
+        link: '/departments/ece'
+      },
+      {
+        name: 'Electrical & Electronics Engineering',
+        duration: '4 Years',
+        seats: '60',
+        code: 'EEE',
+        description: 'Power systems, control engineering, and renewable energy solutions.',
+        highlights: ['Power Systems', 'Control Engineering', 'Renewable Energy', 'Electric Drives'],
+        link: '/departments/eee'
+      },
+      {
+        name: 'Information Technology',
+        duration: '4 Years',
+        seats: '60',
+        code: 'IT',
+        description: 'Modern IT solutions, web technologies, and digital transformation.',
+        highlights: ['Web Development', 'Mobile Computing', 'Cloud Technology', 'Digital Marketing'],
+        link: '/departments/it'
       },
       {
         name: 'Mechanical Engineering',
@@ -30,7 +50,8 @@ const Academics = () => {
         seats: '60',
         code: 'ME',
         description: 'Traditional engineering discipline with modern applications.',
-        highlights: ['CAD/CAM', 'Robotics', 'Thermal Engineering', 'Manufacturing']
+        highlights: ['CAD/CAM', 'Robotics', 'Thermal Engineering', 'Manufacturing'],
+        link: '/departments/me'
       },
       {
         name: 'Biotechnology',
@@ -38,7 +59,17 @@ const Academics = () => {
         seats: '30',
         code: 'BT',
         description: 'Interdisciplinary program combining biology with technology.',
-        highlights: ['Genetic Engineering', 'Bioinformatics', 'Bioprocessing', 'Medical Biotechnology']
+        highlights: ['Genetic Engineering', 'Bioinformatics', 'Bioprocessing', 'Medical Biotechnology'],
+        link: '/departments/bt'
+      },
+      {
+        name: 'Applied Sciences',
+        duration: 'Foundation',
+        seats: 'All Students',
+        code: 'AS',
+        description: 'Foundation courses in mathematics, physics, chemistry, and communication.',
+        highlights: ['Mathematics', 'Physics', 'Chemistry', 'English & Communication'],
+        link: '/departments/as'
       }
     ],
     postgraduate: [
@@ -83,22 +114,26 @@ const Academics = () => {
     {
       icon: BookOpen,
       title: 'Central Library',
-      description: 'Over 50,000 books and digital resources'
+      description: 'Over 50,000 books and digital resources',
+      link: '/about#infrastructure'
     },
     {
       icon: Users,
       title: 'Research Labs',
-      description: 'State-of-the-art laboratories for all departments'
+      description: 'State-of-the-art laboratories for all departments',
+      link: '/research'
     },
     {
       icon: Award,
       title: 'Industry Partnerships',
-      description: 'Collaborations with leading companies'
+      description: 'Collaborations with leading companies',
+      link: '/placements'
     },
     {
       icon: GraduationCap,
       title: 'Expert Faculty',
-      description: 'Experienced professors and industry experts'
+      description: 'Experienced professors and industry experts',
+      link: '/faculty'
     }
   ];
 
@@ -126,12 +161,12 @@ const Academics = () => {
 
           {Object.entries(programs).map(([level, programList]) => (
             <TabsContent key={level} value={level}>
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
                 {programList.map((program, index) => (
                   <Card key={index} className="hover-card border border-slate-200 shadow-sm">
                     <CardHeader className="pb-4">
                       <div className="flex justify-between items-start mb-2">
-                        <CardTitle className="text-xl text-slate-900 leading-tight pr-4">{program.name}</CardTitle>
+                        <CardTitle className="text-lg text-slate-900 leading-tight pr-4">{program.name}</CardTitle>
                         <span className="bg-blue-100 text-blue-800 text-xs font-semibold px-3 py-1 rounded-full whitespace-nowrap">
                           {program.code}
                         </span>
@@ -148,9 +183,9 @@ const Academics = () => {
                       </div>
                     </CardHeader>
                     <CardContent className="pt-0">
-                      <p className="text-slate-600 mb-4 leading-relaxed">{program.description}</p>
+                      <p className="text-slate-600 mb-4 leading-relaxed text-sm">{program.description}</p>
                       <div className="mb-6">
-                        <h4 className="font-semibold text-slate-900 mb-3">Key Highlights:</h4>
+                        <h4 className="font-semibold text-slate-900 mb-3 text-sm">Key Highlights:</h4>
                         <div className="flex flex-wrap gap-2">
                           {program.highlights.map((highlight, idx) => (
                             <span
@@ -162,9 +197,12 @@ const Academics = () => {
                           ))}
                         </div>
                       </div>
-                      <Button variant="outline" className="w-full hover-button">
-                        Learn More
-                      </Button>
+                      <Link to={program.link}>
+                        <Button variant="outline" className="w-full hover-button">
+                          Learn More
+                          <ArrowRight className="h-4 w-4 ml-2" />
+                        </Button>
+                      </Link>
                     </CardContent>
                   </Card>
                 ))}
@@ -173,18 +211,63 @@ const Academics = () => {
           ))}
         </Tabs>
 
+        {/* Academic Calendar & Resources */}
+        <div className="mb-16">
+          <h3 className="text-2xl font-bold text-slate-900 text-center mb-8">Academic Resources</h3>
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <Link to="/downloads">
+              <Card className="hover:shadow-lg transition-shadow cursor-pointer">
+                <CardContent className="p-6 text-center">
+                  <BookOpen className="h-8 w-8 text-blue-600 mx-auto mb-3" />
+                  <h4 className="font-semibold mb-2">Academic Calendar</h4>
+                  <p className="text-sm text-gray-600">Important dates and schedules</p>
+                </CardContent>
+              </Card>
+            </Link>
+            <Link to="/previous-papers">
+              <Card className="hover:shadow-lg transition-shadow cursor-pointer">
+                <CardContent className="p-6 text-center">
+                  <BookOpen className="h-8 w-8 text-green-600 mx-auto mb-3" />
+                  <h4 className="font-semibold mb-2">Previous Papers</h4>
+                  <p className="text-sm text-gray-600">Question papers archive</p>
+                </CardContent>
+              </Card>
+            </Link>
+            <Link to="/downloads">
+              <Card className="hover:shadow-lg transition-shadow cursor-pointer">
+                <CardContent className="p-6 text-center">
+                  <Calculator className="h-8 w-8 text-purple-600 mx-auto mb-3" />
+                  <h4 className="font-semibold mb-2">Syllabus</h4>
+                  <p className="text-sm text-gray-600">Curriculum and syllabus</p>
+                </CardContent>
+              </Card>
+            </Link>
+            <Link to="/downloads">
+              <Card className="hover:shadow-lg transition-shadow cursor-pointer">
+                <CardContent className="p-6 text-center">
+                  <Award className="h-8 w-8 text-orange-600 mx-auto mb-3" />
+                  <h4 className="font-semibold mb-2">Examination</h4>
+                  <p className="text-sm text-gray-600">Exam schedules and results</p>
+                </CardContent>
+              </Card>
+            </Link>
+          </div>
+        </div>
+
         {/* Facilities */}
         <div>
           <h3 className="text-3xl font-bold text-slate-900 text-center mb-12">Academic Facilities</h3>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {facilities.map((facility, index) => (
-              <Card key={index} className="text-center hover-card border-0 shadow-lg bg-white">
-                <CardContent className="p-8">
-                  <facility.icon className="h-12 w-12 text-blue-600 mx-auto mb-4" />
-                  <h4 className="text-lg font-semibold text-slate-900 mb-2">{facility.title}</h4>
-                  <p className="text-slate-600">{facility.description}</p>
-                </CardContent>
-              </Card>
+              <Link key={index} to={facility.link}>
+                <Card className="text-center hover-card border-0 shadow-lg bg-white cursor-pointer">
+                  <CardContent className="p-8">
+                    <facility.icon className="h-12 w-12 text-blue-600 mx-auto mb-4" />
+                    <h4 className="text-lg font-semibold text-slate-900 mb-2">{facility.title}</h4>
+                    <p className="text-slate-600">{facility.description}</p>
+                  </CardContent>
+                </Card>
+              </Link>
             ))}
           </div>
         </div>

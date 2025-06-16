@@ -1,4 +1,3 @@
-
 import React from 'react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
@@ -9,7 +8,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { 
   Building, GraduationCap, Users, Calendar, Trophy, MapPin, 
   Phone, Mail, Globe, Award, Heart, Target, Eye, Lightbulb,
-  School, BookOpen, Cpu, Building2, TreePine, Camera
+  School, BookOpen, Cpu, Building2, TreePine, Camera, ArrowRight
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
@@ -44,10 +43,23 @@ const AboutPage = () => {
               A premier engineering institution under Panjab University, committed to excellence in 
               technical education, research, and innovation since 1999.
             </p>
-            <div className="flex flex-wrap justify-center gap-2">
+            <div className="flex flex-wrap justify-center gap-2 mb-6">
               <Badge variant="secondary" className="bg-white/20 text-white border-white/30">NAAC A+ Accredited</Badge>
               <Badge variant="secondary" className="bg-white/20 text-white border-white/30">NBA Accredited</Badge>
               <Badge variant="secondary" className="bg-white/20 text-white border-white/30">NIRF Ranked</Badge>
+            </div>
+            <div className="flex flex-wrap justify-center gap-4">
+              <Link to="/academics">
+                <Button className="bg-white text-blue-600 hover:bg-blue-50">
+                  <GraduationCap className="h-4 w-4 mr-2" />
+                  Explore Academics
+                </Button>
+              </Link>
+              <Link to="/admissions">
+                <Button variant="outline" className="border-white text-white hover:bg-white hover:text-blue-600">
+                  Apply Now
+                </Button>
+              </Link>
             </div>
           </div>
         </div>
@@ -99,9 +111,20 @@ const AboutPage = () => {
                     disciplines with a focus on industry-relevant curriculum, hands-on learning, 
                     and research excellence.
                   </p>
-                  <Link to="/about/pu">
-                    <Button variant="outline" size="sm">Learn More About PU</Button>
-                  </Link>
+                  <div className="flex gap-3">
+                    <Link to="/academics">
+                      <Button size="sm">
+                        <BookOpen className="h-4 w-4 mr-2" />
+                        View Programs
+                      </Button>
+                    </Link>
+                    <Link to="/departments">
+                      <Button variant="outline" size="sm">
+                        <Building className="h-4 w-4 mr-2" />
+                        All Departments
+                      </Button>
+                    </Link>
+                  </div>
                 </CardContent>
               </Card>
 
@@ -128,9 +151,50 @@ const AboutPage = () => {
                       <span className="text-gray-700">State-of-the-art laboratories and facilities</span>
                     </li>
                   </ul>
+                  <div className="mt-4 pt-4 border-t">
+                    <Link to="/placements">
+                      <Button variant="outline" size="sm" className="w-full">
+                        <Trophy className="h-4 w-4 mr-2" />
+                        View Placement Records
+                        <ArrowRight className="h-4 w-4 ml-2" />
+                      </Button>
+                    </Link>
+                  </div>
                 </CardContent>
               </Card>
             </div>
+
+            {/* Quick Navigation */}
+            <Card className="bg-gradient-to-r from-blue-50 to-indigo-50">
+              <CardHeader>
+                <CardTitle>Explore More</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="grid md:grid-cols-3 gap-4">
+                  <Link to="/research" className="block">
+                    <div className="p-4 bg-white rounded-lg hover:shadow-md transition-shadow">
+                      <Lightbulb className="h-6 w-6 text-blue-600 mb-2" />
+                      <h4 className="font-semibold">Research & Innovation</h4>
+                      <p className="text-sm text-gray-600">Cutting-edge research projects</p>
+                    </div>
+                  </Link>
+                  <Link to="/students" className="block">
+                    <div className="p-4 bg-white rounded-lg hover:shadow-md transition-shadow">
+                      <Users className="h-6 w-6 text-green-600 mb-2" />
+                      <h4 className="font-semibold">Student Life</h4>
+                      <p className="text-sm text-gray-600">Campus life and activities</p>
+                    </div>
+                  </Link>
+                  <Link to="/faculty" className="block">
+                    <div className="p-4 bg-white rounded-lg hover:shadow-md transition-shadow">
+                      <GraduationCap className="h-6 w-6 text-purple-600 mb-2" />
+                      <h4 className="font-semibold">Faculty</h4>
+                      <p className="text-sm text-gray-600">Meet our expert faculty</p>
+                    </div>
+                  </Link>
+                </div>
+              </CardContent>
+            </Card>
           </TabsContent>
 
           <TabsContent value="pu" className="space-y-6">
