@@ -197,26 +197,27 @@ const Header = () => {
       <div className="container mx-auto px-4 max-w-7xl">
         <div className="flex justify-between items-center py-3 sm:py-4">
           {/* Logo and Institute Name */}
-          <Link to="/" className="flex items-center space-x-2 sm:space-x-4 flex-shrink-0">
+          <Link to="/" className="flex items-center space-x-2 sm:space-x-4 flex-shrink-0 min-w-0">
             <div className="flex items-center space-x-2 sm:space-x-3">
-              <div className="w-8 h-8 sm:w-12 sm:h-12 bg-gradient-to-br from-blue-600 to-blue-700 rounded-xl flex items-center justify-center shadow-lg">
+              <div className="w-8 h-8 sm:w-12 sm:h-12 bg-gradient-to-br from-blue-600 to-blue-700 rounded-xl flex items-center justify-center shadow-lg flex-shrink-0">
                 <GraduationCap className="h-5 w-5 sm:h-7 sm:w-7 text-white" />
               </div>
             </div>
-            <div className="min-w-0">
-              <h1 className="text-sm sm:text-xl lg:text-2xl font-bold text-gray-900 tracking-tight leading-tight">
-                <span className="hidden sm:inline">University Institute of Engineering & Technology</span>
+            <div className="min-w-0 flex-1">
+              <h1 className="text-sm sm:text-xl lg:text-2xl font-bold text-gray-900 tracking-tight leading-tight truncate">
+                <span className="hidden lg:inline">University Institute of Engineering & Technology</span>
+                <span className="hidden sm:inline lg:hidden">UIET, Panjab University</span>
                 <span className="sm:hidden">UIET</span>
               </h1>
-              <p className="text-xs sm:text-sm lg:text-base text-blue-600 font-medium">
+              <p className="text-xs sm:text-sm lg:text-base text-blue-600 font-medium truncate">
                 <span className="hidden sm:inline">Panjab University, Chandigarh</span>
                 <span className="sm:hidden">Panjab University</span>
               </p>
             </div>
           </Link>
 
-          {/* Desktop Navigation - Improved positioning and responsiveness */}
-          <nav className="hidden xl:flex items-center space-x-1 2xl:space-x-2">
+          {/* Desktop Navigation - Improved with better breakpoints */}
+          <nav className="hidden 2xl:flex items-center space-x-1">
             {navigationItems.map((item) => (
               <div
                 key={item.name}
@@ -226,7 +227,7 @@ const Header = () => {
               >
                 <Link
                   to={item.href}
-                  className={`flex items-center px-2 xl:px-3 py-2 transition-all duration-200 font-medium hover:bg-blue-50 rounded-lg text-xs xl:text-sm whitespace-nowrap ${
+                  className={`flex items-center px-2 py-2 transition-all duration-200 font-medium hover:bg-blue-50 rounded-lg text-sm whitespace-nowrap ${
                     isActivePath(item.href) || (item.dropdown && hasActiveDropdownItem(item.dropdown))
                       ? 'text-blue-600 bg-blue-50 shadow-sm' 
                       : 'text-gray-700 hover:text-blue-600'
@@ -257,8 +258,78 @@ const Header = () => {
             ))}
           </nav>
 
+          {/* Compact Desktop Navigation for smaller desktop screens */}
+          <nav className="hidden xl:flex 2xl:hidden items-center space-x-1">
+            {navigationItems.slice(0, 8).map((item) => (
+              <div
+                key={item.name}
+                className="relative group"
+                onMouseEnter={() => item.dropdown && setActiveDropdown(item.name)}
+                onMouseLeave={() => setActiveDropdown(null)}
+              >
+                <Link
+                  to={item.href}
+                  className={`flex items-center px-1 py-2 transition-all duration-200 font-medium hover:bg-blue-50 rounded-lg text-xs whitespace-nowrap ${
+                    isActivePath(item.href) || (item.dropdown && hasActiveDropdownItem(item.dropdown))
+                      ? 'text-blue-600 bg-blue-50 shadow-sm' 
+                      : 'text-gray-700 hover:text-blue-600'
+                  }`}
+                >
+                  {item.name === 'Placements' ? 'Place' : item.name === 'Committees' ? 'Comm' : item.name}
+                  {item.dropdown && <ChevronDown className="ml-0.5 h-3 w-3 transition-transform duration-200 group-hover:rotate-180" />}
+                </Link>
+                
+                {item.dropdown && activeDropdown === item.name && (
+                  <div className="absolute top-full left-0 mt-2 w-64 bg-white rounded-xl shadow-xl border border-gray-200 z-50 py-2 opacity-0 translate-y-2 animate-[fadeInUp_0.2s_ease-out_forwards]">
+                    {item.dropdown.map((subItem) => (
+                      <Link
+                        key={subItem.name}
+                        to={subItem.href}
+                        className={`block px-4 py-3 text-sm transition-all duration-150 border-b border-gray-100 last:border-b-0 hover:pl-6 ${
+                          isActivePath(subItem.href.split('#')[0])
+                            ? 'bg-blue-50 text-blue-700 font-medium border-l-4 border-l-blue-600'
+                            : 'text-gray-700 hover:bg-blue-50 hover:text-blue-700'
+                        }`}
+                      >
+                        {subItem.name}
+                      </Link>
+                    ))}
+                  </div>
+                )}
+              </div>
+            ))}
+            <div className="relative group">
+              <Button
+                variant="ghost"
+                size="sm"
+                className="px-1 py-2 text-xs text-gray-700 hover:text-blue-600 hover:bg-blue-50"
+                onMouseEnter={() => setActiveDropdown('more')}
+                onMouseLeave={() => setActiveDropdown(null)}
+              >
+                More <ChevronDown className="ml-0.5 h-3 w-3" />
+              </Button>
+              {activeDropdown === 'more' && (
+                <div className="absolute top-full right-0 mt-2 w-48 bg-white rounded-xl shadow-xl border border-gray-200 z-50 py-2">
+                  {navigationItems.slice(8).map((item) => (
+                    <Link
+                      key={item.name}
+                      to={item.href}
+                      className={`block px-4 py-3 text-sm transition-all duration-150 border-b border-gray-100 last:border-b-0 hover:pl-6 ${
+                        isActivePath(item.href)
+                          ? 'bg-blue-50 text-blue-700 font-medium border-l-4 border-l-blue-600'
+                          : 'text-gray-700 hover:bg-blue-50 hover:text-blue-700'
+                      }`}
+                    >
+                      {item.name}
+                    </Link>
+                  ))}
+                </div>
+              )}
+            </div>
+          </nav>
+
           {/* CTA Button + Mobile Menu */}
-          <div className="flex items-center space-x-2 sm:space-x-4">
+          <div className="flex items-center space-x-2 sm:space-x-4 flex-shrink-0">
             <Link to="/admissions" className="hidden lg:block">
               <Button className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-medium text-sm px-4 py-2 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
                 Apply Online

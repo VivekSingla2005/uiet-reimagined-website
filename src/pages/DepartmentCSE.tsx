@@ -169,6 +169,91 @@ const DepartmentCSE = () => {
     }
   ];
 
+  // Faculty data for CSE department
+  const facultyData = {
+    coordinator: {
+      name: "Dr. Rajesh Kumar",
+      designation: "Professor & Head",
+      email: "rajesh.kumar@uiet.puchd.ac.in",
+      phone: "+91-172-2534816",
+      education: "Ph.D. Computer Science, IIT Delhi",
+      specialization: "Machine Learning, Data Mining",
+      experience: "15+ years",
+      image: "/placeholder.svg"
+    },
+    professors: [
+      {
+        name: "Dr. Priya Sharma",
+        designation: "Professor",
+        email: "priya.sharma@uiet.puchd.ac.in",
+        education: "Ph.D. Computer Science, IIT Bombay",
+        specialization: "Artificial Intelligence, Neural Networks",
+        experience: "12+ years",
+        image: "/placeholder.svg"
+      },
+      {
+        name: "Dr. Amit Singh",
+        designation: "Professor",
+        email: "amit.singh@uiet.puchd.ac.in",
+        education: "Ph.D. Software Engineering, IIT Kanpur",
+        specialization: "Software Engineering, Database Systems",
+        experience: "14+ years",
+        image: "/placeholder.svg"
+      }
+    ],
+    associateProfessors: [
+      {
+        name: "Dr. Neha Gupta",
+        designation: "Associate Professor",
+        email: "neha.gupta@uiet.puchd.ac.in",
+        education: "Ph.D. Computer Networks, NIT Kurukshetra",
+        specialization: "Computer Networks, Cybersecurity",
+        experience: "10+ years",
+        image: "/placeholder.svg"
+      },
+      {
+        name: "Dr. Vikash Yadav",
+        designation: "Associate Professor",
+        email: "vikash.yadav@uiet.puchd.ac.in",
+        education: "Ph.D. Human-Computer Interaction, PU Chandigarh",
+        specialization: "HCI, UI/UX Design",
+        experience: "8+ years",
+        image: "/placeholder.svg"
+      }
+    ],
+    assistantProfessors: [
+      {
+        name: "Dr. Sunita Dhiman",
+        designation: "Assistant Professor",
+        email: "sunita.dhiman@uiet.puchd.ac.in",
+        education: "Ph.D. Data Science, Thapar University",
+        specialization: "Data Science, Big Data Analytics",
+        experience: "6+ years",
+        image: "/placeholder.svg"
+      },
+      {
+        name: "Dr. Rohit Tanwar",
+        designation: "Assistant Professor",
+        email: "rohit.tanwar@uiet.puchd.ac.in",
+        education: "Ph.D. Cloud Computing, BITS Pilani",
+        specialization: "Cloud Computing, Distributed Systems",
+        experience: "5+ years",
+        image: "/placeholder.svg"
+      }
+    ],
+    guestFaculty: [
+      {
+        name: "Prof. Arun Mehta",
+        designation: "Guest Faculty",
+        email: "arun.mehta@uiet.puchd.ac.in",
+        education: "M.Tech. Computer Science",
+        specialization: "Web Development, Programming Languages",
+        experience: "4+ years",
+        image: "/placeholder.svg"
+      }
+    ]
+  };
+
   return (
     <div className="min-h-screen bg-gray-50">
       <Header />
@@ -336,7 +421,7 @@ const DepartmentCSE = () => {
             </TabsContent>
 
             <TabsContent value="faculty">
-              <DepartmentFaculty departmentName="Computer Science & Engineering" />
+              <DepartmentFaculty departmentName="Computer Science & Engineering" facultyData={facultyData} />
             </TabsContent>
 
             <TabsContent value="research" className="space-y-8">
