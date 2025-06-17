@@ -216,8 +216,8 @@ const Header = () => {
             </div>
           </Link>
 
-          {/* Desktop Navigation - Improved with better breakpoints */}
-          <nav className="hidden 2xl:flex items-center space-x-1">
+          {/* Full Desktop Navigation - Fixed for large screens */}
+          <nav className="hidden 2xl:flex items-center space-x-1 overflow-visible">
             {navigationItems.map((item) => (
               <div
                 key={item.name}
@@ -227,7 +227,7 @@ const Header = () => {
               >
                 <Link
                   to={item.href}
-                  className={`flex items-center px-2 py-2 transition-all duration-200 font-medium hover:bg-blue-50 rounded-lg text-sm whitespace-nowrap ${
+                  className={`flex items-center px-3 py-2 transition-all duration-200 font-medium hover:bg-blue-50 rounded-lg text-sm whitespace-nowrap ${
                     isActivePath(item.href) || (item.dropdown && hasActiveDropdownItem(item.dropdown))
                       ? 'text-blue-600 bg-blue-50 shadow-sm' 
                       : 'text-gray-700 hover:text-blue-600'
@@ -258,9 +258,9 @@ const Header = () => {
             ))}
           </nav>
 
-          {/* Compact Desktop Navigation for smaller desktop screens */}
-          <nav className="hidden xl:flex 2xl:hidden items-center space-x-1">
-            {navigationItems.slice(0, 8).map((item) => (
+          {/* Compact Desktop Navigation for medium screens - Show fewer items */}
+          <nav className="hidden lg:flex 2xl:hidden items-center space-x-1">
+            {navigationItems.slice(0, 6).map((item) => (
               <div
                 key={item.name}
                 className="relative group"
@@ -269,13 +269,13 @@ const Header = () => {
               >
                 <Link
                   to={item.href}
-                  className={`flex items-center px-1 py-2 transition-all duration-200 font-medium hover:bg-blue-50 rounded-lg text-xs whitespace-nowrap ${
+                  className={`flex items-center px-2 py-2 transition-all duration-200 font-medium hover:bg-blue-50 rounded-lg text-xs whitespace-nowrap ${
                     isActivePath(item.href) || (item.dropdown && hasActiveDropdownItem(item.dropdown))
                       ? 'text-blue-600 bg-blue-50 shadow-sm' 
                       : 'text-gray-700 hover:text-blue-600'
                   }`}
                 >
-                  {item.name === 'Placements' ? 'Place' : item.name === 'Committees' ? 'Comm' : item.name}
+                  {item.name === 'Admissions' ? 'Apply' : item.name === 'Departments' ? 'Dept' : item.name}
                   {item.dropdown && <ChevronDown className="ml-0.5 h-3 w-3 transition-transform duration-200 group-hover:rotate-180" />}
                 </Link>
                 
@@ -302,7 +302,7 @@ const Header = () => {
               <Button
                 variant="ghost"
                 size="sm"
-                className="px-1 py-2 text-xs text-gray-700 hover:text-blue-600 hover:bg-blue-50"
+                className="px-2 py-2 text-xs text-gray-700 hover:text-blue-600 hover:bg-blue-50"
                 onMouseEnter={() => setActiveDropdown('more')}
                 onMouseLeave={() => setActiveDropdown(null)}
               >
@@ -310,7 +310,7 @@ const Header = () => {
               </Button>
               {activeDropdown === 'more' && (
                 <div className="absolute top-full right-0 mt-2 w-48 bg-white rounded-xl shadow-xl border border-gray-200 z-50 py-2">
-                  {navigationItems.slice(8).map((item) => (
+                  {navigationItems.slice(6).map((item) => (
                     <Link
                       key={item.name}
                       to={item.href}
@@ -338,7 +338,7 @@ const Header = () => {
             <Button
               variant="ghost"
               size="sm"
-              className="xl:hidden p-2 hover:bg-blue-50 transition-colors"
+              className="lg:hidden p-2 hover:bg-blue-50 transition-colors"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
             >
               {isMenuOpen ? <X className="h-5 w-5 sm:h-6 sm:w-6" /> : <Menu className="h-5 w-5 sm:h-6 sm:w-6" />}
@@ -348,7 +348,7 @@ const Header = () => {
 
         {/* Mobile Navigation - Enhanced design */}
         {isMenuOpen && (
-          <div className="xl:hidden border-t bg-white/95 backdrop-blur-md shadow-lg rounded-b-xl mb-2 max-h-96 overflow-y-auto">
+          <div className="lg:hidden border-t bg-white/95 backdrop-blur-md shadow-lg rounded-b-xl mb-2 max-h-96 overflow-y-auto">
             <nav className="py-4 space-y-1">
               {navigationItems.map((item) => (
                 <div key={item.name}>

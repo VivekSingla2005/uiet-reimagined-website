@@ -169,18 +169,20 @@ const DepartmentCSE = () => {
     }
   ];
 
-  // Faculty data for CSE department
+  // Fixed faculty data structure - coordinator should be an array
   const facultyData = {
-    coordinator: {
-      name: "Dr. Rajesh Kumar",
-      designation: "Professor & Head",
-      email: "rajesh.kumar@uiet.puchd.ac.in",
-      phone: "+91-172-2534816",
-      education: "Ph.D. Computer Science, IIT Delhi",
-      specialization: "Machine Learning, Data Mining",
-      experience: "15+ years",
-      image: "/placeholder.svg"
-    },
+    coordinator: [
+      {
+        name: "Dr. Rajesh Kumar",
+        designation: "Professor & Head",
+        email: "rajesh.kumar@uiet.puchd.ac.in",
+        phone: "+91-172-2534816",
+        education: "Ph.D. Computer Science, IIT Delhi",
+        specialization: "Machine Learning, Data Mining",
+        experience: "15+ years",
+        image: "/placeholder.svg"
+      }
+    ],
     professors: [
       {
         name: "Dr. Priya Sharma",
