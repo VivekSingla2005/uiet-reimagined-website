@@ -169,89 +169,115 @@ const DepartmentCSE = () => {
     }
   ];
 
-  // Fixed faculty data structure - coordinator should be an array
+  // Fixed faculty data structure with all required properties
   const facultyData = {
     coordinator: [
       {
         name: "Dr. Rajesh Kumar",
         designation: "Professor & Head",
+        specialization: "Machine Learning, Data Mining",
         email: "rajesh.kumar@uiet.puchd.ac.in",
         phone: "+91-172-2534816",
-        education: "Ph.D. Computer Science, IIT Delhi",
-        specialization: "Machine Learning, Data Mining",
+        office: "Room 301, UIET Building",
         experience: "15+ years",
-        image: "/placeholder.svg"
+        qualification: "Ph.D. Computer Science, IIT Delhi",
+        publications: 45,
+        image: "photo-1507003211169-0a1dd7228f2d",
+        isCoordinator: true,
+        researchAreas: ["Machine Learning", "Data Mining", "Artificial Intelligence"],
+        courses: ["Advanced Algorithms", "Machine Learning", "Data Structures"]
       }
     ],
     professors: [
       {
         name: "Dr. Priya Sharma",
         designation: "Professor",
-        email: "priya.sharma@uiet.puchd.ac.in",
-        education: "Ph.D. Computer Science, IIT Bombay",
         specialization: "Artificial Intelligence, Neural Networks",
+        email: "priya.sharma@uiet.puchd.ac.in",
         experience: "12+ years",
-        image: "/placeholder.svg"
+        qualification: "Ph.D. Computer Science, IIT Bombay",
+        publications: 38,
+        image: "photo-1494790108755-2616b612b786",
+        researchAreas: ["Artificial Intelligence", "Neural Networks", "Deep Learning"],
+        courses: ["AI Fundamentals", "Neural Networks", "Pattern Recognition"]
       },
       {
         name: "Dr. Amit Singh",
         designation: "Professor",
-        email: "amit.singh@uiet.puchd.ac.in",
-        education: "Ph.D. Software Engineering, IIT Kanpur",
         specialization: "Software Engineering, Database Systems",
+        email: "amit.singh@uiet.puchd.ac.in",
         experience: "14+ years",
-        image: "/placeholder.svg"
+        qualification: "Ph.D. Software Engineering, IIT Kanpur",
+        publications: 42,
+        image: "photo-1472099645785-5658abf4ff4e",
+        researchAreas: ["Software Engineering", "Database Systems", "System Design"],
+        courses: ["Software Engineering", "Database Management", "System Analysis"]
       }
     ],
     associateProfessors: [
       {
         name: "Dr. Neha Gupta",
         designation: "Associate Professor",
-        email: "neha.gupta@uiet.puchd.ac.in",
-        education: "Ph.D. Computer Networks, NIT Kurukshetra",
         specialization: "Computer Networks, Cybersecurity",
+        email: "neha.gupta@uiet.puchd.ac.in",
         experience: "10+ years",
-        image: "/placeholder.svg"
+        qualification: "Ph.D. Computer Networks, NIT Kurukshetra",
+        publications: 28,
+        image: "photo-1438761681033-6461ffad8d80",
+        researchAreas: ["Computer Networks", "Cybersecurity", "Network Security"],
+        courses: ["Computer Networks", "Network Security", "Cryptography"]
       },
       {
         name: "Dr. Vikash Yadav",
         designation: "Associate Professor",
+        specialization: "Human-Computer Interaction, UI/UX Design",
         email: "vikash.yadav@uiet.puchd.ac.in",
-        education: "Ph.D. Human-Computer Interaction, PU Chandigarh",
-        specialization: "HCI, UI/UX Design",
         experience: "8+ years",
-        image: "/placeholder.svg"
+        qualification: "Ph.D. Human-Computer Interaction, PU Chandigarh",
+        publications: 22,
+        image: "photo-1500648767791-00dcc994a43e",
+        researchAreas: ["HCI", "UI/UX Design", "User Experience"],
+        courses: ["HCI", "UI/UX Design", "Web Development"]
       }
     ],
     assistantProfessors: [
       {
         name: "Dr. Sunita Dhiman",
         designation: "Assistant Professor",
-        email: "sunita.dhiman@uiet.puchd.ac.in",
-        education: "Ph.D. Data Science, Thapar University",
         specialization: "Data Science, Big Data Analytics",
+        email: "sunita.dhiman@uiet.puchd.ac.in",
         experience: "6+ years",
-        image: "/placeholder.svg"
+        qualification: "Ph.D. Data Science, Thapar University",
+        publications: 18,
+        image: "photo-1544005313-94ddf0286df2",
+        researchAreas: ["Data Science", "Big Data Analytics", "Machine Learning"],
+        courses: ["Data Science", "Big Data", "Statistics"]
       },
       {
         name: "Dr. Rohit Tanwar",
         designation: "Assistant Professor",
-        email: "rohit.tanwar@uiet.puchd.ac.in",
-        education: "Ph.D. Cloud Computing, BITS Pilani",
         specialization: "Cloud Computing, Distributed Systems",
+        email: "rohit.tanwar@uiet.puchd.ac.in",
         experience: "5+ years",
-        image: "/placeholder.svg"
+        qualification: "Ph.D. Cloud Computing, BITS Pilani",
+        publications: 15,
+        image: "photo-1507591064344-4c6ce005b128",
+        researchAreas: ["Cloud Computing", "Distributed Systems", "Parallel Computing"],
+        courses: ["Cloud Computing", "Distributed Systems", "Operating Systems"]
       }
     ],
     guestFaculty: [
       {
         name: "Prof. Arun Mehta",
         designation: "Guest Faculty",
-        email: "arun.mehta@uiet.puchd.ac.in",
-        education: "M.Tech. Computer Science",
         specialization: "Web Development, Programming Languages",
+        email: "arun.mehta@uiet.puchd.ac.in",
         experience: "4+ years",
-        image: "/placeholder.svg"
+        qualification: "M.Tech. Computer Science",
+        publications: 8,
+        image: "photo-1519085360753-af0119f7cbe7",
+        researchAreas: ["Web Development", "Programming Languages", "Software Development"],
+        courses: ["Web Development", "Programming Languages", "Software Engineering"]
       }
     ]
   };

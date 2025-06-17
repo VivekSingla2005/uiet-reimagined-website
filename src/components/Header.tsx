@@ -216,8 +216,8 @@ const Header = () => {
             </div>
           </Link>
 
-          {/* Full Desktop Navigation - Fixed for large screens */}
-          <nav className="hidden 2xl:flex items-center space-x-1 overflow-visible">
+          {/* Desktop Navigation - Improved spacing and responsiveness */}
+          <nav className="hidden xl:flex items-center space-x-1 overflow-visible">
             {navigationItems.map((item) => (
               <div
                 key={item.name}
@@ -227,7 +227,7 @@ const Header = () => {
               >
                 <Link
                   to={item.href}
-                  className={`flex items-center px-3 py-2 transition-all duration-200 font-medium hover:bg-blue-50 rounded-lg text-sm whitespace-nowrap ${
+                  className={`flex items-center px-2.5 py-2 transition-all duration-200 font-medium hover:bg-blue-50 rounded-lg text-sm whitespace-nowrap ${
                     isActivePath(item.href) || (item.dropdown && hasActiveDropdownItem(item.dropdown))
                       ? 'text-blue-600 bg-blue-50 shadow-sm' 
                       : 'text-gray-700 hover:text-blue-600'
@@ -258,9 +258,9 @@ const Header = () => {
             ))}
           </nav>
 
-          {/* Compact Desktop Navigation for medium screens - Show fewer items */}
-          <nav className="hidden lg:flex 2xl:hidden items-center space-x-1">
-            {navigationItems.slice(0, 6).map((item) => (
+          {/* Compact Desktop Navigation for medium screens */}
+          <nav className="hidden lg:flex xl:hidden items-center space-x-1">
+            {navigationItems.slice(0, 5).map((item) => (
               <div
                 key={item.name}
                 className="relative group"
@@ -310,7 +310,7 @@ const Header = () => {
               </Button>
               {activeDropdown === 'more' && (
                 <div className="absolute top-full right-0 mt-2 w-48 bg-white rounded-xl shadow-xl border border-gray-200 z-50 py-2">
-                  {navigationItems.slice(6).map((item) => (
+                  {navigationItems.slice(5).map((item) => (
                     <Link
                       key={item.name}
                       to={item.href}
