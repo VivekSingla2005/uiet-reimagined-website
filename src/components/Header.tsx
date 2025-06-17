@@ -4,6 +4,116 @@ import { Menu, X, ChevronDown, Phone, Mail, MapPin, Building, GraduationCap } fr
 import { Button } from '@/components/ui/button';
 import { Link, useLocation } from 'react-router-dom';
 
+// Navigation data structure
+const navigationItems = [
+  { name: 'Home', href: '/' },
+  {
+    name: 'Institute',
+    href: '/about',
+    dropdown: [
+      { name: 'About UIET', href: '/about' },
+      { name: 'About Panjab University', href: '/about/pu' },
+      { name: 'Vision & Mission', href: '/about#mission' },
+      { name: "Director's Message", href: '/about#director' },
+      { name: 'Campus & Location', href: '/about#location' },
+      { name: 'Infrastructure', href: '/about#infrastructure' },
+      { name: 'Chandigarh City', href: '/about#chandigarh' }
+    ]
+  },
+  {
+    name: 'Academics',
+    href: '/academics',
+    dropdown: [
+      { name: 'Academic Programs', href: '/academics' },
+      { name: 'Academic Calendar', href: '/academics#calendar' },
+      { name: 'Curriculum & Syllabus', href: '/academics#syllabus' },
+      { name: 'Timetable', href: '/academics#timetable' },
+      { name: 'Examination System', href: '/academics#examination' },
+      { name: 'Previous Year Papers', href: '/previous-papers' },
+      { name: 'Important Downloads', href: '/downloads' }
+    ]
+  },
+  {
+    name: 'Departments',
+    href: '/departments',
+    dropdown: [
+      { name: 'All Departments', href: '/departments' },
+      { name: 'Computer Science & Engineering', href: '/departments/cse' },
+      { name: 'Electronics & Communication', href: '/departments/ece' },
+      { name: 'Electrical & Electronics', href: '/departments/eee' },
+      { name: 'Information Technology', href: '/departments/it' },
+      { name: 'Mechanical Engineering', href: '/departments/me' },
+      { name: 'Biotechnology', href: '/departments/bt' },
+      { name: 'Applied Sciences', href: '/departments/as' }
+    ]
+  },
+  { name: 'Faculty', href: '/faculty' },
+  { name: 'Research', href: '/research' },
+  {
+    name: 'Admissions',
+    href: '/admissions',
+    dropdown: [
+      { name: 'B.E. Admissions 2024', href: '/admissions' },
+      { name: 'M.E./M.Tech Admissions', href: '/admissions#mtech' },
+      { name: 'Ph.D Admissions', href: '/admissions#phd' },
+      { name: 'NRI/Foreign Admissions', href: '/admissions#nri' },
+      { name: 'Sports Quota Admissions', href: '/admissions#sports' },
+      { name: 'PUMEET Information', href: '/admissions#pumeet' },
+      { name: 'PULEET Information', href: '/admissions#puleet' }
+    ]
+  },
+  {
+    name: 'Students',
+    href: '/students',
+    dropdown: [
+      { name: 'Student Life Overview', href: '/students' },
+      { name: 'B.E. 1st Year Batch', href: '/students#be-first-year' },
+      { name: 'Research Scholars', href: '/students#research-scholars' },
+      { name: 'Clubs & Societies', href: '/students#clubs' },
+      { name: 'Student Activities', href: '/students#activities' },
+      { name: 'Student Achievements', href: '/students#achievements' },
+      { name: 'Notices & Updates', href: '/students#notices' },
+      { name: 'Scholarships', href: '/students#scholarships' },
+      { name: 'AICTE Scholarships', href: '/students#aicte-scholarships' },
+      { name: 'Medical Emergency', href: '/students#medical-emergency' },
+      { name: 'Alumni Network', href: '/students#alumni' },
+      { name: 'Employment Opportunities', href: '/employment' }
+    ]
+  },
+  {
+    name: 'Committees',
+    href: '/committees',
+    dropdown: [
+      { name: 'All Committees', href: '/committees' },
+      { name: 'Departmental Committee', href: '/committees#departmental' },
+      { name: 'Grievance Redressal Cell', href: '/committees#grievance' },
+      { name: 'Anti-Sexual Harassment', href: '/committees#harassment' },
+      { name: 'Board of Control', href: '/committees#board' },
+      { name: 'SC/ST Cell', href: '/committees#scst' },
+      { name: 'Anti-Ragging Committee', href: '/committees#ragging' },
+      { name: 'R&D Cell', href: '/committees#rnd' },
+      { name: 'UTechnos Committee', href: '/committees#utechnos' }
+    ]
+  },
+  {
+    name: 'Placements',
+    href: '/placements',
+    dropdown: [
+      { name: 'Placement Overview', href: '/placements' },
+      { name: "TPO's Message", href: '/placements#tpo-message' },
+      { name: 'Placement Statistics', href: '/placements#statistics' },
+      { name: 'Past Recruiters', href: '/placements#recruiters' },
+      { name: 'Campus Placement Procedure', href: '/placements#procedure' },
+      { name: 'Placement Web Portal', href: '/placements#portal' },
+      { name: 'Training Programs', href: '/placements#training' },
+      { name: 'TPC Team Contact', href: '/placements#tpc-contact' },
+      { name: 'Placement Brochure', href: '/placements#brochure' },
+      { name: 'Employment Opportunities', href: '/employment' }
+    ]
+  },
+  { name: 'Contact', href: '/contact' }
+];
+
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
@@ -24,116 +134,6 @@ const Header = () => {
     setActiveDropdown(null);
   }, [location.pathname]);
 
-  // Improved navigation with better organization
-  const navigationItems = [
-    { name: 'Home', href: '/' },
-    {
-      name: 'Institute',
-      href: '/about',
-      dropdown: [
-        { name: 'About UIET', href: '/about' },
-        { name: 'About Panjab University', href: '/about/pu' },
-        { name: 'Vision & Mission', href: '/about#mission' },
-        { name: "Director's Message", href: '/about#director' },
-        { name: 'Campus & Location', href: '/about#location' },
-        { name: 'Infrastructure', href: '/about#infrastructure' },
-        { name: 'Chandigarh City', href: '/about#chandigarh' }
-      ]
-    },
-    {
-      name: 'Academics',
-      href: '/academics',
-      dropdown: [
-        { name: 'Academic Programs', href: '/academics' },
-        { name: 'Academic Calendar', href: '/academics#calendar' },
-        { name: 'Curriculum & Syllabus', href: '/academics#syllabus' },
-        { name: 'Timetable', href: '/academics#timetable' },
-        { name: 'Examination System', href: '/academics#examination' },
-        { name: 'Previous Year Papers', href: '/previous-papers' },
-        { name: 'Important Downloads', href: '/downloads' }
-      ]
-    },
-    {
-      name: 'Departments',
-      href: '/departments',
-      dropdown: [
-        { name: 'All Departments', href: '/departments' },
-        { name: 'Computer Science & Engineering', href: '/departments/cse' },
-        { name: 'Electronics & Communication', href: '/departments/ece' },
-        { name: 'Electrical & Electronics', href: '/departments/eee' },
-        { name: 'Information Technology', href: '/departments/it' },
-        { name: 'Mechanical Engineering', href: '/departments/me' },
-        { name: 'Biotechnology', href: '/departments/bt' },
-        { name: 'Applied Sciences', href: '/departments/as' }
-      ]
-    },
-    { name: 'Faculty', href: '/faculty' },
-    { name: 'Research', href: '/research' },
-    {
-      name: 'Admissions',
-      href: '/admissions',
-      dropdown: [
-        { name: 'B.E. Admissions 2024', href: '/admissions' },
-        { name: 'M.E./M.Tech Admissions', href: '/admissions#mtech' },
-        { name: 'Ph.D Admissions', href: '/admissions#phd' },
-        { name: 'NRI/Foreign Admissions', href: '/admissions#nri' },
-        { name: 'Sports Quota Admissions', href: '/admissions#sports' },
-        { name: 'PUMEET Information', href: '/admissions#pumeet' },
-        { name: 'PULEET Information', href: '/admissions#puleet' }
-      ]
-    },
-    {
-      name: 'Students',
-      href: '/students',
-      dropdown: [
-        { name: 'Student Life Overview', href: '/students' },
-        { name: 'B.E. 1st Year Batch', href: '/students#be-first-year' },
-        { name: 'Research Scholars', href: '/students#research-scholars' },
-        { name: 'Clubs & Societies', href: '/students#clubs' },
-        { name: 'Student Activities', href: '/students#activities' },
-        { name: 'Student Achievements', href: '/students#achievements' },
-        { name: 'Notices & Updates', href: '/students#notices' },
-        { name: 'Scholarships', href: '/students#scholarships' },
-        { name: 'AICTE Scholarships', href: '/students#aicte-scholarships' },
-        { name: 'Medical Emergency', href: '/students#medical-emergency' },
-        { name: 'Alumni Network', href: '/students#alumni' },
-        { name: 'Employment Opportunities', href: '/employment' }
-      ]
-    },
-    {
-      name: 'Committees',
-      href: '/committees',
-      dropdown: [
-        { name: 'All Committees', href: '/committees' },
-        { name: 'Departmental Committee', href: '/committees#departmental' },
-        { name: 'Grievance Redressal Cell', href: '/committees#grievance' },
-        { name: 'Anti-Sexual Harassment', href: '/committees#harassment' },
-        { name: 'Board of Control', href: '/committees#board' },
-        { name: 'SC/ST Cell', href: '/committees#scst' },
-        { name: 'Anti-Ragging Committee', href: '/committees#ragging' },
-        { name: 'R&D Cell', href: '/committees#rnd' },
-        { name: 'UTechnos Committee', href: '/committees#utechnos' }
-      ]
-    },
-    {
-      name: 'Placements',
-      href: '/placements',
-      dropdown: [
-        { name: 'Placement Overview', href: '/placements' },
-        { name: "TPO's Message", href: '/placements#tpo-message' },
-        { name: 'Placement Statistics', href: '/placements#statistics' },
-        { name: 'Past Recruiters', href: '/placements#recruiters' },
-        { name: 'Campus Placement Procedure', href: '/placements#procedure' },
-        { name: 'Placement Web Portal', href: '/placements#portal' },
-        { name: 'Training Programs', href: '/placements#training' },
-        { name: 'TPC Team Contact', href: '/placements#tpc-contact' },
-        { name: 'Placement Brochure', href: '/placements#brochure' },
-        { name: 'Employment Opportunities', href: '/employment' }
-      ]
-    },
-    { name: 'Contact', href: '/contact' }
-  ];
-
   const isActivePath = (href: string) => {
     if (href === '/') return location.pathname === '/';
     return location.pathname.startsWith(href);
@@ -147,22 +147,20 @@ const Header = () => {
     <header className={`bg-white/95 backdrop-blur-md shadow-sm sticky top-0 z-50 transition-all duration-300 ${isScrolled ? 'shadow-lg' : ''}`}>
       {/* Government Info Bar */}
       <div className="bg-gradient-to-r from-blue-600 to-blue-700 text-white py-1 sm:py-2">
-        <div className="container mx-auto px-4 max-w-7xl">
+        <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-6">
           <div className="flex justify-between items-center text-xs sm:text-sm">
-            <div className="flex items-center space-x-3 sm:space-x-6">
-              <div className="flex items-center space-x-1 sm:space-x-2">
-                <Building className="h-3 w-3 sm:h-4 sm:w-4" />
+            <div className="flex items-center space-x-2 sm:space-x-4">
+              <div className="flex items-center space-x-1">
+                <Building className="h-3 w-3 sm:h-4 sm:w-4 flex-shrink-0" />
                 <span className="font-medium">Government Institute</span>
               </div>
-              <div className="hidden md:flex items-center space-x-1 sm:space-x-2">
-                <GraduationCap className="h-3 w-3 sm:h-4 sm:w-4" />
+              <div className="hidden sm:flex items-center space-x-1">
+                <GraduationCap className="h-3 w-3 sm:h-4 sm:w-4 flex-shrink-0" />
                 <span>Panjab University</span>
               </div>
             </div>
-            <div className="flex items-center">
-              <div className="bg-white/20 text-white border border-white/30 text-xs px-2 py-1 rounded">
-                NAAC A+ 
-              </div>
+            <div className="bg-white/20 text-white border border-white/30 text-xs px-2 py-1 rounded flex-shrink-0">
+              NAAC A+ 
             </div>
           </div>
         </div>
@@ -170,22 +168,22 @@ const Header = () => {
 
       {/* Contact Info */}
       <div className="bg-gray-50/80 backdrop-blur-sm border-b py-1 sm:py-2">
-        <div className="container mx-auto px-4 max-w-7xl">
+        <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-6">
           <div className="flex justify-between items-center text-xs sm:text-sm text-gray-700">
-            <div className="flex items-center space-x-3 sm:space-x-6">
+            <div className="flex items-center space-x-2 sm:space-x-4">
               <a href="tel:+91-172-2534816" className="flex items-center hover:text-blue-600 transition-colors">
-                <Phone className="h-3 w-3 mr-1 sm:mr-2" />
+                <Phone className="h-3 w-3 mr-1 flex-shrink-0" />
                 <span className="hidden sm:inline">+91-172-2534816</span>
                 <span className="sm:hidden">Call</span>
               </a>
               <a href="mailto:info@uiet.puchd.ac.in" className="hidden sm:flex items-center hover:text-blue-600 transition-colors">
-                <Mail className="h-3 w-3 mr-1 sm:mr-2" />
+                <Mail className="h-3 w-3 mr-1 flex-shrink-0" />
                 <span className="hidden lg:inline">info@uiet.puchd.ac.in</span>
                 <span className="lg:hidden">Email</span>
               </a>
             </div>
-            <div className="flex items-center space-x-1 sm:space-x-2 text-xs">
-              <MapPin className="h-3 w-3" />
+            <div className="flex items-center space-x-1 text-xs flex-shrink-0">
+              <MapPin className="h-3 w-3 flex-shrink-0" />
               <span className="hidden sm:inline">Chandigarh, India</span>
               <span className="sm:hidden">CHD</span>
             </div>
@@ -194,30 +192,28 @@ const Header = () => {
       </div>
 
       {/* Main Header */}
-      <div className="container mx-auto px-4 max-w-7xl">
+      <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-6">
         <div className="flex justify-between items-center py-3 sm:py-4">
           {/* Logo and Institute Name */}
-          <Link to="/" className="flex items-center space-x-2 sm:space-x-4 flex-shrink-0 min-w-0">
-            <div className="flex items-center space-x-2 sm:space-x-3">
-              <div className="w-8 h-8 sm:w-12 sm:h-12 bg-gradient-to-br from-blue-600 to-blue-700 rounded-xl flex items-center justify-center shadow-lg flex-shrink-0">
-                <GraduationCap className="h-5 w-5 sm:h-7 sm:w-7 text-white" />
-              </div>
+          <Link to="/" className="flex items-center space-x-2 sm:space-x-3 flex-shrink-0 min-w-0 max-w-[60%] sm:max-w-none">
+            <div className="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 bg-gradient-to-br from-blue-600 to-blue-700 rounded-lg sm:rounded-xl flex items-center justify-center shadow-lg flex-shrink-0">
+              <GraduationCap className="h-4 w-4 sm:h-5 sm:w-5 lg:h-7 lg:w-7 text-white" />
             </div>
             <div className="min-w-0 flex-1">
-              <h1 className="text-sm sm:text-xl lg:text-2xl font-bold text-gray-900 tracking-tight leading-tight truncate">
-                <span className="hidden lg:inline">University Institute of Engineering & Technology</span>
-                <span className="hidden sm:inline lg:hidden">UIET, Panjab University</span>
+              <h1 className="text-sm sm:text-lg lg:text-xl xl:text-2xl font-bold text-gray-900 tracking-tight leading-tight">
+                <span className="hidden xl:inline">University Institute of Engineering & Technology</span>
+                <span className="hidden sm:inline xl:hidden">UIET, Panjab University</span>
                 <span className="sm:hidden">UIET</span>
               </h1>
-              <p className="text-xs sm:text-sm lg:text-base text-blue-600 font-medium truncate">
+              <p className="text-xs sm:text-sm lg:text-base text-blue-600 font-medium">
                 <span className="hidden sm:inline">Panjab University, Chandigarh</span>
                 <span className="sm:hidden">Panjab University</span>
               </p>
             </div>
           </Link>
 
-          {/* Desktop Navigation - Improved spacing and responsiveness */}
-          <nav className="hidden xl:flex items-center space-x-1 overflow-visible">
+          {/* Desktop Navigation */}
+          <nav className="hidden 2xl:flex items-center space-x-1">
             {navigationItems.map((item) => (
               <div
                 key={item.name}
@@ -227,7 +223,7 @@ const Header = () => {
               >
                 <Link
                   to={item.href}
-                  className={`flex items-center px-2.5 py-2 transition-all duration-200 font-medium hover:bg-blue-50 rounded-lg text-sm whitespace-nowrap ${
+                  className={`flex items-center px-3 py-2 transition-all duration-200 font-medium hover:bg-blue-50 rounded-lg text-sm whitespace-nowrap ${
                     isActivePath(item.href) || (item.dropdown && hasActiveDropdownItem(item.dropdown))
                       ? 'text-blue-600 bg-blue-50 shadow-sm' 
                       : 'text-gray-700 hover:text-blue-600'
@@ -258,9 +254,9 @@ const Header = () => {
             ))}
           </nav>
 
-          {/* Compact Desktop Navigation for medium screens */}
-          <nav className="hidden lg:flex xl:hidden items-center space-x-1">
-            {navigationItems.slice(0, 5).map((item) => (
+          {/* Large Desktop Compact Navigation */}
+          <nav className="hidden xl:flex 2xl:hidden items-center space-x-1">
+            {navigationItems.slice(0, 6).map((item) => (
               <div
                 key={item.name}
                 className="relative group"
@@ -310,7 +306,77 @@ const Header = () => {
               </Button>
               {activeDropdown === 'more' && (
                 <div className="absolute top-full right-0 mt-2 w-48 bg-white rounded-xl shadow-xl border border-gray-200 z-50 py-2">
-                  {navigationItems.slice(5).map((item) => (
+                  {navigationItems.slice(6).map((item) => (
+                    <Link
+                      key={item.name}
+                      to={item.href}
+                      className={`block px-4 py-3 text-sm transition-all duration-150 border-b border-gray-100 last:border-b-0 hover:pl-6 ${
+                        isActivePath(item.href)
+                          ? 'bg-blue-50 text-blue-700 font-medium border-l-4 border-l-blue-600'
+                          : 'text-gray-700 hover:bg-blue-50 hover:text-blue-700'
+                      }`}
+                    >
+                      {item.name}
+                    </Link>
+                  ))}
+                </div>
+              )}
+            </div>
+          </nav>
+
+          {/* Medium Desktop Navigation */}
+          <nav className="hidden lg:flex xl:hidden items-center space-x-1">
+            {navigationItems.slice(0, 4).map((item) => (
+              <div
+                key={item.name}
+                className="relative group"
+                onMouseEnter={() => item.dropdown && setActiveDropdown(item.name)}
+                onMouseLeave={() => setActiveDropdown(null)}
+              >
+                <Link
+                  to={item.href}
+                  className={`flex items-center px-2 py-2 transition-all duration-200 font-medium hover:bg-blue-50 rounded-lg text-xs whitespace-nowrap ${
+                    isActivePath(item.href) || (item.dropdown && hasActiveDropdownItem(item.dropdown))
+                      ? 'text-blue-600 bg-blue-50 shadow-sm' 
+                      : 'text-gray-700 hover:text-blue-600'
+                  }`}
+                >
+                  {item.name === 'Departments' ? 'Dept' : item.name}
+                  {item.dropdown && <ChevronDown className="ml-0.5 h-3 w-3 transition-transform duration-200 group-hover:rotate-180" />}
+                </Link>
+                
+                {item.dropdown && activeDropdown === item.name && (
+                  <div className="absolute top-full left-0 mt-2 w-64 bg-white rounded-xl shadow-xl border border-gray-200 z-50 py-2 opacity-0 translate-y-2 animate-[fadeInUp_0.2s_ease-out_forwards]">
+                    {item.dropdown.map((subItem) => (
+                      <Link
+                        key={subItem.name}
+                        to={subItem.href}
+                        className={`block px-4 py-3 text-sm transition-all duration-150 border-b border-gray-100 last:border-b-0 hover:pl-6 ${
+                          isActivePath(subItem.href.split('#')[0])
+                            ? 'bg-blue-50 text-blue-700 font-medium border-l-4 border-l-blue-600'
+                            : 'text-gray-700 hover:bg-blue-50 hover:text-blue-700'
+                        }`}
+                      >
+                        {subItem.name}
+                      </Link>
+                    ))}
+                  </div>
+                )}
+              </div>
+            ))}
+            <div className="relative group">
+              <Button
+                variant="ghost"
+                size="sm"
+                className="px-2 py-2 text-xs text-gray-700 hover:text-blue-600 hover:bg-blue-50"
+                onMouseEnter={() => setActiveDropdown('more')}
+                onMouseLeave={() => setActiveDropdown(null)}
+              >
+                More <ChevronDown className="ml-0.5 h-3 w-3" />
+              </Button>
+              {activeDropdown === 'more' && (
+                <div className="absolute top-full right-0 mt-2 w-48 bg-white rounded-xl shadow-xl border border-gray-200 z-50 py-2">
+                  {navigationItems.slice(4).map((item) => (
                     <Link
                       key={item.name}
                       to={item.href}
@@ -329,10 +395,11 @@ const Header = () => {
           </nav>
 
           {/* CTA Button + Mobile Menu */}
-          <div className="flex items-center space-x-2 sm:space-x-4 flex-shrink-0">
-            <Link to="/admissions" className="hidden lg:block">
-              <Button className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-medium text-sm px-4 py-2 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
-                Apply Online
+          <div className="flex items-center space-x-2 sm:space-x-3 flex-shrink-0">
+            <Link to="/admissions" className="hidden sm:block">
+              <Button className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-medium text-xs sm:text-sm px-3 sm:px-4 py-2 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
+                <span className="hidden lg:inline">Apply Online</span>
+                <span className="lg:hidden">Apply</span>
               </Button>
             </Link>
             <Button
@@ -341,14 +408,14 @@ const Header = () => {
               className="lg:hidden p-2 hover:bg-blue-50 transition-colors"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
             >
-              {isMenuOpen ? <X className="h-5 w-5 sm:h-6 sm:w-6" /> : <Menu className="h-5 w-5 sm:h-6 sm:w-6" />}
+              {isMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
             </Button>
           </div>
         </div>
 
-        {/* Mobile Navigation - Enhanced design */}
+        {/* Mobile Navigation */}
         {isMenuOpen && (
-          <div className="lg:hidden border-t bg-white/95 backdrop-blur-md shadow-lg rounded-b-xl mb-2 max-h-96 overflow-y-auto">
+          <div className="lg:hidden border-t bg-white/95 backdrop-blur-md shadow-lg rounded-b-xl mb-2 max-h-[80vh] overflow-y-auto">
             <nav className="py-4 space-y-1">
               {navigationItems.map((item) => (
                 <div key={item.name}>
