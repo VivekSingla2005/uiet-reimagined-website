@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { Menu, X, ChevronDown, Phone, Mail, MapPin, Building, GraduationCap } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -214,8 +215,8 @@ const Header = () => {
             </div>
           </Link>
 
-          {/* Desktop Navigation - Enhanced responsive design */}
-          <nav className="hidden xl:flex items-center space-x-1">
+          {/* Desktop Navigation - Improved positioning and responsiveness */}
+          <nav className="hidden xl:flex items-center space-x-1 2xl:space-x-2">
             {navigationItems.map((item) => (
               <div
                 key={item.name}
@@ -225,7 +226,7 @@ const Header = () => {
               >
                 <Link
                   to={item.href}
-                  className={`flex items-center px-3 py-2 transition-all duration-200 font-medium hover:bg-blue-50 rounded-lg text-sm ${
+                  className={`flex items-center px-2 xl:px-3 py-2 transition-all duration-200 font-medium hover:bg-blue-50 rounded-lg text-xs xl:text-sm whitespace-nowrap ${
                     isActivePath(item.href) || (item.dropdown && hasActiveDropdownItem(item.dropdown))
                       ? 'text-blue-600 bg-blue-50 shadow-sm' 
                       : 'text-gray-700 hover:text-blue-600'
@@ -338,18 +339,20 @@ const Header = () => {
         )}
       </div>
 
-      <style jsx>{`
-        @keyframes fadeInUp {
-          from {
-            opacity: 0;
-            transform: translateY(8px);
+      <style>
+        {`
+          @keyframes fadeInUp {
+            from {
+              opacity: 0;
+              transform: translateY(8px);
+            }
+            to {
+              opacity: 1;
+              transform: translateY(0);
+            }
           }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-      `}</style>
+        `}
+      </style>
     </header>
   );
 };

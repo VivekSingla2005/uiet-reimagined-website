@@ -1,482 +1,487 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import DepartmentFaculty from '@/components/DepartmentFaculty';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { 
-  Cpu, Users, GraduationCap, Award, BookOpen, Building, 
-  Calendar, MapPin, Phone, Mail, Globe, ExternalLink,
-  TrendingUp, Target, Lightbulb, Trophy, Star
+  GraduationCap, 
+  BookOpen, 
+  Users, 
+  Award, 
+  Building, 
+  Code, 
+  Database, 
+  Globe, 
+  Smartphone, 
+  Brain,
+  Beaker,
+  ChevronRight,
+  ExternalLink,
+  Calendar,
+  MapPin,
+  Phone,
+  Mail
 } from 'lucide-react';
 
 const DepartmentCSE = () => {
-  const facultyData = {
-    coordinator: [
-      {
-        name: 'Dr. Rajesh Kumar',
-        designation: 'Professor & Head',
-        specialization: 'Artificial Intelligence, Machine Learning',
-        email: 'rajesh.kumar@uiet.puchd.ac.in',
-        phone: '+91-172-2534820',
-        office: 'Room 301, CSE Block',
-        experience: '18 years',
-        qualification: 'Ph.D in Computer Science',
-        publications: 45,
-        image: 'photo-1507003211169-0a1dd7228f2d',
-        isCoordinator: true,
-        researchAreas: ['AI/ML', 'Deep Learning', 'Computer Vision'],
-        courses: ['Machine Learning', 'Artificial Intelligence', 'Data Structures']
-      }
-    ],
-    professors: [
-      {
-        name: 'Dr. Priya Sharma',
-        designation: 'Professor',
-        specialization: 'Data Science, Big Data Analytics',
-        email: 'priya.sharma@uiet.puchd.ac.in',
-        phone: '+91-172-2534821',
-        office: 'Room 302, CSE Block',
-        experience: '15 years',
-        qualification: 'Ph.D in Computer Science',
-        publications: 42,
-        image: 'photo-1494790108755-2616c34b009c',
-        researchAreas: ['Data Science', 'Big Data', 'Analytics'],
-        courses: ['Database Systems', 'Data Mining', 'Big Data Analytics']
-      }
-    ],
-    associateProfessors: [
-      {
-        name: 'Dr. Amit Singh',
-        designation: 'Associate Professor',
-        specialization: 'Cybersecurity, Network Security',
-        email: 'amit.singh@uiet.puchd.ac.in',
-        phone: '+91-172-2534822',
-        office: 'Room 203, CSE Block',
-        experience: '12 years',
-        qualification: 'Ph.D in Computer Science',
-        publications: 35,
-        image: 'photo-1472099645785-5658abf4ff4e',
-        researchAreas: ['Cybersecurity', 'Network Security', 'Cryptography'],
-        courses: ['Network Security', 'Cryptography', 'Computer Networks']
-      },
-      {
-        name: 'Dr. Neha Verma',
-        designation: 'Associate Professor',
-        specialization: 'Software Engineering, HCI',
-        email: 'neha.verma@uiet.puchd.ac.in',
-        phone: '+91-172-2534823',
-        office: 'Room 204, CSE Block',
-        experience: '10 years',
-        qualification: 'Ph.D in Computer Science',
-        publications: 28,
-        image: 'photo-1438761681033-6461ffad8d80',
-        researchAreas: ['Software Engineering', 'HCI', 'UI/UX'],
-        courses: ['Software Engineering', 'Human Computer Interaction', 'Web Development']
-      }
-    ],
-    assistantProfessors: [
-      {
-        name: 'Dr. Rohit Gupta',
-        designation: 'Assistant Professor',
-        specialization: 'Cloud Computing, IoT',
-        email: 'rohit.gupta@uiet.puchd.ac.in',
-        phone: '+91-172-2534824',
-        office: 'Room 105, CSE Block',
-        experience: '8 years',
-        qualification: 'Ph.D in Computer Science',
-        publications: 22,
-        image: 'photo-1560250097-0b93528c311a',
-        researchAreas: ['Cloud Computing', 'IoT', 'Distributed Systems'],
-        courses: ['Cloud Computing', 'Internet of Things', 'Operating Systems']
-      },
-      {
-        name: 'Dr. Kavita Jain',
-        designation: 'Assistant Professor',
-        specialization: 'Computer Graphics, Image Processing',
-        email: 'kavita.jain@uiet.puchd.ac.in',
-        phone: '+91-172-2534825',
-        office: 'Room 106, CSE Block',
-        experience: '6 years',
-        qualification: 'Ph.D in Computer Science',
-        publications: 18,
-        image: 'photo-1573496359142-b8d87734a5a2',
-        researchAreas: ['Computer Graphics', 'Image Processing', 'Computer Vision'],
-        courses: ['Computer Graphics', 'Image Processing', 'Multimedia Systems']
-      }
-    ],
-    guestFaculty: [
-      {
-        name: 'Mr. Suresh Patel',
-        designation: 'Guest Faculty',
-        specialization: 'Industry Expert - Software Development',
-        email: 'suresh.patel@uiet.puchd.ac.in',
-        experience: '12 years (Industry)',
-        qualification: 'M.Tech in Computer Science',
-        publications: 5,
-        image: 'photo-1519085360753-af0119f7cbe7',
-        researchAreas: ['Software Development', 'Agile', 'DevOps'],
-        courses: ['Software Project Management', 'Industry Practices']
-      }
-    ]
-  };
+  const [activeTab, setActiveTab] = useState('overview');
 
-  const faculty = [
-    { name: 'Dr. Rajesh Kumar', designation: 'Professor & HOD', specialization: 'Machine Learning, AI', experience: '20 years' },
-    { name: 'Dr. Priya Sharma', designation: 'Associate Professor', specialization: 'Data Structures, Algorithms', experience: '15 years' },
-    { name: 'Dr. Amit Singh', designation: 'Assistant Professor', specialization: 'Computer Networks, IoT', experience: '10 years' },
-    { name: 'Dr. Neha Gupta', designation: 'Assistant Professor', specialization: 'Software Engineering, Web Tech', experience: '8 years' }
+  // Department statistics
+  const stats = [
+    { label: 'Faculty Members', value: '28+', icon: Users },
+    { label: 'Students Enrolled', value: '400+', icon: GraduationCap },
+    { label: 'Research Projects', value: '15+', icon: Beaker },
+    { label: 'Industry Partners', value: '50+', icon: Building }
   ];
 
-  const labs = [
-    { name: 'Programming Lab', systems: 60, software: 'Dev-C++, Eclipse, Visual Studio' },
-    { name: 'Database Lab', systems: 40, software: 'Oracle, MySQL, MongoDB' },
-    { name: 'Network Lab', systems: 30, software: 'Cisco Packet Tracer, Wireshark' },
-    { name: 'AI/ML Lab', systems: 25, software: 'Python, R, TensorFlow, Jupyter' }
+  // Specialization areas
+  const specializations = [
+    { 
+      name: 'Artificial Intelligence & Machine Learning', 
+      icon: Brain,
+      description: 'Advanced AI/ML algorithms, deep learning, and neural networks',
+      courses: ['Pattern Recognition', 'Machine Learning', 'Deep Learning', 'Natural Language Processing']
+    },
+    { 
+      name: 'Software Engineering', 
+      icon: Code,
+      description: 'Software development methodologies, testing, and project management',
+      courses: ['Software Engineering', 'Software Testing', 'Agile Development', 'DevOps']
+    },
+    { 
+      name: 'Database Systems', 
+      icon: Database,
+      description: 'Database design, management, and big data analytics',
+      courses: ['Database Management', 'Data Warehousing', 'Big Data Analytics', 'NoSQL Databases']
+    },
+    { 
+      name: 'Web & Mobile Development', 
+      icon: Smartphone,
+      description: 'Modern web technologies and mobile application development',
+      courses: ['Web Development', 'Mobile App Development', 'Cloud Computing', 'UI/UX Design']
+    },
+    { 
+      name: 'Network & Security', 
+      icon: Globe,
+      description: 'Computer networks, cybersecurity, and information systems',
+      courses: ['Computer Networks', 'Network Security', 'Cryptography', 'Ethical Hacking']
+    }
   ];
 
+  // Academic programs
   const programs = [
-    { degree: 'B.Tech CSE', duration: '4 years', intake: 120, eligibility: '10+2 with PCM' },
-    { degree: 'M.Tech CSE', duration: '2 years', intake: 30, eligibility: 'B.Tech in CSE/IT' },
-    { degree: 'Ph.D CSE', duration: '3-5 years', intake: 10, eligibility: 'M.Tech with valid GATE/NET' }
+    {
+      name: 'B.E. Computer Science & Engineering',
+      duration: '4 Years',
+      intake: '60 Students',
+      eligibility: '10+2 with Physics, Chemistry, Mathematics',
+      highlights: ['AICTE Approved', 'Industry-Oriented Curriculum', 'Research Opportunities']
+    },
+    {
+      name: 'M.E. Computer Science & Engineering',
+      duration: '2 Years',
+      intake: '18 Students',
+      eligibility: 'B.E./B.Tech in CSE or related field',
+      highlights: ['Research-Based Program', 'Thesis Work', 'Industry Collaboration']
+    },
+    {
+      name: 'Ph.D Computer Science & Engineering',
+      duration: '3-5 Years',
+      intake: 'Variable',
+      eligibility: 'M.E./M.Tech with valid GATE/NET score',
+      highlights: ['Advanced Research', 'Publications', 'Teaching Assistantship']
+    }
+  ];
+
+  // Research areas
+  const researchAreas = [
+    'Artificial Intelligence & Machine Learning',
+    'Computer Vision & Image Processing',
+    'Natural Language Processing',
+    'Internet of Things (IoT)',
+    'Cloud Computing & Distributed Systems',
+    'Cybersecurity & Cryptography',
+    'Software Engineering',
+    'Database & Data Mining',
+    'Human-Computer Interaction',
+    'Bioinformatics'
+  ];
+
+  // Recent achievements
+  const achievements = [
+    {
+      title: 'Best Department Award',
+      description: 'Recognized for excellence in academic performance and research',
+      year: '2023'
+    },
+    {
+      title: 'Research Publications',
+      description: '50+ papers published in international journals and conferences',
+      year: '2023'
+    },
+    {
+      title: 'Industry Collaborations',
+      description: 'MoUs signed with leading tech companies for internships and placements',
+      year: '2023'
+    },
+    {
+      title: 'Student Achievements',
+      description: 'Students secured top positions in coding competitions and hackathons',
+      year: '2023'
+    }
+  ];
+
+  // Infrastructure and facilities
+  const facilities = [
+    {
+      name: 'Advanced Computing Lab',
+      description: 'High-performance workstations with latest software tools',
+      capacity: '40 Systems'
+    },
+    {
+      name: 'Network Security Lab',
+      description: 'Dedicated lab for cybersecurity and network analysis',
+      capacity: '30 Systems'
+    },
+    {
+      name: 'Mobile Development Lab',
+      description: 'Android and iOS development environment',
+      capacity: '35 Systems'
+    },
+    {
+      name: 'AI/ML Research Lab',
+      description: 'GPU-enabled systems for machine learning research',
+      capacity: '20 Systems'
+    },
+    {
+      name: 'Project Development Lab',
+      description: '24/7 access lab for final year projects',
+      capacity: '25 Systems'
+    },
+    {
+      name: 'Smart Classrooms',
+      description: 'Interactive boards and multimedia facilities',
+      capacity: '3 Rooms'
+    }
   ];
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-gray-50">
       <Header />
       
       {/* Hero Section */}
-      <section className="bg-gradient-to-r from-blue-600 to-purple-600 text-white py-16">
-        <div className="container mx-auto px-4">
+      <section className="bg-gradient-to-br from-blue-600 via-blue-700 to-indigo-800 text-white py-16 sm:py-20">
+        <div className="container mx-auto px-4 max-w-7xl">
           <div className="max-w-4xl mx-auto text-center">
-            <Cpu className="h-16 w-16 mx-auto mb-6" />
-            <h1 className="text-4xl md:text-5xl font-bold mb-6">Computer Science & Engineering</h1>
-            <p className="text-xl text-blue-100 mb-8 leading-relaxed">
-              Pioneering innovation in computing technology, artificial intelligence, and software engineering 
-              to shape the digital future.
-            </p>
-            <div className="flex flex-wrap justify-center gap-3 mb-8">
-              <Badge className="bg-white/20 text-white border-white/30">NAAC A+ Accredited</Badge>
-              <Badge className="bg-white/20 text-white border-white/30">NBA Accredited</Badge>
-              <Badge className="bg-white/20 text-white border-white/30">Industry Partnerships</Badge>
-              <Badge className="bg-white/20 text-white border-white/30">100% Placement</Badge>
+            <div className="flex justify-center mb-6">
+              <div className="w-16 h-16 bg-white/20 rounded-2xl flex items-center justify-center backdrop-blur-sm">
+                <Code className="h-8 w-8 text-white" />
+              </div>
             </div>
-            <div className="flex flex-wrap justify-center gap-4">
-              <Button className="bg-white text-blue-600 hover:bg-blue-50">
-                <GraduationCap className="h-5 w-5 mr-2" />
-                Apply Now
-              </Button>
-              <Button variant="outline" className="border-white text-white hover:bg-white hover:text-blue-600">
-                <BookOpen className="h-5 w-5 mr-2" />
-                View Curriculum
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-6 leading-tight">
+              Department of Computer Science & Engineering
+            </h1>
+            <p className="text-xl sm:text-2xl text-blue-100 mb-8 leading-relaxed">
+              Pioneering Innovation in Computing Technology & Software Development
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Link to="/admissions">
+                <Button size="lg" className="bg-white text-blue-600 hover:bg-blue-50 font-semibold px-8 py-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300">
+                  Apply Now <ChevronRight className="ml-2 h-5 w-5" />
+                </Button>
+              </Link>
+              <Button size="lg" variant="outline" className="border-white/30 text-white hover:bg-white/10 font-semibold px-8 py-3 rounded-xl">
+                Department Brochure <ExternalLink className="ml-2 h-5 w-5" />
               </Button>
             </div>
           </div>
         </div>
       </section>
 
-      <div className="container mx-auto px-4 py-12">
-        <Tabs defaultValue="overview" className="w-full">
-          <TabsList className="grid w-full grid-cols-3 lg:grid-cols-8 mb-8">
-            <TabsTrigger value="overview">Overview</TabsTrigger>
-            <TabsTrigger value="programs">Programs</TabsTrigger>
-            <TabsTrigger value="faculty">Faculty</TabsTrigger>
-            <TabsTrigger value="research">Research</TabsTrigger>
-            <TabsTrigger value="labs">Labs</TabsTrigger>
-            <TabsTrigger value="placements">Placements</TabsTrigger>
-            <TabsTrigger value="events">Events</TabsTrigger>
-            <TabsTrigger value="contact">Contact</TabsTrigger>
-          </TabsList>
+      {/* Statistics Section */}
+      <section className="py-12 bg-white">
+        <div className="container mx-auto px-4 max-w-7xl">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
+            {stats.map((stat, index) => (
+              <Card key={index} className="text-center border-none shadow-lg hover:shadow-xl transition-all duration-300">
+                <CardContent className="p-6">
+                  <div className="flex justify-center mb-4">
+                    <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl flex items-center justify-center">
+                      <stat.icon className="h-6 w-6 text-white" />
+                    </div>
+                  </div>
+                  <div className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">{stat.value}</div>
+                  <div className="text-sm text-gray-600">{stat.label}</div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
 
-          <TabsContent value="overview" className="space-y-8">
-            <div className="grid md:grid-cols-2 gap-8">
-              <Card>
+      {/* Main Content */}
+      <section className="py-16">
+        <div className="container mx-auto px-4 max-w-7xl">
+          <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
+            <TabsList className="grid w-full grid-cols-2 lg:grid-cols-6 mb-8">
+              <TabsTrigger value="overview">Overview</TabsTrigger>
+              <TabsTrigger value="programs">Programs</TabsTrigger>
+              <TabsTrigger value="faculty">Faculty</TabsTrigger>
+              <TabsTrigger value="research">Research</TabsTrigger>
+              <TabsTrigger value="facilities">Facilities</TabsTrigger>
+              <TabsTrigger value="achievements">Achievements</TabsTrigger>
+            </TabsList>
+
+            <TabsContent value="overview" className="space-y-8">
+              {/* Department Introduction */}
+              <Card className="border-none shadow-lg">
                 <CardHeader>
-                  <CardTitle className="flex items-center">
-                    <Target className="h-5 w-5 mr-2 text-blue-600" />
-                    Vision
-                  </CardTitle>
+                  <CardTitle className="text-2xl text-gray-900">About the Department</CardTitle>
                 </CardHeader>
-                <CardContent>
-                  <p className="text-gray-600">
-                    To be a globally recognized department of excellence in computer science and engineering education, 
-                    research, and innovation that contributes to societal development.
+                <CardContent className="prose max-w-none">
+                  <p className="text-gray-700 text-lg leading-relaxed mb-6">
+                    The Department of Computer Science & Engineering at UIET, Panjab University, stands as a beacon of excellence in computer science education and research. Established with the vision to create world-class computer professionals, our department has consistently maintained its position as one of the premier institutions in Northern India.
+                  </p>
+                  <p className="text-gray-700 text-lg leading-relaxed mb-6">
+                    We offer comprehensive programs at undergraduate, postgraduate, and doctoral levels, designed to meet the evolving needs of the technology industry. Our curriculum is regularly updated to incorporate the latest technological advancements and industry best practices.
+                  </p>
+                  <p className="text-gray-700 text-lg leading-relaxed">
+                    With state-of-the-art laboratories, experienced faculty, and strong industry connections, we prepare our students to tackle real-world challenges and become innovative leaders in the field of computer science and engineering.
                   </p>
                 </CardContent>
               </Card>
 
-              <Card>
-                <CardHeader>
-                  <CardTitle className="flex items-center">
-                    <BookOpen className="h-5 w-5 mr-2 text-green-600" />
-                    Mission
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-gray-600">
-                    To provide quality education in computer science and engineering through innovative curriculum, 
-                    cutting-edge research, and industry collaboration while fostering ethical and professional values.
-                  </p>
-                </CardContent>
-              </Card>
-            </div>
+              {/* Specialization Areas */}
+              <div>
+                <h2 className="text-2xl font-bold text-gray-900 mb-6">Areas of Specialization</h2>
+                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {specializations.map((spec, index) => (
+                    <Card key={index} className="border-none shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+                      <CardHeader>
+                        <div className="flex items-center space-x-3 mb-3">
+                          <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg flex items-center justify-center">
+                            <spec.icon className="h-5 w-5 text-white" />
+                          </div>
+                          <CardTitle className="text-xl">{spec.name}</CardTitle>
+                        </div>
+                        <CardDescription className="text-base">{spec.description}</CardDescription>
+                      </CardHeader>
+                      <CardContent>
+                        <div className="space-y-2">
+                          <p className="font-semibold text-gray-900 mb-2">Key Courses:</p>
+                          <div className="flex flex-wrap gap-2">
+                            {spec.courses.map((course, idx) => (
+                              <Badge key={idx} variant="secondary" className="text-xs">
+                                {course}
+                              </Badge>
+                            ))}
+                          </div>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  ))}
+                </div>
+              </div>
+            </TabsContent>
 
-            <Card>
-              <CardHeader>
-                <CardTitle>Program Educational Objectives (PEOs)</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-3">
-                  <div className="flex items-start space-x-3">
-                    <div className="w-6 h-6 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 text-sm font-semibold mt-0.5">1</div>
-                    <p className="text-gray-600">Graduates will demonstrate technical competence in computer science and engineering fundamentals.</p>
+            <TabsContent value="programs" className="space-y-8">
+              <div>
+                <h2 className="text-2xl font-bold text-gray-900 mb-6">Academic Programs</h2>
+                <div className="space-y-6">
+                  {programs.map((program, index) => (
+                    <Card key={index} className="border-none shadow-lg">
+                      <CardHeader>
+                        <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between">
+                          <div>
+                            <CardTitle className="text-xl text-blue-600 mb-2">{program.name}</CardTitle>
+                            <div className="flex flex-wrap gap-4 text-sm text-gray-600">
+                              <div className="flex items-center">
+                                <Calendar className="h-4 w-4 mr-1" />
+                                Duration: {program.duration}
+                              </div>
+                              <div className="flex items-center">
+                                <Users className="h-4 w-4 mr-1" />
+                                Intake: {program.intake}
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </CardHeader>
+                      <CardContent>
+                        <div className="space-y-4">
+                          <div>
+                            <h4 className="font-semibold text-gray-900 mb-2">Eligibility:</h4>
+                            <p className="text-gray-700">{program.eligibility}</p>
+                          </div>
+                          <div>
+                            <h4 className="font-semibold text-gray-900 mb-2">Program Highlights:</h4>
+                            <div className="flex flex-wrap gap-2">
+                              {program.highlights.map((highlight, idx) => (
+                                <Badge key={idx} className="bg-green-100 text-green-800">
+                                  {highlight}
+                                </Badge>
+                              ))}
+                            </div>
+                          </div>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  ))}
+                </div>
+              </div>
+            </TabsContent>
+
+            <TabsContent value="faculty">
+              <DepartmentFaculty departmentName="Computer Science & Engineering" />
+            </TabsContent>
+
+            <TabsContent value="research" className="space-y-8">
+              <div>
+                <h2 className="text-2xl font-bold text-gray-900 mb-6">Research Areas</h2>
+                <Card className="border-none shadow-lg">
+                  <CardContent className="p-6">
+                    <div className="grid md:grid-cols-2 gap-4">
+                      {researchAreas.map((area, index) => (
+                        <div key={index} className="flex items-center space-x-3 p-3 rounded-lg bg-blue-50 hover:bg-blue-100 transition-colors">
+                          <div className="w-2 h-2 bg-blue-600 rounded-full"></div>
+                          <span className="text-gray-800 font-medium">{area}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
+
+              <div>
+                <h2 className="text-2xl font-bold text-gray-900 mb-6">Current Research Projects</h2>
+                <div className="grid md:grid-cols-2 gap-6">
+                  <Card className="border-none shadow-lg">
+                    <CardHeader>
+                      <CardTitle className="text-xl text-blue-600">AI-Driven Healthcare Solutions</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <p className="text-gray-700 mb-4">
+                        Developing machine learning algorithms for early disease detection and personalized treatment recommendations.
+                      </p>
+                      <div className="flex items-center text-sm text-gray-600">
+                        <Users className="h-4 w-4 mr-1" />
+                        <span>Principal Investigator: Dr. Sarah Johnson</span>
+                      </div>
+                    </CardContent>
+                  </Card>
+
+                  <Card className="border-none shadow-lg">
+                    <CardHeader>
+                      <CardTitle className="text-xl text-blue-600">Smart City Infrastructure</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <p className="text-gray-700 mb-4">
+                        IoT-based solutions for traffic management, waste management, and energy optimization in urban environments.
+                      </p>
+                      <div className="flex items-center text-sm text-gray-600">
+                        <Users className="h-4 w-4 mr-1" />
+                        <span>Principal Investigator: Dr. Michael Chen</span>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </div>
+              </div>
+            </TabsContent>
+
+            <TabsContent value="facilities" className="space-y-8">
+              <div>
+                <h2 className="text-2xl font-bold text-gray-900 mb-6">Infrastructure & Facilities</h2>
+                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {facilities.map((facility, index) => (
+                    <Card key={index} className="border-none shadow-lg hover:shadow-xl transition-all duration-300">
+                      <CardHeader>
+                        <CardTitle className="text-lg text-blue-600">{facility.name}</CardTitle>
+                        <CardDescription>{facility.description}</CardDescription>
+                      </CardHeader>
+                      <CardContent>
+                        <div className="flex items-center text-sm text-gray-600">
+                          <Building className="h-4 w-4 mr-2" />
+                          <span>{facility.capacity}</span>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  ))}
+                </div>
+              </div>
+            </TabsContent>
+
+            <TabsContent value="achievements" className="space-y-8">
+              <div>
+                <h2 className="text-2xl font-bold text-gray-900 mb-6">Recent Achievements</h2>
+                <div className="space-y-6">
+                  {achievements.map((achievement, index) => (
+                    <Card key={index} className="border-none shadow-lg">
+                      <CardContent className="p-6">
+                        <div className="flex items-start space-x-4">
+                          <div className="w-12 h-12 bg-gradient-to-br from-yellow-400 to-yellow-500 rounded-xl flex items-center justify-center flex-shrink-0">
+                            <Award className="h-6 w-6 text-white" />
+                          </div>
+                          <div className="flex-1">
+                            <h3 className="text-xl font-semibold text-gray-900 mb-2">{achievement.title}</h3>
+                            <p className="text-gray-700 mb-2">{achievement.description}</p>
+                            <Badge variant="outline" className="text-blue-600 border-blue-600">
+                              {achievement.year}
+                            </Badge>
+                          </div>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  ))}
+                </div>
+              </div>
+            </TabsContent>
+          </Tabs>
+        </div>
+      </section>
+
+      {/* Contact Section */}
+      <section className="py-16 bg-gray-100">
+        <div className="container mx-auto px-4 max-w-7xl">
+          <div className="max-w-4xl mx-auto">
+            <h2 className="text-3xl font-bold text-center text-gray-900 mb-12">Contact Department</h2>
+            <Card className="border-none shadow-lg">
+              <CardContent className="p-8">
+                <div className="grid md:grid-cols-2 gap-8">
+                  <div>
+                    <h3 className="text-xl font-semibold text-gray-900 mb-4">Department Office</h3>
+                    <div className="space-y-3">
+                      <div className="flex items-center space-x-3">
+                        <MapPin className="h-5 w-5 text-blue-600" />
+                        <span className="text-gray-700">Room 301, UIET Building, Panjab University</span>
+                      </div>
+                      <div className="flex items-center space-x-3">
+                        <Phone className="h-5 w-5 text-blue-600" />
+                        <span className="text-gray-700">+91-172-2534816</span>
+                      </div>
+                      <div className="flex items-center space-x-3">
+                        <Mail className="h-5 w-5 text-blue-600" />
+                        <span className="text-gray-700">cse@uiet.puchd.ac.in</span>
+                      </div>
+                    </div>
                   </div>
-                  <div className="flex items-start space-x-3">
-                    <div className="w-6 h-6 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 text-sm font-semibold mt-0.5">2</div>
-                    <p className="text-gray-600">Graduates will exhibit problem-solving skills and innovative thinking in their professional careers.</p>
-                  </div>
-                  <div className="flex items-start space-x-3">
-                    <div className="w-6 h-6 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 text-sm font-semibold mt-0.5">3</div>
-                    <p className="text-gray-600">Graduates will demonstrate effective communication, teamwork, and leadership skills.</p>
-                  </div>
-                  <div className="flex items-start space-x-3">
-                    <div className="w-6 h-6 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 text-sm font-semibold mt-0.5">4</div>
-                    <p className="text-gray-600">Graduates will engage in lifelong learning and professional development.</p>
+                  <div>
+                    <h3 className="text-xl font-semibold text-gray-900 mb-4">Office Hours</h3>
+                    <div className="space-y-2 text-gray-700">
+                      <p><strong>Monday - Friday:</strong> 9:00 AM - 5:00 PM</p>
+                      <p><strong>Saturday:</strong> 9:00 AM - 1:00 PM</p>
+                      <p><strong>Sunday:</strong> Closed</p>
+                    </div>
                   </div>
                 </div>
               </CardContent>
             </Card>
-          </TabsContent>
-
-          <TabsContent value="programs">
-            <div className="space-y-6">
-              {programs.map((program, index) => (
-                <Card key={index}>
-                  <CardContent className="p-6">
-                    <div className="grid md:grid-cols-4 gap-4 items-center">
-                      <div>
-                        <h3 className="text-lg font-semibold text-gray-900">{program.degree}</h3>
-                        <p className="text-sm text-gray-600">Duration: {program.duration}</p>
-                      </div>
-                      <div className="text-center">
-                        <div className="text-2xl font-bold text-blue-600">{program.intake}</div>
-                        <div className="text-sm text-gray-600">Intake</div>
-                      </div>
-                      <div>
-                        <div className="text-sm text-gray-600">Eligibility</div>
-                        <div className="font-medium">{program.eligibility}</div>
-                      </div>
-                      <div className="text-right">
-                        <button className="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm hover:bg-blue-700 transition-colors">
-                          View Syllabus
-                        </button>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-          </TabsContent>
-
-          <TabsContent value="faculty">
-            <DepartmentFaculty 
-              departmentName="Computer Science & Engineering"
-              facultyData={facultyData}
-            />
-          </TabsContent>
-
-          <TabsContent value="research">
-            <div className="grid md:grid-cols-2 gap-8">
-              <Card>
-                <CardHeader>
-                  <CardTitle className="flex items-center">
-                    <Beaker className="h-5 w-5 mr-2 text-green-600" />
-                    Ongoing Research
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="space-y-3">
-                    <div className="border-l-4 border-green-500 pl-4">
-                      <h4 className="font-semibold">AI-based Healthcare Solutions</h4>
-                      <p className="text-sm text-gray-600">Dr. Rajesh Kumar - Funded by DST</p>
-                    </div>
-                    <div className="border-l-4 border-green-500 pl-4">
-                      <h4 className="font-semibold">IoT Security Framework</h4>
-                      <p className="text-sm text-gray-600">Dr. Amit Singh - Industry Collaboration</p>
-                    </div>
-                    <div className="border-l-4 border-green-500 pl-4">
-                      <h4 className="font-semibold">Blockchain for Supply Chain</h4>
-                      <p className="text-sm text-gray-600">Dr. Neha Gupta - UGC Funded</p>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-
-              <Card>
-                <CardHeader>
-                  <CardTitle className="flex items-center">
-                    <Award className="h-5 w-5 mr-2 text-blue-600" />
-                    Completed Research
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="space-y-3">
-                    <div className="border-l-4 border-blue-500 pl-4">
-                      <h4 className="font-semibold">Machine Learning in Agriculture</h4>
-                      <p className="text-sm text-gray-600">2023 - Published in IEEE Journal</p>
-                    </div>
-                    <div className="border-l-4 border-blue-500 pl-4">
-                      <h4 className="font-semibold">Cloud Computing Security</h4>
-                      <p className="text-sm text-gray-600">2022 - Patent Filed</p>
-                    </div>
-                    <div className="border-l-4 border-blue-500 pl-4">
-                      <h4 className="font-semibold">Data Mining Techniques</h4>
-                      <p className="text-sm text-gray-600">2021 - Best Paper Award</p>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            </div>
-          </TabsContent>
-
-          <TabsContent value="labs">
-            <div className="grid md:grid-cols-2 gap-6">
-              {labs.map((lab, index) => (
-                <Card key={index}>
-                  <CardHeader>
-                    <CardTitle>{lab.name}</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="space-y-2">
-                      <div className="flex justify-between">
-                        <span className="text-gray-600">Systems:</span>
-                        <span className="font-semibold">{lab.systems}</span>
-                      </div>
-                      <div>
-                        <span className="text-gray-600">Software: </span>
-                        <span className="text-sm">{lab.software}</span>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-          </TabsContent>
-
-          <TabsContent value="placements">
-            <div className="space-y-6">
-              <Card>
-                <CardHeader>
-                  <CardTitle className="flex items-center">
-                    <Trophy className="h-5 w-5 mr-2 text-yellow-600" />
-                    Placement Statistics
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="space-y-4">
-                    <div className="flex items-center space-x-4 p-4 bg-gray-50 rounded-lg">
-                      <div className="text-center">
-                        <div className="text-lg font-bold text-blue-600">100%</div>
-                        <div className="text-sm text-gray-600">Placement Rate</div>
-                      </div>
-                      <div>
-                        <h4 className="font-semibold">Top Companies</h4>
-                        <p className="text-sm text-gray-600">Google, Microsoft, Amazon</p>
-                      </div>
-                    </div>
-                    <div className="flex items-center space-x-4 p-4 bg-gray-50 rounded-lg">
-                      <div className="text-center">
-                        <div className="text-lg font-bold text-blue-600">80%</div>
-                        <div className="text-sm text-gray-600">Placement Package</div>
-                      </div>
-                      <div>
-                        <h4 className="font-semibold">Average Package</h4>
-                        <p className="text-sm text-gray-600">$100,000</p>
-                      </div>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            </div>
-          </TabsContent>
-
-          <TabsContent value="events">
-            <div className="space-y-6">
-              <Card>
-                <CardHeader>
-                  <CardTitle className="flex items-center">
-                    <Calendar className="h-5 w-5 mr-2 text-purple-600" />
-                    Upcoming Events
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="space-y-4">
-                    <div className="flex items-center space-x-4 p-4 bg-gray-50 rounded-lg">
-                      <div className="text-center">
-                        <div className="text-lg font-bold text-blue-600">15</div>
-                        <div className="text-sm text-gray-600">JAN</div>
-                      </div>
-                      <div>
-                        <h4 className="font-semibold">AI Workshop</h4>
-                        <p className="text-sm text-gray-600">Introduction to Machine Learning</p>
-                      </div>
-                    </div>
-                    <div className="flex items-center space-x-4 p-4 bg-gray-50 rounded-lg">
-                      <div className="text-center">
-                        <div className="text-lg font-bold text-blue-600">22</div>
-                        <div className="text-sm text-gray-600">JAN</div>
-                      </div>
-                      <div>
-                        <h4 className="font-semibold">Tech Symposium</h4>
-                        <p className="text-sm text-gray-600">Latest trends in Computer Science</p>
-                      </div>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            </div>
-          </TabsContent>
-
-          <TabsContent value="contact">
-            <div className="space-y-6">
-              <Card>
-                <CardHeader>
-                  <CardTitle className="flex items-center">
-                    <MapPin className="h-5 w-5 mr-2 text-green-600" />
-                    Contact Information
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="space-y-4">
-                    <div className="flex items-center space-x-4 p-4 bg-gray-50 rounded-lg">
-                      <div className="text-center">
-                        <div className="text-lg font-bold text-blue-600">+91-172-2534820</div>
-                        <div className="text-sm text-gray-600">Phone</div>
-                      </div>
-                      <div>
-                        <h4 className="font-semibold">Email</h4>
-                        <p className="text-sm text-gray-600">info@uiet.puchd.ac.in</p>
-                      </div>
-                    </div>
-                    <div className="flex items-center space-x-4 p-4 bg-gray-50 rounded-lg">
-                      <div className="text-center">
-                        <div className="text-lg font-bold text-blue-600">Punjab University</div>
-                        <div className="text-sm text-gray-600">Address</div>
-                      </div>
-                      <div>
-                        <h4 className="font-semibold">Website</h4>
-                        <p className="text-sm text-gray-600"><a href="https://www.uiet.puchd.ac.in" target="_blank" rel="noopener noreferrer">www.uiet.puchd.ac.in</a></p>
-                      </div>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            </div>
-          </TabsContent>
-        </Tabs>
-      </div>
+          </div>
+        </div>
+      </section>
 
       <Footer />
     </div>
