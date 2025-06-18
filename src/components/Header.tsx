@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import { Menu, X, ChevronDown, Phone, Mail, MapPin, Building, GraduationCap } from 'lucide-react';
+
+import React, { useState, useEffect, useRef } from 'react';
+import { Menu, X, ChevronDown, Phone, Mail, MapPin, Building, GraduationCap, MoreHorizontal } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Link, useLocation } from 'react-router-dom';
 
@@ -117,6 +118,8 @@ const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [visibleItems, setVisibleItems] = useState(navigationItems.length);
+  const navRef = useRef<HTMLDivElement>(null);
   const location = useLocation();
 
   useEffect(() => {
@@ -125,6 +128,26 @@ const Header = () => {
     };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  useEffect(() => {
+    const calculateVisibleItems = () => {
+      if (!navRef.current) return;
+      
+      const containerWidth = navRef.current.offsetWidth;
+      const itemWidth = 120; // Approximate width per nav item
+      const moreButtonWidth = 80; // Width for "More" button
+      const availableWidth = containerWidth - moreButtonWidth;
+      const maxItems = Math.floor(availableWidth / itemWidth);
+      
+      // Always show at least 3 items, but not more than total items
+      const itemsToShow = Math.max(3, Math.min(maxItems, navigationItems.length));
+      setVisibleItems(itemsToShow);
+    };
+
+    calculateVisibleItems();
+    window.addEventListener('resize', calculateVisibleItems);
+    return () => window.removeEventListener('resize', calculateVisibleItems);
   }, []);
 
   // Close mobile menu when route changes
@@ -141,6 +164,9 @@ const Header = () => {
   const hasActiveDropdownItem = (dropdown: any[]) => {
     return dropdown.some(item => isActivePath(item.href.split('#')[0]));
   };
+
+  const visibleNavItems = navigationItems.slice(0, visibleItems);
+  const hiddenNavItems = navigationItems.slice(visibleItems);
 
   return (
     <header className={`bg-white/95 backdrop-blur-md shadow-sm sticky top-0 z-50 transition-all duration-300 ${isScrolled ? 'shadow-lg' : ''}`}>
@@ -211,9 +237,10 @@ const Header = () => {
             </div>
           </Link>
 
-          {/* Full Desktop Navigation - For screens 1400px+ */}
-          <nav className="hidden 2xl:flex items-center space-x-2">
-            {navigationItems.map((item) => (
+          {/* Responsive Desktop Navigation */}
+          <nav ref={navRef} className="hidden lg:flex items-center space-x-1 flex-1 justify-center mx-4">
+            {/* Visible Navigation Items */}
+            {visibleNavItems.map((item) => (
               <div
                 key={item.name}
                 className="relative group"
@@ -251,142 +278,55 @@ const Header = () => {
                 )}
               </div>
             ))}
-          </nav>
 
-          {/* Compact Desktop Navigation - For 15.6" displays (1280px-1400px) */}
-          <nav className="hidden xl:flex 2xl:hidden items-center space-x-1">
-            {navigationItems.slice(0, 5).map((item) => (
-              <div
-                key={item.name}
+            {/* More Dropdown - Only show if there are hidden items */}
+            {hiddenNavItems.length > 0 && (
+              <div 
                 className="relative group"
-                onMouseEnter={() => item.dropdown && setActiveDropdown(item.name)}
+                onMouseEnter={() => setActiveDropdown('more')}
                 onMouseLeave={() => setActiveDropdown(null)}
               >
-                <Link
-                  to={item.href}
-                  className={`flex items-center px-2 py-2 transition-all duration-200 font-medium hover:bg-blue-50 rounded-lg text-xs whitespace-nowrap ${
-                    isActivePath(item.href) || (item.dropdown && hasActiveDropdownItem(item.dropdown))
-                      ? 'text-blue-600 bg-blue-50 shadow-sm' 
-                      : 'text-gray-700 hover:text-blue-600'
-                  }`}
-                >
-                  {item.name === 'Departments' ? 'Dept.' : item.name}
-                  {item.dropdown && <ChevronDown className="ml-0.5 h-3 w-3 transition-transform duration-200 group-hover:rotate-180" />}
-                </Link>
-                
-                {item.dropdown && activeDropdown === item.name && (
-                  <div className="absolute top-full left-0 mt-2 w-64 bg-white rounded-xl shadow-xl border border-gray-200 z-50 py-2 opacity-0 translate-y-2 animate-[fadeInUp_0.2s_ease-out_forwards]">
-                    {item.dropdown.map((subItem) => (
-                      <Link
-                        key={subItem.name}
-                        to={subItem.href}
-                        className={`block px-4 py-3 text-sm transition-all duration-150 border-b border-gray-100 last:border-b-0 hover:pl-6 ${
-                          isActivePath(subItem.href.split('#')[0])
-                            ? 'bg-blue-50 text-blue-700 font-medium border-l-4 border-l-blue-600'
-                            : 'text-gray-700 hover:bg-blue-50 hover:text-blue-700'
-                        }`}
-                      >
-                        {subItem.name}
-                      </Link>
+                <button className="flex items-center px-3 py-2 text-sm text-gray-700 hover:text-blue-600 hover:bg-blue-50 font-medium rounded-lg transition-all duration-200 whitespace-nowrap">
+                  <MoreHorizontal className="h-4 w-4 mr-1" />
+                  More
+                </button>
+                {activeDropdown === 'more' && (
+                  <div className="absolute top-full right-0 mt-2 w-56 bg-white rounded-xl shadow-xl border border-gray-200 z-50 py-2 opacity-0 translate-y-2 animate-[fadeInUp_0.2s_ease-out_forwards]">
+                    {hiddenNavItems.map((item) => (
+                      <div key={item.name}>
+                        <Link
+                          to={item.href}
+                          className={`block px-4 py-3 text-sm transition-all duration-150 border-b border-gray-100 last:border-b-0 hover:pl-6 ${
+                            isActivePath(item.href)
+                              ? 'bg-blue-50 text-blue-700 font-medium border-l-4 border-l-blue-600'
+                              : 'text-gray-700 hover:bg-blue-50 hover:text-blue-700'
+                          }`}
+                        >
+                          {item.name}
+                        </Link>
+                        {item.dropdown && (
+                          <div className="pl-4 bg-gray-50/50">
+                            {item.dropdown.map((subItem) => (
+                              <Link
+                                key={subItem.name}
+                                to={subItem.href}
+                                className={`block px-4 py-2 text-xs transition-all duration-150 border-b border-gray-100 last:border-b-0 hover:pl-6 ${
+                                  isActivePath(subItem.href.split('#')[0])
+                                    ? 'bg-blue-50 text-blue-600 font-medium'
+                                    : 'text-gray-600 hover:bg-blue-50 hover:text-blue-600'
+                                }`}
+                              >
+                                {subItem.name}
+                              </Link>
+                            ))}
+                          </div>
+                        )}
+                      </div>
                     ))}
                   </div>
                 )}
               </div>
-            ))}
-            <div 
-              className="relative group"
-              onMouseEnter={() => setActiveDropdown('more')}
-              onMouseLeave={() => setActiveDropdown(null)}
-            >
-              <button className="flex items-center px-2 py-2 text-xs text-gray-700 hover:text-blue-600 hover:bg-blue-50 font-medium rounded-lg transition-all duration-200">
-                More <ChevronDown className="ml-0.5 h-3 w-3" />
-              </button>
-              {activeDropdown === 'more' && (
-                <div className="absolute top-full right-0 mt-2 w-48 bg-white rounded-xl shadow-xl border border-gray-200 z-50 py-2 opacity-0 translate-y-2 animate-[fadeInUp_0.2s_ease-out_forwards]">
-                  {navigationItems.slice(5).map((item) => (
-                    <Link
-                      key={item.name}
-                      to={item.href}
-                      className={`block px-4 py-3 text-sm transition-all duration-150 border-b border-gray-100 last:border-b-0 hover:pl-6 ${
-                        isActivePath(item.href)
-                          ? 'bg-blue-50 text-blue-700 font-medium border-l-4 border-l-blue-600'
-                          : 'text-gray-700 hover:bg-blue-50 hover:text-blue-700'
-                      }`}
-                    >
-                      {item.name}
-                    </Link>
-                  ))}
-                </div>
-              )}
-            </div>
-          </nav>
-
-          {/* Medium Desktop Navigation - For screens 1024px-1280px */}
-          <nav className="hidden lg:flex xl:hidden items-center space-x-1">
-            {navigationItems.slice(0, 3).map((item) => (
-              <div
-                key={item.name}
-                className="relative group"
-                onMouseEnter={() => item.dropdown && setActiveDropdown(item.name)}
-                onMouseLeave={() => setActiveDropdown(null)}
-              >
-                <Link
-                  to={item.href}
-                  className={`flex items-center px-2 py-2 transition-all duration-200 font-medium hover:bg-blue-50 rounded-lg text-xs whitespace-nowrap ${
-                    isActivePath(item.href) || (item.dropdown && hasActiveDropdownItem(item.dropdown))
-                      ? 'text-blue-600 bg-blue-50 shadow-sm' 
-                      : 'text-gray-700 hover:text-blue-600'
-                  }`}
-                >
-                  {item.name === 'Departments' ? 'Dept.' : item.name}
-                  {item.dropdown && <ChevronDown className="ml-0.5 h-3 w-3 transition-transform duration-200 group-hover:rotate-180" />}
-                </Link>
-                
-                {item.dropdown && activeDropdown === item.name && (
-                  <div className="absolute top-full left-0 mt-2 w-64 bg-white rounded-xl shadow-xl border border-gray-200 z-50 py-2 opacity-0 translate-y-2 animate-[fadeInUp_0.2s_ease-out_forwards]">
-                    {item.dropdown.map((subItem) => (
-                      <Link
-                        key={subItem.name}
-                        to={subItem.href}
-                        className={`block px-4 py-3 text-sm transition-all duration-150 border-b border-gray-100 last:border-b-0 hover:pl-6 ${
-                          isActivePath(subItem.href.split('#')[0])
-                            ? 'bg-blue-50 text-blue-700 font-medium border-l-4 border-l-blue-600'
-                            : 'text-gray-700 hover:bg-blue-50 hover:text-blue-700'
-                        }`}
-                      >
-                        {subItem.name}
-                      </Link>
-                    ))}
-                  </div>
-                )}
-              </div>
-            ))}
-            <div 
-              className="relative group"
-              onMouseEnter={() => setActiveDropdown('more')}
-              onMouseLeave={() => setActiveDropdown(null)}
-            >
-              <button className="flex items-center px-2 py-2 text-xs text-gray-700 hover:text-blue-600 hover:bg-blue-50 font-medium rounded-lg transition-all duration-200">
-                More <ChevronDown className="ml-0.5 h-3 w-3" />
-              </button>
-              {activeDropdown === 'more' && (
-                <div className="absolute top-full right-0 mt-2 w-48 bg-white rounded-xl shadow-xl border border-gray-200 z-50 py-2 opacity-0 translate-y-2 animate-[fadeInUp_0.2s_ease-out_forwards]">
-                  {navigationItems.slice(3).map((item) => (
-                    <Link
-                      key={item.name}
-                      to={item.href}
-                      className={`block px-4 py-3 text-sm transition-all duration-150 border-b border-gray-100 last:border-b-0 hover:pl-6 ${
-                        isActivePath(item.href)
-                          ? 'bg-blue-50 text-blue-700 font-medium border-l-4 border-l-blue-600'
-                          : 'text-gray-700 hover:bg-blue-50 hover:text-blue-700'
-                      }`}
-                    >
-                      {item.name}
-                    </Link>
-                  ))}
-                </div>
-              )}
-            </div>
+            )}
           </nav>
 
           {/* CTA Button + Mobile Menu */}
