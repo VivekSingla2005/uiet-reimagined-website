@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Menu, X, ChevronDown, Phone, Mail, MapPin, Building, GraduationCap } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -192,28 +191,28 @@ const Header = () => {
       </div>
 
       {/* Main Header */}
-      <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-6">
+      <div className="w-full mx-auto px-2 sm:px-4 lg:px-6">
         <div className="flex justify-between items-center py-3 sm:py-4">
           {/* Logo and Institute Name */}
-          <Link to="/" className="flex items-center space-x-2 sm:space-x-3 flex-shrink-0 min-w-0 max-w-[60%] sm:max-w-none">
+          <Link to="/" className="flex items-center space-x-2 sm:space-x-3 flex-shrink-0 min-w-0">
             <div className="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 bg-gradient-to-br from-blue-600 to-blue-700 rounded-lg sm:rounded-xl flex items-center justify-center shadow-lg flex-shrink-0">
               <GraduationCap className="h-4 w-4 sm:h-5 sm:w-5 lg:h-7 lg:w-7 text-white" />
             </div>
             <div className="min-w-0 flex-1">
-              <h1 className="text-sm sm:text-lg lg:text-xl xl:text-2xl font-bold text-gray-900 tracking-tight leading-tight">
-                <span className="hidden xl:inline">University Institute of Engineering & Technology</span>
-                <span className="hidden sm:inline xl:hidden">UIET, Panjab University</span>
+              <h1 className="text-sm sm:text-base lg:text-lg xl:text-xl font-bold text-gray-900 tracking-tight leading-tight">
+                <span className="hidden lg:inline">University Institute of Engineering & Technology</span>
+                <span className="hidden sm:inline lg:hidden">UIET, Panjab University</span>
                 <span className="sm:hidden">UIET</span>
               </h1>
-              <p className="text-xs sm:text-sm lg:text-base text-blue-600 font-medium">
+              <p className="text-xs sm:text-sm text-blue-600 font-medium">
                 <span className="hidden sm:inline">Panjab University, Chandigarh</span>
                 <span className="sm:hidden">Panjab University</span>
               </p>
             </div>
           </Link>
 
-          {/* Desktop Navigation */}
-          <nav className="hidden 2xl:flex items-center space-x-1">
+          {/* Full Desktop Navigation - For screens 1400px+ */}
+          <nav className="hidden 2xl:flex items-center space-x-2">
             {navigationItems.map((item) => (
               <div
                 key={item.name}
@@ -254,9 +253,9 @@ const Header = () => {
             ))}
           </nav>
 
-          {/* Large Desktop Compact Navigation */}
+          {/* Compact Desktop Navigation - For 15.6" displays (1280px-1400px) */}
           <nav className="hidden xl:flex 2xl:hidden items-center space-x-1">
-            {navigationItems.slice(0, 6).map((item) => (
+            {navigationItems.slice(0, 5).map((item) => (
               <div
                 key={item.name}
                 className="relative group"
@@ -271,7 +270,7 @@ const Header = () => {
                       : 'text-gray-700 hover:text-blue-600'
                   }`}
                 >
-                  {item.name === 'Admissions' ? 'Apply' : item.name === 'Departments' ? 'Dept' : item.name}
+                  {item.name === 'Departments' ? 'Dept.' : item.name}
                   {item.dropdown && <ChevronDown className="ml-0.5 h-3 w-3 transition-transform duration-200 group-hover:rotate-180" />}
                 </Link>
                 
@@ -294,19 +293,17 @@ const Header = () => {
                 )}
               </div>
             ))}
-            <div className="relative group">
-              <Button
-                variant="ghost"
-                size="sm"
-                className="px-2 py-2 text-xs text-gray-700 hover:text-blue-600 hover:bg-blue-50"
-                onMouseEnter={() => setActiveDropdown('more')}
-                onMouseLeave={() => setActiveDropdown(null)}
-              >
+            <div 
+              className="relative group"
+              onMouseEnter={() => setActiveDropdown('more')}
+              onMouseLeave={() => setActiveDropdown(null)}
+            >
+              <button className="flex items-center px-2 py-2 text-xs text-gray-700 hover:text-blue-600 hover:bg-blue-50 font-medium rounded-lg transition-all duration-200">
                 More <ChevronDown className="ml-0.5 h-3 w-3" />
-              </Button>
+              </button>
               {activeDropdown === 'more' && (
-                <div className="absolute top-full right-0 mt-2 w-48 bg-white rounded-xl shadow-xl border border-gray-200 z-50 py-2">
-                  {navigationItems.slice(6).map((item) => (
+                <div className="absolute top-full right-0 mt-2 w-48 bg-white rounded-xl shadow-xl border border-gray-200 z-50 py-2 opacity-0 translate-y-2 animate-[fadeInUp_0.2s_ease-out_forwards]">
+                  {navigationItems.slice(5).map((item) => (
                     <Link
                       key={item.name}
                       to={item.href}
@@ -324,9 +321,9 @@ const Header = () => {
             </div>
           </nav>
 
-          {/* Medium Desktop Navigation */}
+          {/* Medium Desktop Navigation - For screens 1024px-1280px */}
           <nav className="hidden lg:flex xl:hidden items-center space-x-1">
-            {navigationItems.slice(0, 4).map((item) => (
+            {navigationItems.slice(0, 3).map((item) => (
               <div
                 key={item.name}
                 className="relative group"
@@ -341,7 +338,7 @@ const Header = () => {
                       : 'text-gray-700 hover:text-blue-600'
                   }`}
                 >
-                  {item.name === 'Departments' ? 'Dept' : item.name}
+                  {item.name === 'Departments' ? 'Dept.' : item.name}
                   {item.dropdown && <ChevronDown className="ml-0.5 h-3 w-3 transition-transform duration-200 group-hover:rotate-180" />}
                 </Link>
                 
@@ -364,19 +361,17 @@ const Header = () => {
                 )}
               </div>
             ))}
-            <div className="relative group">
-              <Button
-                variant="ghost"
-                size="sm"
-                className="px-2 py-2 text-xs text-gray-700 hover:text-blue-600 hover:bg-blue-50"
-                onMouseEnter={() => setActiveDropdown('more')}
-                onMouseLeave={() => setActiveDropdown(null)}
-              >
+            <div 
+              className="relative group"
+              onMouseEnter={() => setActiveDropdown('more')}
+              onMouseLeave={() => setActiveDropdown(null)}
+            >
+              <button className="flex items-center px-2 py-2 text-xs text-gray-700 hover:text-blue-600 hover:bg-blue-50 font-medium rounded-lg transition-all duration-200">
                 More <ChevronDown className="ml-0.5 h-3 w-3" />
-              </Button>
+              </button>
               {activeDropdown === 'more' && (
-                <div className="absolute top-full right-0 mt-2 w-48 bg-white rounded-xl shadow-xl border border-gray-200 z-50 py-2">
-                  {navigationItems.slice(4).map((item) => (
+                <div className="absolute top-full right-0 mt-2 w-48 bg-white rounded-xl shadow-xl border border-gray-200 z-50 py-2 opacity-0 translate-y-2 animate-[fadeInUp_0.2s_ease-out_forwards]">
+                  {navigationItems.slice(3).map((item) => (
                     <Link
                       key={item.name}
                       to={item.href}
