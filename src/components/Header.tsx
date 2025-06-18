@@ -120,7 +120,6 @@ const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [visibleItems, setVisibleItems] = useState(navigationItems.length);
   const navRef = useRef<HTMLDivElement>(null);
-  const dropdownRef = useRef<HTMLDivElement>(null);
   const location = useLocation();
 
   useEffect(() => {
@@ -136,11 +135,12 @@ const Header = () => {
       if (!navRef.current) return;
       
       const containerWidth = navRef.current.offsetWidth;
-      const itemWidth = 120;
-      const moreButtonWidth = 80;
+      const itemWidth = 120; // Approximate width per nav item
+      const moreButtonWidth = 80; // Width for "More" button
       const availableWidth = containerWidth - moreButtonWidth;
       const maxItems = Math.floor(availableWidth / itemWidth);
       
+      // Always show at least 3 items, but not more than total items
       const itemsToShow = Math.max(3, Math.min(maxItems, navigationItems.length));
       setVisibleItems(itemsToShow);
     };
@@ -150,25 +150,11 @@ const Header = () => {
     return () => window.removeEventListener('resize', calculateVisibleItems);
   }, []);
 
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
-        setActiveDropdown(null);
-      }
-    };
-
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, []);
-
+  // Close mobile menu when route changes
   useEffect(() => {
     setIsMenuOpen(false);
     setActiveDropdown(null);
   }, [location.pathname]);
-
-  const handleDropdownToggle = (itemName: string) => {
-    setActiveDropdown(activeDropdown === itemName ? null : itemName);
-  };
 
   const isActivePath = (href: string) => {
     if (href === '/') return location.pathname === '/';
@@ -185,7 +171,7 @@ const Header = () => {
   return (
     <header className={`bg-white/95 backdrop-blur-md shadow-sm sticky top-0 z-50 transition-all duration-300 ${isScrolled ? 'shadow-lg' : ''}`}>
       {/* Government Info Bar */}
-      <div className="bg-gradient-to-r from-gray-700 to-gray-800 text-white py-1 sm:py-2">
+      <div className="bg-gradient-to-r from-blue-600 to-blue-700 text-white py-1 sm:py-2">
         <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-6">
           <div className="flex justify-between items-center text-xs sm:text-sm">
             <div className="flex items-center space-x-2 sm:space-x-4">
@@ -210,12 +196,12 @@ const Header = () => {
         <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-6">
           <div className="flex justify-between items-center text-xs sm:text-sm text-gray-700">
             <div className="flex items-center space-x-2 sm:space-x-4">
-              <a href="tel:+91-172-2534816" className="flex items-center hover:text-gray-600 transition-colors">
+              <a href="tel:+91-172-2534816" className="flex items-center hover:text-blue-600 transition-colors">
                 <Phone className="h-3 w-3 mr-1 flex-shrink-0" />
                 <span className="hidden sm:inline">+91-172-2534816</span>
                 <span className="sm:hidden">Call</span>
               </a>
-              <a href="mailto:info@uiet.puchd.ac.in" className="hidden sm:flex items-center hover:text-gray-600 transition-colors">
+              <a href="mailto:info@uiet.puchd.ac.in" className="hidden sm:flex items-center hover:text-blue-600 transition-colors">
                 <Mail className="h-3 w-3 mr-1 flex-shrink-0" />
                 <span className="hidden lg:inline">info@uiet.puchd.ac.in</span>
                 <span className="lg:hidden">Email</span>
@@ -235,7 +221,7 @@ const Header = () => {
         <div className="flex justify-between items-center py-3 sm:py-4">
           {/* Logo and Institute Name */}
           <Link to="/" className="flex items-center space-x-2 sm:space-x-3 flex-shrink-0 min-w-0">
-            <div className="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 bg-gradient-to-br from-gray-700 to-gray-800 rounded-lg sm:rounded-xl flex items-center justify-center shadow-lg flex-shrink-0">
+            <div className="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 bg-gradient-to-br from-blue-600 to-blue-700 rounded-lg sm:rounded-xl flex items-center justify-center shadow-lg flex-shrink-0">
               <GraduationCap className="h-4 w-4 sm:h-5 sm:w-5 lg:h-7 lg:w-7 text-white" />
             </div>
             <div className="min-w-0 flex-1">
@@ -244,7 +230,7 @@ const Header = () => {
                 <span className="hidden sm:inline lg:hidden">UIET, Panjab University</span>
                 <span className="sm:hidden">UIET</span>
               </h1>
-              <p className="text-xs sm:text-sm text-gray-600 font-medium">
+              <p className="text-xs sm:text-sm text-blue-600 font-medium">
                 <span className="hidden sm:inline">Panjab University, Chandigarh</span>
                 <span className="sm:hidden">Panjab University</span>
               </p>
@@ -253,112 +239,100 @@ const Header = () => {
 
           {/* Responsive Desktop Navigation */}
           <nav ref={navRef} className="hidden lg:flex items-center space-x-1 flex-1 justify-center mx-4">
-            <div ref={dropdownRef}>
-              {/* Visible Navigation Items */}
-              {visibleNavItems.map((item) => (
-                <div key={item.name} className="relative">
-                  {item.dropdown ? (
-                    <button
-                      onClick={() => handleDropdownToggle(item.name)}
-                      className={`flex items-center px-3 py-2 transition-all duration-200 font-medium hover:bg-gray-100 rounded-lg text-sm whitespace-nowrap ${
-                        isActivePath(item.href) || (item.dropdown && hasActiveDropdownItem(item.dropdown))
-                          ? 'text-gray-800 bg-gray-100 shadow-sm' 
-                          : 'text-gray-700 hover:text-gray-800'
-                      }`}
-                    >
-                      {item.name}
-                      <ChevronDown className={`ml-1 h-3 w-3 transition-transform duration-200 ${activeDropdown === item.name ? 'rotate-180' : ''}`} />
-                    </button>
-                  ) : (
-                    <Link
-                      to={item.href}
-                      className={`flex items-center px-3 py-2 transition-all duration-200 font-medium hover:bg-gray-100 rounded-lg text-sm whitespace-nowrap ${
-                        isActivePath(item.href)
-                          ? 'text-gray-800 bg-gray-100 shadow-sm' 
-                          : 'text-gray-700 hover:text-gray-800'
-                      }`}
-                    >
-                      {item.name}
-                    </Link>
-                  )}
-                  
-                  {item.dropdown && activeDropdown === item.name && (
-                    <div className="absolute top-full left-0 mt-2 w-64 bg-white rounded-xl shadow-xl border border-gray-200 z-50 py-2">
-                      {item.dropdown.map((subItem) => (
-                        <Link
-                          key={subItem.name}
-                          to={subItem.href}
-                          className={`block px-4 py-3 text-sm transition-all duration-150 border-b border-gray-100 last:border-b-0 hover:pl-6 ${
-                            isActivePath(subItem.href.split('#')[0])
-                              ? 'bg-gray-100 text-gray-800 font-medium border-l-4 border-l-gray-600'
-                              : 'text-gray-700 hover:bg-gray-100 hover:text-gray-800'
-                          }`}
-                          onClick={() => setActiveDropdown(null)}
-                        >
-                          {subItem.name}
-                        </Link>
-                      ))}
-                    </div>
-                  )}
-                </div>
-              ))}
+            {/* Visible Navigation Items */}
+            {visibleNavItems.map((item) => (
+              <div
+                key={item.name}
+                className="relative group"
+                onMouseEnter={() => item.dropdown && setActiveDropdown(item.name)}
+                onMouseLeave={() => setActiveDropdown(null)}
+              >
+                <Link
+                  to={item.href}
+                  className={`flex items-center px-3 py-2 transition-all duration-200 font-medium hover:bg-blue-50 rounded-lg text-sm whitespace-nowrap ${
+                    isActivePath(item.href) || (item.dropdown && hasActiveDropdownItem(item.dropdown))
+                      ? 'text-blue-600 bg-blue-50 shadow-sm' 
+                      : 'text-gray-700 hover:text-blue-600'
+                  }`}
+                >
+                  {item.name}
+                  {item.dropdown && <ChevronDown className="ml-1 h-3 w-3 transition-transform duration-200 group-hover:rotate-180" />}
+                </Link>
+                
+                {item.dropdown && activeDropdown === item.name && (
+                  <div className="absolute top-full left-0 mt-2 w-64 bg-white rounded-xl shadow-xl border border-gray-200 z-50 py-2 opacity-0 translate-y-2 animate-[fadeInUp_0.2s_ease-out_forwards]">
+                    {item.dropdown.map((subItem) => (
+                      <Link
+                        key={subItem.name}
+                        to={subItem.href}
+                        className={`block px-4 py-3 text-sm transition-all duration-150 border-b border-gray-100 last:border-b-0 hover:pl-6 ${
+                          isActivePath(subItem.href.split('#')[0])
+                            ? 'bg-blue-50 text-blue-700 font-medium border-l-4 border-l-blue-600'
+                            : 'text-gray-700 hover:bg-blue-50 hover:text-blue-700'
+                        }`}
+                      >
+                        {subItem.name}
+                      </Link>
+                    ))}
+                  </div>
+                )}
+              </div>
+            ))}
 
-              {/* More Dropdown */}
-              {hiddenNavItems.length > 0 && (
-                <div className="relative">
-                  <button 
-                    onClick={() => handleDropdownToggle('more')}
-                    className="flex items-center px-3 py-2 text-sm text-gray-700 hover:text-gray-800 hover:bg-gray-100 font-medium rounded-lg transition-all duration-200 whitespace-nowrap"
-                  >
-                    <MoreHorizontal className="h-4 w-4 mr-1" />
-                    More
-                  </button>
-                  {activeDropdown === 'more' && (
-                    <div className="absolute top-full right-0 mt-2 w-56 bg-white rounded-xl shadow-xl border border-gray-200 z-50 py-2">
-                      {hiddenNavItems.map((item) => (
-                        <div key={item.name}>
-                          <Link
-                            to={item.href}
-                            className={`block px-4 py-3 text-sm transition-all duration-150 border-b border-gray-100 last:border-b-0 hover:pl-6 ${
-                              isActivePath(item.href)
-                                ? 'bg-gray-100 text-gray-800 font-medium border-l-4 border-l-gray-600'
-                                : 'text-gray-700 hover:bg-gray-100 hover:text-gray-800'
-                            }`}
-                            onClick={() => setActiveDropdown(null)}
-                          >
-                            {item.name}
-                          </Link>
-                          {item.dropdown && (
-                            <div className="pl-4 bg-gray-50/50">
-                              {item.dropdown.map((subItem) => (
-                                <Link
-                                  key={subItem.name}
-                                  to={subItem.href}
-                                  className={`block px-4 py-2 text-xs transition-all duration-150 border-b border-gray-100 last:border-b-0 hover:pl-6 ${
-                                    isActivePath(subItem.href.split('#')[0])
-                                      ? 'bg-gray-100 text-gray-700 font-medium'
-                                      : 'text-gray-600 hover:bg-gray-100 hover:text-gray-700'
-                                  }`}
-                                  onClick={() => setActiveDropdown(null)}
-                                >
-                                  {subItem.name}
-                                </Link>
-                              ))}
-                            </div>
-                          )}
-                        </div>
-                      ))}
-                    </div>
-                  )}
-                </div>
-              )}
-            </div>
+            {/* More Dropdown - Only show if there are hidden items */}
+            {hiddenNavItems.length > 0 && (
+              <div 
+                className="relative group"
+                onMouseEnter={() => setActiveDropdown('more')}
+                onMouseLeave={() => setActiveDropdown(null)}
+              >
+                <button className="flex items-center px-3 py-2 text-sm text-gray-700 hover:text-blue-600 hover:bg-blue-50 font-medium rounded-lg transition-all duration-200 whitespace-nowrap">
+                  <MoreHorizontal className="h-4 w-4 mr-1" />
+                  More
+                </button>
+                {activeDropdown === 'more' && (
+                  <div className="absolute top-full right-0 mt-2 w-56 bg-white rounded-xl shadow-xl border border-gray-200 z-50 py-2 opacity-0 translate-y-2 animate-[fadeInUp_0.2s_ease-out_forwards]">
+                    {hiddenNavItems.map((item) => (
+                      <div key={item.name}>
+                        <Link
+                          to={item.href}
+                          className={`block px-4 py-3 text-sm transition-all duration-150 border-b border-gray-100 last:border-b-0 hover:pl-6 ${
+                            isActivePath(item.href)
+                              ? 'bg-blue-50 text-blue-700 font-medium border-l-4 border-l-blue-600'
+                              : 'text-gray-700 hover:bg-blue-50 hover:text-blue-700'
+                          }`}
+                        >
+                          {item.name}
+                        </Link>
+                        {item.dropdown && (
+                          <div className="pl-4 bg-gray-50/50">
+                            {item.dropdown.map((subItem) => (
+                              <Link
+                                key={subItem.name}
+                                to={subItem.href}
+                                className={`block px-4 py-2 text-xs transition-all duration-150 border-b border-gray-100 last:border-b-0 hover:pl-6 ${
+                                  isActivePath(subItem.href.split('#')[0])
+                                    ? 'bg-blue-50 text-blue-600 font-medium'
+                                    : 'text-gray-600 hover:bg-blue-50 hover:text-blue-600'
+                                }`}
+                              >
+                                {subItem.name}
+                              </Link>
+                            ))}
+                          </div>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+            )}
           </nav>
 
           {/* CTA Button + Mobile Menu */}
           <div className="flex items-center space-x-2 sm:space-x-3 flex-shrink-0">
             <Link to="/admissions" className="hidden sm:block">
-              <Button className="bg-gradient-to-r from-gray-700 to-gray-800 hover:from-gray-800 hover:to-gray-900 text-white font-medium text-xs sm:text-sm px-3 sm:px-4 py-2 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
+              <Button className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-medium text-xs sm:text-sm px-3 sm:px-4 py-2 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
                 <span className="hidden lg:inline">Apply Online</span>
                 <span className="lg:hidden">Apply</span>
               </Button>
@@ -366,7 +340,7 @@ const Header = () => {
             <Button
               variant="ghost"
               size="sm"
-              className="lg:hidden p-2 hover:bg-gray-100 transition-colors"
+              className="lg:hidden p-2 hover:bg-blue-50 transition-colors"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
             >
               {isMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
@@ -385,8 +359,8 @@ const Header = () => {
                       to={item.href}
                       className={`flex-1 block px-4 py-3 transition-all duration-200 rounded-lg mx-2 font-medium text-sm ${
                         isActivePath(item.href) || (item.dropdown && hasActiveDropdownItem(item.dropdown))
-                          ? 'text-gray-800 bg-gray-100 shadow-sm' 
-                          : 'text-gray-700 hover:bg-gray-100 hover:text-gray-800'
+                          ? 'text-blue-700 bg-blue-50 shadow-sm' 
+                          : 'text-gray-700 hover:bg-blue-50 hover:text-blue-700'
                       }`}
                       onClick={() => !item.dropdown && setIsMenuOpen(false)}
                     >
@@ -411,8 +385,8 @@ const Header = () => {
                           to={subItem.href}
                           className={`block px-4 py-2 text-sm transition-all duration-150 rounded ${
                             isActivePath(subItem.href.split('#')[0])
-                              ? 'text-gray-700 bg-gray-100 font-medium'
-                              : 'text-gray-600 hover:text-gray-700 hover:bg-gray-100'
+                              ? 'text-blue-600 bg-blue-50 font-medium'
+                              : 'text-gray-600 hover:text-blue-600 hover:bg-blue-50'
                           }`}
                           onClick={() => setIsMenuOpen(false)}
                         >
@@ -426,7 +400,7 @@ const Header = () => {
               <div className="px-4 pt-4">
                 <Link to="/admissions">
                   <Button 
-                    className="w-full bg-gradient-to-r from-gray-700 to-gray-800 hover:from-gray-800 hover:to-gray-900 text-white font-medium text-sm shadow-lg" 
+                    className="w-full bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-medium text-sm shadow-lg" 
                     onClick={() => setIsMenuOpen(false)}
                   >
                     Apply Online
