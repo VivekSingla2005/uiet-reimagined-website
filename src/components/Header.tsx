@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useRef } from 'react';
 import { Menu, X, ChevronDown, Phone, Mail, MapPin, Building, GraduationCap, MoreHorizontal } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -120,6 +119,7 @@ const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [visibleItems, setVisibleItems] = useState(navigationItems.length);
   const navRef = useRef<HTMLDivElement>(null);
+  const dropdownRef = useRef<HTMLDivElement>(null);
   const location = useLocation();
 
   useEffect(() => {
@@ -135,12 +135,11 @@ const Header = () => {
       if (!navRef.current) return;
       
       const containerWidth = navRef.current.offsetWidth;
-      const itemWidth = 120; // Approximate width per nav item
-      const moreButtonWidth = 80; // Width for "More" button
+      const itemWidth = 120;
+      const moreButtonWidth = 80;
       const availableWidth = containerWidth - moreButtonWidth;
       const maxItems = Math.floor(availableWidth / itemWidth);
       
-      // Always show at least 3 items, but not more than total items
       const itemsToShow = Math.max(3, Math.min(maxItems, navigationItems.length));
       setVisibleItems(itemsToShow);
     };
@@ -150,11 +149,25 @@ const Header = () => {
     return () => window.removeEventListener('resize', calculateVisibleItems);
   }, []);
 
-  // Close mobile menu when route changes
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setActiveDropdown(null);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
   useEffect(() => {
     setIsMenuOpen(false);
     setActiveDropdown(null);
   }, [location.pathname]);
+
+  const handleDropdownToggle = (itemName: string) => {
+    setActiveDropdown(activeDropdown === itemName ? null : itemName);
+  };
 
   const isActivePath = (href: string) => {
     if (href === '/') return location.pathname === '/';
@@ -239,94 +252,93 @@ const Header = () => {
 
           {/* Responsive Desktop Navigation */}
           <nav ref={navRef} className="hidden lg:flex items-center space-x-1 flex-1 justify-center mx-4">
-            {/* Visible Navigation Items */}
-            {visibleNavItems.map((item) => (
-              <div
-                key={item.name}
-                className="relative group"
-                onMouseEnter={() => item.dropdown && setActiveDropdown(item.name)}
-                onMouseLeave={() => setActiveDropdown(null)}
-              >
-                <Link
-                  to={item.href}
-                  className={`flex items-center px-3 py-2 transition-all duration-200 font-medium hover:bg-blue-50 rounded-lg text-sm whitespace-nowrap ${
-                    isActivePath(item.href) || (item.dropdown && hasActiveDropdownItem(item.dropdown))
-                      ? 'text-blue-600 bg-blue-50 shadow-sm' 
-                      : 'text-gray-700 hover:text-blue-600'
-                  }`}
-                >
-                  {item.name}
-                  {item.dropdown && <ChevronDown className="ml-1 h-3 w-3 transition-transform duration-200 group-hover:rotate-180" />}
-                </Link>
-                
-                {item.dropdown && activeDropdown === item.name && (
-                  <div className="absolute top-full left-0 mt-2 w-64 bg-white rounded-xl shadow-xl border border-gray-200 z-50 py-2 opacity-0 translate-y-2 animate-[fadeInUp_0.2s_ease-out_forwards]">
-                    {item.dropdown.map((subItem) => (
-                      <Link
-                        key={subItem.name}
-                        to={subItem.href}
-                        className={`block px-4 py-3 text-sm transition-all duration-150 border-b border-gray-100 last:border-b-0 hover:pl-6 ${
-                          isActivePath(subItem.href.split('#')[0])
-                            ? 'bg-blue-50 text-blue-700 font-medium border-l-4 border-l-blue-600'
-                            : 'text-gray-700 hover:bg-blue-50 hover:text-blue-700'
-                        }`}
-                      >
-                        {subItem.name}
-                      </Link>
-                    ))}
-                  </div>
-                )}
-              </div>
-            ))}
-
-            {/* More Dropdown - Only show if there are hidden items */}
-            {hiddenNavItems.length > 0 && (
-              <div 
-                className="relative group"
-                onMouseEnter={() => setActiveDropdown('more')}
-                onMouseLeave={() => setActiveDropdown(null)}
-              >
-                <button className="flex items-center px-3 py-2 text-sm text-gray-700 hover:text-blue-600 hover:bg-blue-50 font-medium rounded-lg transition-all duration-200 whitespace-nowrap">
-                  <MoreHorizontal className="h-4 w-4 mr-1" />
-                  More
-                </button>
-                {activeDropdown === 'more' && (
-                  <div className="absolute top-full right-0 mt-2 w-56 bg-white rounded-xl shadow-xl border border-gray-200 z-50 py-2 opacity-0 translate-y-2 animate-[fadeInUp_0.2s_ease-out_forwards]">
-                    {hiddenNavItems.map((item) => (
-                      <div key={item.name}>
+            <div ref={dropdownRef}>
+              {/* Visible Navigation Items */}
+              {visibleNavItems.map((item) => (
+                <div key={item.name} className="relative">
+                  <button
+                    onClick={() => item.dropdown ? handleDropdownToggle(item.name) : window.location.href = item.href}
+                    className={`flex items-center px-3 py-2 transition-all duration-200 font-medium hover:bg-blue-50 rounded-lg text-sm whitespace-nowrap ${
+                      isActivePath(item.href) || (item.dropdown && hasActiveDropdownItem(item.dropdown))
+                        ? 'text-blue-600 bg-blue-50 shadow-sm' 
+                        : 'text-gray-700 hover:text-blue-600'
+                    }`}
+                  >
+                    {item.name}
+                    {item.dropdown && <ChevronDown className={`ml-1 h-3 w-3 transition-transform duration-200 ${activeDropdown === item.name ? 'rotate-180' : ''}`} />}
+                  </button>
+                  
+                  {item.dropdown && activeDropdown === item.name && (
+                    <div className="absolute top-full left-0 mt-2 w-64 bg-white rounded-xl shadow-xl border border-gray-200 z-50 py-2">
+                      {item.dropdown.map((subItem) => (
                         <Link
-                          to={item.href}
+                          key={subItem.name}
+                          to={subItem.href}
                           className={`block px-4 py-3 text-sm transition-all duration-150 border-b border-gray-100 last:border-b-0 hover:pl-6 ${
-                            isActivePath(item.href)
+                            isActivePath(subItem.href.split('#')[0])
                               ? 'bg-blue-50 text-blue-700 font-medium border-l-4 border-l-blue-600'
                               : 'text-gray-700 hover:bg-blue-50 hover:text-blue-700'
                           }`}
+                          onClick={() => setActiveDropdown(null)}
                         >
-                          {item.name}
+                          {subItem.name}
                         </Link>
-                        {item.dropdown && (
-                          <div className="pl-4 bg-gray-50/50">
-                            {item.dropdown.map((subItem) => (
-                              <Link
-                                key={subItem.name}
-                                to={subItem.href}
-                                className={`block px-4 py-2 text-xs transition-all duration-150 border-b border-gray-100 last:border-b-0 hover:pl-6 ${
-                                  isActivePath(subItem.href.split('#')[0])
-                                    ? 'bg-blue-50 text-blue-600 font-medium'
-                                    : 'text-gray-600 hover:bg-blue-50 hover:text-blue-600'
-                                }`}
-                              >
-                                {subItem.name}
-                              </Link>
-                            ))}
-                          </div>
-                        )}
-                      </div>
-                    ))}
-                  </div>
-                )}
-              </div>
-            )}
+                      ))}
+                    </div>
+                  )}
+                </div>
+              ))}
+
+              {/* More Dropdown */}
+              {hiddenNavItems.length > 0 && (
+                <div className="relative">
+                  <button 
+                    onClick={() => handleDropdownToggle('more')}
+                    className="flex items-center px-3 py-2 text-sm text-gray-700 hover:text-blue-600 hover:bg-blue-50 font-medium rounded-lg transition-all duration-200 whitespace-nowrap"
+                  >
+                    <MoreHorizontal className="h-4 w-4 mr-1" />
+                    More
+                  </button>
+                  {activeDropdown === 'more' && (
+                    <div className="absolute top-full right-0 mt-2 w-56 bg-white rounded-xl shadow-xl border border-gray-200 z-50 py-2">
+                      {hiddenNavItems.map((item) => (
+                        <div key={item.name}>
+                          <Link
+                            to={item.href}
+                            className={`block px-4 py-3 text-sm transition-all duration-150 border-b border-gray-100 last:border-b-0 hover:pl-6 ${
+                              isActivePath(item.href)
+                                ? 'bg-blue-50 text-blue-700 font-medium border-l-4 border-l-blue-600'
+                                : 'text-gray-700 hover:bg-blue-50 hover:text-blue-700'
+                            }`}
+                            onClick={() => setActiveDropdown(null)}
+                          >
+                            {item.name}
+                          </Link>
+                          {item.dropdown && (
+                            <div className="pl-4 bg-gray-50/50">
+                              {item.dropdown.map((subItem) => (
+                                <Link
+                                  key={subItem.name}
+                                  to={subItem.href}
+                                  className={`block px-4 py-2 text-xs transition-all duration-150 border-b border-gray-100 last:border-b-0 hover:pl-6 ${
+                                    isActivePath(subItem.href.split('#')[0])
+                                      ? 'bg-blue-50 text-blue-600 font-medium'
+                                      : 'text-gray-600 hover:bg-blue-50 hover:text-blue-600'
+                                  }`}
+                                  onClick={() => setActiveDropdown(null)}
+                                >
+                                  {subItem.name}
+                                </Link>
+                              ))}
+                            </div>
+                          )}
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              )}
+            </div>
           </nav>
 
           {/* CTA Button + Mobile Menu */}

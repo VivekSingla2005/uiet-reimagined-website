@@ -155,7 +155,7 @@ const HomepageContent = () => {
   ];
 
   return (
-    <div className="space-y-16 py-12">
+    <div className="space-y-16 py-12 bg-white">
       {/* Features Section */}
       <section className="container-modern">
         <div className="text-center mb-12">
@@ -167,15 +167,15 @@ const HomepageContent = () => {
         
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {features.map((feature, index) => (
-            <Card key={index} className="text-center hover:shadow-lg transition-shadow group">
+            <Card key={index} className="text-center hover:shadow-lg transition-shadow group border border-gray-200">
               <CardContent className="p-6">
-                <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-blue-200 transition-colors">
-                  <feature.icon className="h-8 w-8 text-blue-600" />
+                <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-gray-200 transition-colors">
+                  <feature.icon className="h-8 w-8 text-gray-700" />
                 </div>
-                <h3 className="text-xl font-semibold mb-3">{feature.title}</h3>
+                <h3 className="text-xl font-semibold mb-3 text-gray-900">{feature.title}</h3>
                 <p className="text-gray-600 mb-4">{feature.description}</p>
                 <Link to={feature.link}>
-                  <Button variant="outline" size="sm" className="group-hover:bg-blue-50">
+                  <Button variant="outline" size="sm" className="group-hover:bg-gray-50 border-gray-300">
                     Learn More
                     <ArrowRight className="ml-2 h-4 w-4" />
                   </Button>
@@ -198,14 +198,14 @@ const HomepageContent = () => {
           
           <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             {departments.map((dept, index) => (
-              <Card key={index} className="hover:shadow-lg transition-shadow group cursor-pointer">
+              <Card key={index} className="hover:shadow-lg transition-shadow group cursor-pointer border border-gray-200 bg-white">
                 <Link to={dept.link}>
                   <CardContent className="p-6">
                     <div className="flex items-center justify-between mb-4">
-                      <dept.icon className="h-8 w-8 text-blue-600" />
-                      <ExternalLink className="h-4 w-4 text-gray-400 group-hover:text-blue-600 transition-colors" />
+                      <dept.icon className="h-8 w-8 text-gray-700" />
+                      <ExternalLink className="h-4 w-4 text-gray-400 group-hover:text-gray-600 transition-colors" />
                     </div>
-                    <h3 className="font-semibold text-gray-900 mb-3 group-hover:text-blue-600 transition-colors">
+                    <h3 className="font-semibold text-gray-900 mb-3 group-hover:text-gray-700 transition-colors">
                       {dept.name}
                     </h3>
                     <div className="space-y-1 text-sm text-gray-600">
@@ -226,7 +226,7 @@ const HomepageContent = () => {
           
           <div className="text-center mt-8">
             <Link to="/departments">
-              <Button className="modern-button">
+              <Button className="bg-gray-800 hover:bg-gray-900 text-white">
                 View All Departments
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
@@ -246,13 +246,13 @@ const HomepageContent = () => {
         
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
           {achievements.map((achievement, index) => (
-            <Card key={index} className="text-center hover:shadow-lg transition-shadow group cursor-pointer">
+            <Card key={index} className="text-center hover:shadow-lg transition-shadow group cursor-pointer border border-gray-200">
               <Link to={achievement.link}>
                 <CardContent className="p-6">
-                  <div className="w-16 h-16 bg-yellow-100 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-yellow-200 transition-colors">
-                    <achievement.icon className="h-8 w-8 text-yellow-600" />
+                  <div className="w-16 h-16 bg-amber-50 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-amber-100 transition-colors">
+                    <achievement.icon className="h-8 w-8 text-amber-600" />
                   </div>
-                  <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors">
+                  <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-gray-700 transition-colors">
                     {achievement.title}
                   </h3>
                   <p className="text-gray-600">{achievement.description}</p>
@@ -264,7 +264,7 @@ const HomepageContent = () => {
       </section>
 
       {/* Campus Life Section */}
-      <section className="bg-blue-50 py-16">
+      <section className="bg-gray-50 py-16">
         <div className="container-modern">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-gray-900 mb-4">Campus Life</h2>
@@ -275,7 +275,7 @@ const HomepageContent = () => {
           
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {campusLife.map((item, index) => (
-              <Card key={index} className="overflow-hidden hover:shadow-lg transition-shadow group cursor-pointer">
+              <Card key={index} className="overflow-hidden hover:shadow-lg transition-shadow group cursor-pointer border border-gray-200 bg-white">
                 <Link to={item.link}>
                   <div className="aspect-video overflow-hidden">
                     <img 
@@ -285,7 +285,7 @@ const HomepageContent = () => {
                     />
                   </div>
                   <CardContent className="p-4">
-                    <h3 className="font-semibold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors">
+                    <h3 className="font-semibold text-gray-900 mb-2 group-hover:text-gray-700 transition-colors">
                       {item.title}
                     </h3>
                     <p className="text-sm text-gray-600">{item.description}</p>
@@ -297,7 +297,7 @@ const HomepageContent = () => {
           
           <div className="text-center mt-8">
             <Link to="/students">
-              <Button className="modern-button">
+              <Button className="bg-gray-800 hover:bg-gray-900 text-white">
                 Explore Student Life
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
@@ -317,7 +317,7 @@ const HomepageContent = () => {
         
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
           <Link to="/admissions">
-            <Card className="hover:shadow-lg transition-shadow group cursor-pointer">
+            <Card className="hover:shadow-lg transition-shadow group cursor-pointer border border-gray-200">
               <CardContent className="p-6 text-center">
                 <GraduationCap className="h-12 w-12 text-green-600 mx-auto mb-4 group-hover:scale-110 transition-transform" />
                 <h3 className="font-semibold text-gray-900 group-hover:text-green-600 transition-colors">
@@ -329,7 +329,7 @@ const HomepageContent = () => {
           </Link>
           
           <Link to="/previous-papers">
-            <Card className="hover:shadow-lg transition-shadow group cursor-pointer">
+            <Card className="hover:shadow-lg transition-shadow group cursor-pointer border border-gray-200">
               <CardContent className="p-6 text-center">
                 <BookOpen className="h-12 w-12 text-blue-600 mx-auto mb-4 group-hover:scale-110 transition-transform" />
                 <h3 className="font-semibold text-gray-900 group-hover:text-blue-600 transition-colors">
@@ -341,7 +341,7 @@ const HomepageContent = () => {
           </Link>
           
           <Link to="/downloads">
-            <Card className="hover:shadow-lg transition-shadow group cursor-pointer">
+            <Card className="hover:shadow-lg transition-shadow group cursor-pointer border border-gray-200">
               <CardContent className="p-6 text-center">
                 <Award className="h-12 w-12 text-purple-600 mx-auto mb-4 group-hover:scale-110 transition-transform" />
                 <h3 className="font-semibold text-gray-900 group-hover:text-purple-600 transition-colors">
@@ -353,7 +353,7 @@ const HomepageContent = () => {
           </Link>
           
           <Link to="/placements">
-            <Card className="hover:shadow-lg transition-shadow group cursor-pointer">
+            <Card className="hover:shadow-lg transition-shadow group cursor-pointer border border-gray-200">
               <CardContent className="p-6 text-center">
                 <Trophy className="h-12 w-12 text-orange-600 mx-auto mb-4 group-hover:scale-110 transition-transform" />
                 <h3 className="font-semibold text-gray-900 group-hover:text-orange-600 transition-colors">
@@ -367,55 +367,55 @@ const HomepageContent = () => {
       </section>
 
       {/* Contact Section */}
-      <section className="bg-gradient-to-r from-blue-600 to-purple-600 text-white py-16">
+      <section className="bg-gray-800 text-white py-16">
         <div className="container-modern">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div>
               <h2 className="text-3xl font-bold mb-6">Get In Touch</h2>
-              <p className="text-lg text-blue-100 mb-8">
+              <p className="text-lg text-gray-300 mb-8">
                 Have questions about admissions, academics, or campus life? 
                 We're here to help you every step of the way.
               </p>
               
               <div className="space-y-4">
                 <div className="flex items-center">
-                  <MapPin className="h-5 w-5 mr-3 text-blue-200" />
+                  <MapPin className="h-5 w-5 mr-3 text-gray-400" />
                   <span>Sector 25, Chandigarh - 160014</span>
                 </div>
                 <div className="flex items-center">
-                  <Phone className="h-5 w-5 mr-3 text-blue-200" />
-                  <a href="tel:+91-172-2534816" className="hover:text-blue-200 transition-colors">
+                  <Phone className="h-5 w-5 mr-3 text-gray-400" />
+                  <a href="tel:+91-172-2534816" className="hover:text-gray-300 transition-colors">
                     +91-172-2534816
                   </a>
                 </div>
                 <div className="flex items-center">
-                  <Mail className="h-5 w-5 mr-3 text-blue-200" />
-                  <a href="mailto:info@uiet.puchd.ac.in" className="hover:text-blue-200 transition-colors">
+                  <Mail className="h-5 w-5 mr-3 text-gray-400" />
+                  <a href="mailto:info@uiet.puchd.ac.in" className="hover:text-gray-300 transition-colors">
                     info@uiet.puchd.ac.in
                   </a>
                 </div>
               </div>
             </div>
             
-            <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8">
+            <div className="bg-gray-700 rounded-2xl p-8">
               <h3 className="text-2xl font-bold mb-6">Quick Inquiry</h3>
               <form className="space-y-4">
                 <input
                   type="text"
                   placeholder="Your Name"
-                  className="w-full px-4 py-3 bg-white/20 border border-white/30 rounded-lg text-white placeholder-white/70 focus:outline-none focus:border-white/50"
+                  className="w-full px-4 py-3 bg-gray-600 border border-gray-500 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-gray-400"
                 />
                 <input
                   type="email"
                   placeholder="Your Email"
-                  className="w-full px-4 py-3 bg-white/20 border border-white/30 rounded-lg text-white placeholder-white/70 focus:outline-none focus:border-white/50"
+                  className="w-full px-4 py-3 bg-gray-600 border border-gray-500 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-gray-400"
                 />
                 <textarea
                   placeholder="Your Message"
                   rows={4}
-                  className="w-full px-4 py-3 bg-white/20 border border-white/30 rounded-lg text-white placeholder-white/70 focus:outline-none focus:border-white/50 resize-none"
+                  className="w-full px-4 py-3 bg-gray-600 border border-gray-500 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-gray-400 resize-none"
                 ></textarea>
-                <Button className="w-full bg-white text-blue-600 hover:bg-gray-100 font-semibold">
+                <Button className="w-full bg-white text-gray-800 hover:bg-gray-100 font-semibold">
                   Send Message
                 </Button>
               </form>
