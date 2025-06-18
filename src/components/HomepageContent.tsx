@@ -331,8 +331,8 @@ const HomepageContent = () => {
           <Link to="/previous-papers">
             <Card className="hover:shadow-lg transition-shadow group cursor-pointer border border-gray-200">
               <CardContent className="p-6 text-center">
-                <BookOpen className="h-12 w-12 text-blue-600 mx-auto mb-4 group-hover:scale-110 transition-transform" />
-                <h3 className="font-semibold text-gray-900 group-hover:text-blue-600 transition-colors">
+                <BookOpen className="h-12 w-12 text-gray-600 mx-auto mb-4 group-hover:scale-110 transition-transform" />
+                <h3 className="font-semibold text-gray-900 group-hover:text-gray-600 transition-colors">
                   Previous Papers
                 </h3>
                 <p className="text-sm text-gray-600 mt-2">Access question papers</p>
